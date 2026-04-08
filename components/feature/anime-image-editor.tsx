@@ -171,10 +171,10 @@ export function AnimeImageEditor({
       <div className={compact ? "w-full" : "max-w-5xl mx-auto"}>
         <div className="space-y-6">
           <div className="space-y-2 text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
-            {subtitle ? <p className="text-muted-foreground text-lg max-w-2xl mx-auto">{subtitle}</p> : null}
+            <h1 className="text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">{title}</h1>
+            {subtitle ? <p className="text-lg text-white/55 max-w-2xl mx-auto">{subtitle}</p> : null}
           </div>
-          <Card className="p-6 md:p-8">
+          <Card className="border-white/10 bg-white/[0.03] p-6 shadow-none md:p-8">
             <ImageUploader onImageSelect={handleImageSelect} onHeicConvert={convertHeic} />
           </Card>
         </div>
@@ -185,37 +185,40 @@ export function AnimeImageEditor({
   return (
     <div className={compact ? "w-full" : "max-w-6xl mx-auto"}>
       <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start">
-        <div className="space-y-6 p-6 bg-card border border-border rounded-xl lg:sticky lg:top-4">
+        <div className="space-y-6 rounded-[26px] border border-white/10 bg-white/[0.03] p-6 lg:sticky lg:top-6">
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold">{t("panel_title")}</h2>
-            <p className="text-sm text-muted-foreground">{t("panel_subtitle")}</p>
+            <div className="text-[11px] uppercase tracking-[0.22em] text-primary">Studio Controls</div>
+            <h2 className="text-2xl font-medium tracking-[-0.03em] text-white">{t("panel_title")}</h2>
+            <p className="text-sm text-white/48">{t("panel_subtitle")}</p>
           </div>
 
           {!hideStyleSelector && (
             <div className="space-y-3">
-              <Label className="text-base font-semibold">{t("style_label")}</Label>
+              <Label className="text-base font-medium text-white">{t("style_label")}</Label>
               <RadioGroup value={style} onValueChange={(v) => setStyle(v as AnimeStyleId)}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {STYLE_OPTIONS.map((s) => (
                     <label
                       key={s.id}
                       htmlFor={`style-${s.id}`}
-                      className={`flex items-start gap-3 rounded-lg border p-4 cursor-pointer transition-colors ${
-                        style === s.id ? "border-primary bg-primary/5" : "border-border hover:bg-muted/30"
+                      className={`flex items-start gap-3 rounded-[20px] border p-4 cursor-pointer transition-colors ${
+                        style === s.id
+                          ? "border-primary/50 bg-primary/10"
+                          : "border-white/8 bg-black/25 hover:bg-white/[0.04]"
                       }`}
                     >
                       <RadioGroupItem value={s.id} id={`style-${s.id}`} className="mt-1" />
                       <div className="space-y-1">
-                        <div className="font-semibold">{s.label}</div>
-                        <div className="text-sm text-muted-foreground">{s.desc}</div>
+                        <div className="font-medium text-white">{s.label}</div>
+                        <div className="text-sm text-white/45">{s.desc}</div>
                       </div>
                     </label>
                   ))}
                 </div>
               </RadioGroup>
               {selectedStyle ? (
-                <p className="text-xs text-muted-foreground">
-                  {t("style_hint")}: <span className="font-medium text-foreground">{selectedStyle.label}</span>
+                <p className="text-xs text-white/42">
+                  {t("style_hint")}: <span className="font-medium text-white">{selectedStyle.label}</span>
                 </p>
               ) : null}
             </div>
@@ -223,8 +226,8 @@ export function AnimeImageEditor({
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label className="text-base font-semibold">{t("intensity_label")}</Label>
-              <span className="text-sm text-muted-foreground">{t(`intensity_${intensity}`)}</span>
+              <Label className="text-base font-medium text-white">{t("intensity_label")}</Label>
+              <span className="text-sm text-white/50">{t(`intensity_${intensity}`)}</span>
             </div>
             <Slider
               value={[intensityToSliderValue(intensity)]}
@@ -233,45 +236,45 @@ export function AnimeImageEditor({
               max={100}
               step={1}
             />
-            <div className="flex justify-between text-xs text-muted-foreground">
+            <div className="flex justify-between text-xs text-white/38">
               <span>{t("intensity_low")}</span>
               <span>{t("intensity_high")}</span>
             </div>
           </div>
 
           <div className="space-y-3">
-            <Label className="text-base font-semibold">{t("details_label")}</Label>
-            <div className="grid gap-3">
-              <label className="flex items-center gap-3">
+            <Label className="text-base font-medium text-white">{t("details_label")}</Label>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <label className="flex items-center gap-3 rounded-[18px] border border-white/8 bg-black/25 px-4 py-3">
                 <Checkbox checked={keepEyeColor} onCheckedChange={(v) => setKeepEyeColor(!!v)} />
-                <span className="text-sm">{t("keep_eye_color")}</span>
+                <span className="text-sm text-white/72">{t("keep_eye_color")}</span>
               </label>
-              <label className="flex items-center gap-3">
+              <label className="flex items-center gap-3 rounded-[18px] border border-white/8 bg-black/25 px-4 py-3">
                 <Checkbox checked={keepHairColor} onCheckedChange={(v) => setKeepHairColor(!!v)} />
-                <span className="text-sm">{t("keep_hair_color")}</span>
+                <span className="text-sm text-white/72">{t("keep_hair_color")}</span>
               </label>
             </div>
           </div>
 
           <div className="space-y-3">
-            <Label className="text-base font-semibold">{t("prompt_label")}</Label>
+            <Label className="text-base font-medium text-white">{t("prompt_label")}</Label>
             <textarea
               value={extraPrompt}
               onChange={(e) => setExtraPrompt(e.target.value)}
               placeholder={t("prompt_placeholder")}
-              className="w-full min-h-[100px] rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full min-h-[120px] rounded-[20px] border border-white/8 bg-black/25 px-4 py-3 text-sm text-white outline-none placeholder:text-white/28 focus:ring-2 focus:ring-primary/30"
             />
           </div>
 
           {!user ? (
-            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 space-y-3">
-              <p className="text-sm text-foreground">{t("signin_gate_title")}</p>
-              <p className="text-sm text-muted-foreground">{t("signin_gate_desc")}</p>
+            <div className="rounded-[22px] border border-primary/20 bg-primary/8 p-4 space-y-3">
+              <p className="text-sm text-white">{t("signin_gate_title")}</p>
+              <p className="text-sm text-white/56">{t("signin_gate_desc")}</p>
               <div className="flex gap-3">
                 <Button asChild className="flex-1">
                   <Link href={`${localePrefix}/sign-up`}>{t("cta_signup")}</Link>
                 </Button>
-                <Button asChild variant="outline" className="flex-1">
+                <Button asChild variant="outline" className="flex-1 border-white/10 bg-black/20 text-white hover:bg-white/8">
                   <Link href={`${localePrefix}/sign-in`}>{t("cta_signin")}</Link>
                 </Button>
               </div>
@@ -282,7 +285,7 @@ export function AnimeImageEditor({
             <Button
               onClick={handleGenerate}
               disabled={isGenerating || !originalImage}
-              className="flex-1"
+              className="flex-1 rounded-[18px] h-12"
               size="lg"
             >
               {isGenerating ? (
@@ -297,36 +300,42 @@ export function AnimeImageEditor({
                 </>
               )}
             </Button>
-            <Button onClick={handleReset} variant="outline" size="lg">
+            <Button onClick={handleReset} variant="outline" size="lg" className="rounded-[18px] border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.08]">
               <RefreshCw className="w-4 h-4 mr-2" />
               {t("reset")}
             </Button>
           </div>
 
           <div className="flex gap-3">
-            <Button onClick={handleDownload} disabled={!resultImage} variant="secondary" className="flex-1">
+            <Button onClick={handleDownload} disabled={!resultImage} variant="secondary" className="flex-1 rounded-[18px] bg-white/[0.08] text-white hover:bg-white/[0.14]">
               <Download className="w-4 h-4 mr-2" />
               {t("download")}
             </Button>
           </div>
 
           {error ? (
-            <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4 text-sm text-destructive">
+            <div className="rounded-[18px] border border-destructive/20 bg-destructive/8 p-4 text-sm text-destructive">
               {error}
             </div>
           ) : null}
         </div>
 
         <div className="space-y-4">
-          <CompareSlider
-            beforeImage={originalImage}
-            afterImage={resultImage || originalImage}
-            isLoading={isGenerating}
-            autoSlide={!!resultImage && !isGenerating}
-            autoSlideDelay={250}
-            className="w-full"
-          />
-          <div className="text-xs text-muted-foreground text-center">
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="text-[11px] uppercase tracking-[0.22em] text-primary">Preview</div>
+              <div className="text-xs text-white/35">{selectedStyle?.label ?? "Animeify"}</div>
+            </div>
+            <CompareSlider
+              beforeImage={originalImage}
+              afterImage={resultImage || originalImage}
+              isLoading={isGenerating}
+              autoSlide={!!resultImage && !isGenerating}
+              autoSlideDelay={250}
+              className="w-full"
+            />
+          </div>
+          <div className="text-xs text-white/42 text-center">
             {t("disclaimer")}
           </div>
         </div>

@@ -13,18 +13,19 @@ export function Logo() {
   return (
     <Link
       href={localePrefix}
-      className="flex items-center gap-2 hover:opacity-90 transition-opacity"
+      className="flex items-center gap-3 hover:opacity-90 transition-opacity"
     >
       <Image
         src="/favicon.svg"
         alt={`${site.siteName} Logo`}
-        width={32}
-        height={32}
-        className="rounded-lg"
+        width={34}
+        height={34}
+        className="rounded-xl border border-white/10 bg-white/5 p-1.5"
       />
-      <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-        {site.siteName}
-      </span>
+      <div className="flex flex-col leading-none">
+        <span className="text-lg font-semibold tracking-[-0.04em] text-white">{site.siteName}</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">Image + Veo</span>
+      </div>
     </Link>
   );
 }

@@ -29,27 +29,26 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="md:hidden text-white hover:bg-white/5 hover:text-white">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="flex flex-col">
+      <SheetContent side="left" className="flex flex-col border-white/10 bg-black text-white">
         <SheetHeader>
-          <SheetTitle>{currentLocale === 'zh' ? '导航' : 'Navigation'}</SheetTitle>
+          <SheetTitle className="text-white">{currentLocale === 'zh' ? '导航' : 'Navigation'}</SheetTitle>
         </SheetHeader>
 
-        {/* Language Switcher for Mobile */}
-        <div className="flex items-center gap-2 mt-4 pb-4 border-b">
-          <span className="text-sm text-muted-foreground">
+        <div className="mt-4 flex items-center gap-2 border-b border-white/10 pb-4">
+          <span className="text-sm text-white/45">
             {currentLocale === 'zh' ? '语言:' : 'Language:'}
           </span>
           <Link
             href={pathWithoutLocale}
             locale="en"
-            className={`px-3 py-1.5 rounded text-sm transition-colors ${currentLocale === 'en'
+            className={`rounded-full px-3 py-1.5 text-sm transition-colors ${currentLocale === 'en'
               ? 'bg-primary text-primary-foreground'
-              : 'bg-muted text-muted-foreground hover:text-foreground'
+              : 'bg-white/5 text-white/60 hover:text-white'
               }`}
           >
             EN
@@ -57,27 +56,27 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
           <Link
             href={pathWithoutLocale}
             locale="zh"
-            className={`px-3 py-1.5 rounded text-sm transition-colors ${currentLocale === 'zh'
+            className={`rounded-full px-3 py-1.5 text-sm transition-colors ${currentLocale === 'zh'
               ? 'bg-primary text-primary-foreground'
-              : 'bg-muted text-muted-foreground hover:text-foreground'
+              : 'bg-white/5 text-white/60 hover:text-white'
               }`}
           >
             中文
           </Link>
         </div>
 
-        <nav className="flex flex-col gap-4 mt-4">
+        <nav className="mt-4 flex flex-col gap-4">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-lg font-semibold text-muted-foreground transition-colors hover:text-primary"
+              className="text-lg font-semibold text-white/70 transition-colors hover:text-primary"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="mt-auto pt-4 border-t">
+        <div className="mt-auto border-t border-white/10 pt-4">
           {loading ? (
             <div className="flex flex-col gap-2">
               <Skeleton className="h-10 w-full" />
@@ -91,14 +90,14 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
                 </Link>
               </Button>
               <form action={signOutAction} className="w-full">
-                <Button type="submit" variant="outline" className="w-full">
+                <Button type="submit" variant="outline" className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10">
                   {currentLocale === 'zh' ? '退出登录' : 'Sign out'}
                 </Button>
               </form>
             </div>
           ) : (
             <div className="flex flex-col gap-2">
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild variant="outline" className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10">
                 <Link href="/sign-in">
                   {currentLocale === 'zh' ? '登录' : 'Sign in'}
                 </Link>

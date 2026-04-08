@@ -1,29 +1,33 @@
 {
   "metadata": {
-    "title": "【免费体验】照片转二次元 AI - 一键在线生成绝美动漫头像",
-    "description": "想要看到你的二次元分身吗？立即免费体验最懂你的 AI 照片转二次元生成器！只需上传自拍，一键解锁吉卜力、韩漫、90年代复古等多种动漫滤镜。零门槛轻松出图，快来定制你的专属高颜值动漫形象！",
-    "keywords": "照片转二次元, 真人变动漫, AI动漫生成器, 免费动漫头像制作, 一键照片动漫化, 吉卜力滤镜, 二次元形象定制"
+    "title": "Imaveo - 聚合 AI 视频、AI 图片与 Animeify 的创作中枢",
+    "description": "Imaveo 是面向大众创作者的 AI 视觉创作聚合站，把 Veo、Kling、Flux 和 Animeify 放进同一个暗色极简工作台。",
+    "keywords": "imaveo, ai视频生成, ai图片生成, animeify, veo 3, kling 2.6, flux pro, ai创作平台"
   },
   "nav": {
     "home": "首页",
     "tools": "工具",
+    "models": "模型",
+    "ai_video": "AI 视频",
+    "ai_image": "AI 图片",
     "pricing": "定价",
-    "about": "关于",
+    "blog": "博客",
+    "creations": "我的创作",
     "sign_in": "登录",
     "sign_up": "注册",
     "dashboard": "控制台",
     "sign_out": "退出"
   },
   "hero": {
-    "badge": "动漫优先 • 风格预设 • 高质量出图",
-    "title": "照片转二次元",
-    "title_highlight": "AI 生成器",
-    "subtitle": "上传照片，在线一键生成动漫风图片。选择风格、调整二次元浓度，几秒内完成照片转二次元。",
-    "feature_1": "多种风格",
-    "feature_2": "浓度可调",
-    "feature_3": "支持下载",
-    "tool_title": "立即免费体验",
-    "tool_subtitle": "上传一张照片，即刻探索你的二次元分身。"
+    "badge": "AI 视频 • AI 图片 • Animeify",
+    "title": "一个暗色极简的",
+    "title_highlight": "AI 视觉创作中枢",
+    "subtitle": "把 Veo、Kling、Flux 和 Animeify 聚合到同一个高级工作台里，围绕提示词、资产和转化路径统一组织。",
+    "feature_1": "按场景组织工作流",
+    "feature_2": "热门模型即时切换",
+    "feature_3": "统一资产底座",
+    "tool_title": "启动第一个工作流",
+    "tool_subtitle": "先用 Animeify 获得最快的首个成果，再扩展到视频和更广泛的图片生成模型。"
   },
   "uploader": {
     "title": "上传图片",
@@ -102,14 +106,14 @@
     "faq_title": "常见问题"
   },
   "footer": {
-    "tagline": "动漫优先的照片生成工具",
+    "tagline": "面向创作者的 AI 视频、AI 图片与二次元专属工作流中枢。",
     "legal": "法律条款",
     "link_privacy": "隐私政策",
     "link_terms": "服务条款",
-    "link_about": "关于我们",
+    "link_blog": "博客",
     "rights": "保留所有权利。",
-    "brand": "我们的网站",
-    "built_by": "为创作者打造"
+    "brand": "Imaveo",
+    "built_by": "为高频创作者而建"
   },
   "Pricing": {
     "eyebrow": "创作者定价",

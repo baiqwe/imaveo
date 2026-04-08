@@ -1,56 +1,44 @@
 "use client";
 
 import { Logo } from "./logo";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { getLocalizedLandingPage } from "@/config/landing-pages";
+import { Link } from "@/i18n/routing";
+import { imaveoArticles, imaveoModels, imaveoTools } from "@/config/imaveo";
 
 export function Footer() {
   const pathname = usePathname();
-  const t = useTranslations('footer');
+  const t = useTranslations("footer");
   const isDashboard = /^\/(?:en|zh)?\/?dashboard(?:\/|$)/.test(pathname || "");
 
-  // 检测当前 locale
-  const pathParts = pathname?.split('/') || [];
-  const currentLocale = (pathParts[1] === 'en' || pathParts[1] === 'zh') ? pathParts[1] : 'en';
+  const pathParts = pathname?.split("/") || [];
+  const currentLocale = pathParts[1] === "en" || pathParts[1] === "zh" ? pathParts[1] : "en";
   const localePrefix = `/${currentLocale}`;
   const isZh = currentLocale === "zh";
 
-  const ghibliPage = getLocalizedLandingPage("ghibli-filter", currentLocale);
-  const animePfpPage = getLocalizedLandingPage("anime-pfp-generator", currentLocale);
-  const cyberpunkPage = getLocalizedLandingPage("cyberpunk-anime", currentLocale);
-  const retroPage = getLocalizedLandingPage("90s-anime-filter", currentLocale);
-  const webtoonPage = getLocalizedLandingPage("webtoon-ai", currentLocale);
-  const cosplayPage = getLocalizedLandingPage("cosplay-enhancer", currentLocale);
+  const toolLinks = imaveoTools.slice(0, 4).map((tool) => ({
+    label: tool.labels[currentLocale as "en" | "zh"],
+    href: `${localePrefix}${tool.href}`,
+  }));
 
-  const toolLinks = [
-    { label: isZh ? "照片转二次元" : "Photo to Anime", href: `${localePrefix}` },
-    { label: ghibliPage?.h1 || (isZh ? "吉卜力风格滤镜" : "Ghibli Filter"), href: `${localePrefix}/ghibli-filter` },
-    { label: animePfpPage?.h1 || (isZh ? "动漫头像生成器" : "Anime PFP Generator"), href: `${localePrefix}/anime-pfp-generator` },
-    { label: cyberpunkPage?.h1 || (isZh ? "赛博朋克动漫滤镜" : "Cyberpunk Anime Filter"), href: `${localePrefix}/cyberpunk-anime` },
-  ];
-
-  const styleLinks = [
-    { label: retroPage?.h1 || (isZh ? "90 年代复古动漫滤镜" : "90s Anime Filter"), href: `${localePrefix}/90s-anime-filter` },
-    { label: webtoonPage?.h1 || (isZh ? "韩漫风 AI 滤镜" : "Webtoon AI Filter"), href: `${localePrefix}/webtoon-ai` },
-    { label: cosplayPage?.h1 || (isZh ? "Cos 照增强器" : "Cosplay Enhancer"), href: `${localePrefix}/cosplay-enhancer` },
-  ];
+  const modelLinks = imaveoModels.slice(0, 4).map((model) => ({
+    label: model.labels[currentLocale as "en" | "zh"],
+    href: `${localePrefix}${model.href}`,
+  }));
 
   const legalLinks = [
-    { label: t('link_privacy'), href: `${localePrefix}/privacy` },
-    { label: t('link_terms'), href: `${localePrefix}/terms` },
-    { label: t('link_about'), href: `${localePrefix}/about` },
+    { label: t("link_privacy"), href: `${localePrefix}/privacy` },
+    { label: t("link_terms"), href: `${localePrefix}/terms` },
+    { label: t("link_blog"), href: `${localePrefix}/blog` },
   ];
 
   if (isDashboard) {
     return (
-      <footer className="border-t py-6 md:py-0">
+      <footer className="border-t border-white/10 py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row md:py-0">
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-            <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-              Built by{" "}
-              <span className="font-medium">Bai</span>
+            <p className="text-center text-sm leading-loose text-white/45 md:text-left">
+              Built by <span className="font-medium text-white/80">Bai</span>
             </p>
           </div>
         </div>
@@ -59,33 +47,29 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="border-t border-white/10 bg-black/60">
       <div className="container px-4 py-12 md:py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
-          {/* Brand */}
           <div className="col-span-full lg:col-span-2">
             <Logo />
-            <p className="mt-4 text-sm text-muted-foreground max-w-sm">
-              {t('tagline')}
-            </p>
-            <p className="mt-2 text-xs text-muted-foreground">
-              {currentLocale === 'zh'
-                ? '提示：为生成效果，上传图片会发送到第三方 AI 服务处理。'
-                : 'Note: uploads are sent to a third-party AI service for generation.'}
+            <p className="mt-4 max-w-sm text-sm leading-6 text-white/65">{t("tagline")}</p>
+            <p className="mt-2 text-xs text-white/40">
+              {isZh
+                ? "Imaveo 聚合 AI 视频、图片和 Animeify 专属入口，统一管理生成资产与额度。"
+                : "Imaveo brings AI video, AI image, and Animeify into one premium creation hub."}
             </p>
           </div>
 
-          {/* Tools - 工具内链 */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold">
-              {currentLocale === 'zh' ? '转换工具' : 'Tools'}
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+              {isZh ? "创作入口" : "Tools"}
             </h3>
             <nav className="flex flex-col gap-2">
               {toolLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-white/55 transition-colors hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -93,17 +77,16 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Styles */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold">
-              {currentLocale === 'zh' ? '热门风格' : 'Styles'}
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+              {isZh ? "热门模型" : "Models"}
             </h3>
             <nav className="flex flex-col gap-2">
-              {styleLinks.map((link) => (
+              {modelLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-white/55 transition-colors hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -111,15 +94,14 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Legal */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold">{t('legal')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">{t("legal")}</h3>
             <nav className="flex flex-col gap-2">
               {legalLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-white/55 transition-colors hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -128,14 +110,29 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
-          <p className="text-center text-sm text-muted-foreground md:text-left">
-            © {new Date().getFullYear()} {t('brand')}. {t('rights')}
+        <div className="mt-10 rounded-[28px] border border-white/10 bg-white/[0.03] p-5">
+          <div className="section-label mb-3">{isZh ? "内容引擎" : "Editorial Engine"}</div>
+          <div className="grid gap-3 md:grid-cols-3">
+            {imaveoArticles.map((article) => (
+              <Link
+                key={article.slug}
+                href={article.href}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-primary/40 hover:bg-white/[0.05]"
+              >
+                <div className="text-[11px] uppercase tracking-[0.2em] text-primary/90">{article.category}</div>
+                <div className="mt-2 text-sm font-medium text-white">
+                  {article.title[currentLocale as "en" | "zh"]}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
+          <p className="text-center text-sm text-white/45 md:text-left">
+            © {new Date().getFullYear()} {t("brand")}. {t("rights")}
           </p>
-          <p className="text-center text-sm text-muted-foreground md:text-right">
-            {t('built_by')}
-          </p>
+          <p className="text-center text-sm text-white/45 md:text-right">{t("built_by")}</p>
         </div>
       </div>
     </footer>

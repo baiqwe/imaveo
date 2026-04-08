@@ -1,29 +1,33 @@
 {
   "metadata": {
-    "title": "[Free Try] Photo to Anime AI - Create a Stunning Anime Avatar in One Click",
-    "description": "Want to see your anime alter ego? Try our photo to anime AI generator for free. Upload a selfie and instantly unlock Ghibli-inspired, webtoon, and 90s retro anime filters to create your own high-impact anime look.",
-    "keywords": "photo to anime, turn photo into anime, ai anime generator, free anime avatar maker, one click anime filter, ghibli filter ai, anime character creator"
+    "title": "Imaveo - AI Video, AI Image, and Animeify in One Creation Hub",
+    "description": "Imaveo is an AI visual creation hub for video, image, and anime-first workflows. Explore Veo, Kling, Flux, and Animeify from one dark, creator-focused interface.",
+    "keywords": "imaveo, ai video generator, ai image generator, animeify, veo 3, kling 2.6, flux pro, ai creation hub"
   },
   "nav": {
     "home": "Home",
     "tools": "Tools",
+    "models": "Models",
+    "ai_video": "AI Video",
+    "ai_image": "AI Image",
     "pricing": "Pricing",
-    "about": "About",
+    "blog": "Blog",
+    "creations": "My Creations",
     "sign_in": "Sign In",
     "sign_up": "Sign Up",
     "dashboard": "Dashboard",
     "sign_out": "Sign Out"
   },
   "hero": {
-    "badge": "Anime-First • Style Presets • High Quality",
-    "title": "Photo to Anime",
-    "title_highlight": "AI Converter",
-    "subtitle": "Upload a photo and turn it into anime art online. Pick a style, adjust intensity, and generate a clean 2D anime look in seconds.",
-    "feature_1": "Multiple styles",
-    "feature_2": "Intensity control",
-    "feature_3": "Download ready",
-    "tool_title": "Try it free",
-    "tool_subtitle": "Upload one photo and instantly explore your anime alter ego."
+    "badge": "AI Video • AI Image • Animeify",
+    "title": "One dark hub for",
+    "title_highlight": "visual AI creation",
+    "subtitle": "Route creators across Veo, Kling, Flux, and Animeify from a single premium workspace built for prompts, assets, and conversion.",
+    "feature_1": "Scenario-first workflows",
+    "feature_2": "Hot model switching",
+    "feature_3": "Unified asset foundation",
+    "tool_title": "Launch the first workflow",
+    "tool_subtitle": "Use Animeify as the fastest route to first value, then expand into video and broader image generation."
   },
   "uploader": {
     "title": "Upload Your Image",
@@ -102,14 +106,14 @@
     "faq_title": "Frequently asked questions"
   },
   "footer": {
-    "tagline": "Anime-first photo conversion with AI",
+    "tagline": "The AI creation hub for video, image, and anime-specialized workflows.",
     "legal": "Legal",
     "link_privacy": "Privacy Policy",
     "link_terms": "Terms of Service",
-    "link_about": "About",
+    "link_blog": "Blog",
     "rights": "All rights reserved.",
-    "brand": "Our Site",
-    "built_by": "Built for creators"
+    "brand": "Imaveo",
+    "built_by": "Built for creators shipping fast"
   },
   "Pricing": {
     "eyebrow": "Creator Pricing",

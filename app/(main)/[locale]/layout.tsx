@@ -122,11 +122,11 @@ export default async function LocaleLayout(props: {
             <NextIntlClientProvider messages={messages} locale={locale}>
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="system"
-                    enableSystem
+                    defaultTheme="dark"
+                    enableSystem={false}
                     disableTransitionOnChange
                 >
-                    <div className="relative min-h-screen flex flex-col">
+                    <div className="relative min-h-screen flex flex-col bg-background text-foreground">
                         <Header />
                         <main className="flex-1">{children}</main>
                         <Footer />

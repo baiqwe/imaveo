@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getProjectId } from "@/utils/supabase/project";
 import { CREDITS_PER_GENERATION } from "@/config/credit-packs";
 import type { AnimeStyleId } from "@/config/landing-pages";
+import { modelConfig } from "@/config/imaveo";
 
 export const runtime = "nodejs";
 export const maxDuration = 60; // 1 minute timeout
@@ -14,6 +15,7 @@ const REPLICATE_MODEL =
     "google/nano-banana-pro:d71e2df08d6ef4c4fb6d3773e9e557de6312e04444940dbb81fd73366ed83941";
 
 type Intensity = "low" | "medium" | "high";
+type GenerateModelId = keyof typeof modelConfig;
 
 const PONY_PREFIX =
     "score_9, score_8_up, score_7_up, source_anime, masterpiece, best quality, very aesthetic";
@@ -162,6 +164,19 @@ function extractReplicateOutputUrl(output: unknown) {
     return null;
 }
 
+function resolveGenerationConfig(modelId?: string) {
+    if (!modelId) {
+        return {
+            providerId: "replicate",
+            category: "image",
+            mode: "anime",
+            generationDefaults: { style: "standard" },
+        };
+    }
+
+    return modelConfig[modelId as GenerateModelId] ?? null;
+}
+
 export async function POST(request: NextRequest) {
     const supabase = await createClient();
     const projectId = await getProjectId(supabase);
@@ -169,11 +184,13 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const image: string | undefined = body?.image;
+        const modelId: string | undefined = body?.model;
         const style: AnimeStyleId = (body?.style as AnimeStyleId) || "standard";
         const intensity: Intensity = (body?.intensity as Intensity) || "medium";
         const keepEyeColor: boolean = body?.keepEyeColor !== false;
         const keepHairColor: boolean = body?.keepHairColor !== false;
         const prompt: string | undefined = body?.prompt;
+        const generationConfig = resolveGenerationConfig(modelId);
         const stylePreset = STYLE_PRESETS[style] ?? STYLE_PRESETS.standard;
 
         // 1. Authentication
@@ -185,6 +202,17 @@ export async function POST(request: NextRequest) {
         // 2. Input Validation
         if (!image) {
             return NextResponse.json({ error: "Missing image", code: "MISSING_IMAGE" }, { status: 400 });
+        }
+
+        if (!generationConfig) {
+            return NextResponse.json({ error: "Unsupported model", code: "UNSUPPORTED_MODEL" }, { status: 400 });
+        }
+
+        if (generationConfig.category === "video") {
+            return NextResponse.json({
+                error: "Video generation dispatcher is not wired yet.",
+                code: "VIDEO_NOT_READY",
+            }, { status: 501 });
         }
 
         if (!process.env.REPLICATE_API_TOKEN) {
@@ -215,11 +243,11 @@ export async function POST(request: NextRequest) {
         // 4. Call Replicate img2img API
         try {
             const { positive, negative, promptStrength } = buildPromptParts({
-                style,
-                intensity,
-                keepEyeColor,
-                keepHairColor,
-                userPrompt: prompt,
+                    style,
+                    intensity,
+                    keepEyeColor,
+                    keepHairColor,
+                    userPrompt: prompt,
             });
 
             console.log("=== Calling Replicate Nano Banana Pro ===");
@@ -294,6 +322,7 @@ export async function POST(request: NextRequest) {
                 status: "succeeded",
                 credits_cost: CREDITS_PER_GENERATION,
                 metadata: {
+                    requestedModelId: modelId ?? "animeify",
                     style,
                     intensity,
                     keepEyeColor,
@@ -303,7 +332,8 @@ export async function POST(request: NextRequest) {
                     styleNegativePrompt: negative,
                     denoisingStrength: promptStrength,
                     promptFramework: "nano-banana-style-matrix",
-                    provider: "replicate",
+                    provider: generationConfig.providerId,
+                    generationMode: generationConfig.mode,
                 }
             });
 

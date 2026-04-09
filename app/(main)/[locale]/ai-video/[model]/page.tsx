@@ -3,16 +3,26 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getImaveoModel } from "@/config/imaveo";
+import { buildAbsoluteUrl, buildLocaleAlternates, getModelMetadata } from "@/utils/seo/metadata";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string; model: string }> }): Promise<Metadata> {
   const { locale, model } = await props.params;
   const item = getImaveoModel(model, "video");
   if (!item) return {};
   const localeKey = locale as "en" | "zh";
+  const seo = getModelMetadata(localeKey, model, "video");
+  const pathname = `/${locale}/ai-video/${model}`;
 
   return {
-    title: `${item.labels[localeKey]} | Imaveo`,
-    description: item.descriptions[localeKey],
+    title: seo?.title ?? `${item.labels[localeKey]} | Imaveo`,
+    description: seo?.description ?? item.descriptions[localeKey],
+    keywords: seo?.keywords,
+    alternates: buildLocaleAlternates(pathname),
+    openGraph: {
+      title: seo?.title ?? `${item.labels[localeKey]} | Imaveo`,
+      description: seo?.description ?? item.descriptions[localeKey],
+      url: buildAbsoluteUrl(pathname),
+    },
   };
 }
 

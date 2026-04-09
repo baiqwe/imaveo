@@ -1,6 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 const landingPages = require("./config/landing-pages.json");
 const landingPageSlugs = Object.keys(landingPages);
+const imaveoModelPaths = ["/ai-video/veo-3", "/ai-video/kling-2-6", "/ai-image/flux-pro", "/ai-image/animeify"];
+const imaveoToolPaths = ["/text-to-video", "/image-to-video"];
 
 module.exports = {
     siteUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
@@ -50,7 +52,7 @@ module.exports = {
     // ✅ 核心修复：手动添加动态路由路径
     additionalPaths: async (config) => {
         const locales = ['en', 'zh'];
-        const staticPages = ['pricing', 'privacy', 'terms', 'about'];
+        const staticPages = ['pricing', 'privacy', 'terms', 'about', 'blog', 'my-creations'];
         const result = [];
 
         // Landing pages (pSEO slugs)
@@ -73,6 +75,28 @@ module.exports = {
                     loc: `/${locale}/${page}`,
                     changefreq: page.includes('privacy') || page.includes('terms') ? 'monthly' : 'weekly',
                     priority: priority,
+                    lastmod: new Date().toISOString(),
+                });
+            }
+        }
+
+        for (const locale of locales) {
+            for (const path of imaveoModelPaths) {
+                result.push({
+                    loc: `/${locale}${path}`,
+                    changefreq: 'weekly',
+                    priority: 0.85,
+                    lastmod: new Date().toISOString(),
+                });
+            }
+        }
+
+        for (const locale of locales) {
+            for (const path of imaveoToolPaths) {
+                result.push({
+                    loc: `/${locale}${path}`,
+                    changefreq: 'weekly',
+                    priority: 0.8,
                     lastmod: new Date().toISOString(),
                 });
             }

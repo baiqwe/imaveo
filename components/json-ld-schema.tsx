@@ -1,20 +1,15 @@
-/**
- * JSON-LD Structured Data for SoftwareApplication
- * Helps search engines understand the app as a web application
- * 
- * Note: This is a server component to avoid hydration issues
- */
-import { getTranslations } from 'next-intl/server';
 import { site } from '@/config/site';
 
 export async function SoftwareApplicationSchema({ locale }: { locale: string }) {
-    const t = await getTranslations({ locale, namespace: 'metadata' });
+    const isZh = locale === "zh";
 
     const schema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": `${site.siteName} - Photo to Anime AI Converter`,
-        "description": t('description'),
+        "name": site.siteName,
+        "description": isZh
+            ? "Imaveo 是聚合 AI 视频、AI 图片与 Animeify 的创作平台。"
+            : "Imaveo is a creation platform that unifies AI video, AI image, and Animeify workflows.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Web Browser",
         "offers": {
@@ -23,17 +18,35 @@ export async function SoftwareApplicationSchema({ locale }: { locale: string }) 
             "priceCurrency": "USD"
         },
         "featureList": [
-            "Photo to anime AI conversion",
-            "Multiple anime styles (Ghibli-inspired, cyberpunk, 90s retro, webtoon)",
-            "Adjustable anime intensity",
-            "Preserve key colors (eyes/hair)",
-            "Download generated images"
+            "AI video generation hub",
+            "AI image generation hub",
+            "Animeify portrait workflow",
+            "Credits packs and subscriptions",
+            "Localized English and Chinese pages"
         ],
         "screenshot": new URL(site.ogImagePath, site.siteUrl).toString(),
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "1250"
+        "url": site.siteUrl,
+        "offersCatalog": {
+            "@type": "OfferCatalog",
+            "name": isZh ? "Imaveo 套餐" : "Imaveo Plans",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "name": "Free",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Credits Pack",
+                    "priceCurrency": "USD"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Pro Subscription",
+                    "priceCurrency": "USD"
+                }
+            ]
         }
     };
 

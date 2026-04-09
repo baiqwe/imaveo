@@ -6,12 +6,19 @@ import { buildLocaleAlternates } from "@/utils/seo/metadata";
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
     const { locale } = await props.params;
+    const isZh = locale === "zh";
 
     return {
-        title: "Pricing",
-        description: "Pricing plans for Photo to Anime AI credits and subscriptions.",
+        title: isZh ? "定价方案 | Imaveo" : "Pricing Plans | Imaveo",
+        description: isZh
+            ? "查看 Imaveo 的订阅方案和 Credits 包，适合 AI 视频、AI 图片与 Animeify 创作需求。"
+            : "Explore Imaveo subscription plans and credits packs for AI video, AI image, and Animeify workflows.",
         alternates: buildLocaleAlternates(`/${locale}/pricing`),
         openGraph: {
+            title: isZh ? "定价方案 | Imaveo" : "Pricing Plans | Imaveo",
+            description: isZh
+                ? "按月订阅或按次购买 Credits，适配不同频率的 AI 创作需求。"
+                : "Choose between subscriptions and credits packs for different AI creation cadences.",
             url: new URL(`/${locale}/pricing`, site.siteUrl).toString(),
         },
     };

@@ -23,7 +23,12 @@ export function Logo() {
         className="rounded-xl border border-white/10 bg-white/5 p-1.5"
       />
       <div className="flex flex-col leading-none">
-        <span className="text-lg font-semibold tracking-[-0.04em] text-white">{site.siteName}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-lg font-semibold tracking-[-0.04em] text-white">{site.siteName}</span>
+          <span className="rounded-full border border-primary/25 bg-primary/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-primary">
+            Beta
+          </span>
+        </div>
         <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">Image + Veo</span>
       </div>
     </Link>

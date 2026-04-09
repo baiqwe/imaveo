@@ -31,6 +31,16 @@ function HeroWithUploadSection({
   const locale = pathParts[1] === 'en' || pathParts[1] === 'zh' ? pathParts[1] : 'en';
   const localeKey = locale as 'en' | 'zh';
   const isZh = locale === 'zh';
+  const [activeMode, setActiveMode] = useState<'video' | 'image' | 'anime'>('anime');
+  const activeModels = imaveoModels.filter((model) =>
+    activeMode === 'video' ? model.category === 'video' : model.category === 'image'
+  );
+  const activeLabel = activeMode === 'video' ? (isZh ? 'AI 视频工作台' : 'AI Video Console') : activeMode === 'image' ? (isZh ? 'AI 图片工作台' : 'AI Image Console') : 'Animeify Studio';
+  const activeDescription = activeMode === 'video'
+    ? (isZh ? '适合文生视频、图生视频与电影感镜头实验。' : 'Built for text-to-video, image-to-video, and cinematic motion experiments.')
+    : activeMode === 'image'
+      ? (isZh ? '适合封面、海报、品牌主视觉和商品图。' : 'Built for covers, posters, hero art, and product visuals.')
+      : (isZh ? '最快拿到第一张可用成片的二次元专属入口。' : 'The fastest route to a usable first result for anime portraits.');
 
   return (
     <section className="hero-backdrop relative min-h-[92vh] border-b border-white/10">
@@ -62,27 +72,33 @@ function HeroWithUploadSection({
             ))}
           </div>
 
-          <div className="mt-12 w-full max-w-4xl rounded-[28px] border border-[#3b2910] bg-[#09090d]/88 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
-            <div className="flex flex-wrap items-center gap-2 border-b border-white/8 pb-4 text-left">
-              <HeroTab icon={<PlaySquare className="h-4 w-4" />} label={isZh ? 'AI 视频' : 'AI Video'} active />
-              <HeroTab icon={<ImageIcon className="h-4 w-4" />} label={isZh ? 'AI 图片' : 'AI Image'} />
-              <HeroTab icon={<Sparkles className="h-4 w-4" />} label="Animeify" hot />
-            </div>
+            <div className="mt-12 w-full max-w-4xl rounded-[28px] border border-[#3b2910] bg-[#09090d]/88 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
+              <div className="flex flex-wrap items-center gap-2 border-b border-white/8 pb-4 text-left">
+              <HeroTab icon={<PlaySquare className="h-4 w-4" />} label={isZh ? 'AI 视频' : 'AI Video'} active={activeMode === 'video'} onClick={() => setActiveMode('video')} />
+              <HeroTab icon={<ImageIcon className="h-4 w-4" />} label={isZh ? 'AI 图片' : 'AI Image'} active={activeMode === 'image'} onClick={() => setActiveMode('image')} />
+              <HeroTab icon={<Sparkles className="h-4 w-4" />} label="Animeify" hot active={activeMode === 'anime'} onClick={() => setActiveMode('anime')} />
+              </div>
 
-            <div className="grid gap-4 pt-4 md:grid-cols-[1fr_auto]">
+              <div className="grid gap-4 pt-4 md:grid-cols-[1fr_auto]">
               <div className="rounded-[22px] border border-white/8 bg-white/[0.03] p-4 text-left">
                 <div className="text-xs uppercase tracking-[0.2em] text-white/35">
                   {isZh ? '快速生成入口' : 'Prompt Console'}
                 </div>
                 <div className="mt-3 text-base text-white/88">
-                  {isZh
-                    ? '把 Animeify 作为默认首屏入口，继续承接 Veo、Kling、Flux 等模型的统一切换。'
-                    : 'Use Animeify as the first launch path, while keeping Veo, Kling, and Flux inside the same frame.'}
+                  {activeDescription}
                 </div>
                 <div className="mt-4 rounded-[18px] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-7 text-white/52">
-                  {isZh
-                    ? '示例：上传一张人像，先生成动漫头像；接着切到图生视频，把同一张角色图继续做成动态短片。'
-                    : 'Example: upload one portrait, generate an anime avatar first, then switch to image-to-video and animate the same character into a short cinematic clip.'}
+                  {activeMode === 'video'
+                    ? (isZh
+                      ? '示例：输入一句角色动作提示词，切到 Veo 或 Kling，生成 5-8 秒短片。'
+                      : 'Example: write a motion prompt, switch between Veo and Kling, and generate a 5-8 second clip.')
+                    : activeMode === 'image'
+                      ? (isZh
+                        ? '示例：输入品牌视觉需求，切到 Flux，生成海报、广告图或封面。'
+                        : 'Example: write a branding prompt, switch to Flux, and generate a poster, ad visual, or hero image.')
+                      : (isZh
+                        ? '示例：上传一张人像，先生成动漫头像；再切到图生视频，把同一角色做成动态短片。'
+                        : 'Example: upload a portrait, generate an anime avatar, then animate that same character into a short video.')}
                 </div>
               </div>
 
@@ -91,9 +107,9 @@ function HeroWithUploadSection({
                   <div className="text-[11px] uppercase tracking-[0.2em] text-white/35">
                     {isZh ? '默认模型' : 'Default Model'}
                   </div>
-                  <div className="mt-2 text-lg font-medium text-white">Animeify</div>
+                  <div className="mt-2 text-lg font-medium text-white">{activeLabel}</div>
                   <div className="mt-2 text-sm leading-6 text-white/45">
-                    {isZh ? '首屏负责最快拿到第一张成片。' : 'Optimized for the fastest first success.'}
+                    {isZh ? '点击标签切换模式，后续会接更细的参数面板。' : 'Switch modes with tabs. A deeper parameter sheet can plug in later.'}
                   </div>
                 </div>
                 <div className="rounded-[22px] border border-white/8 bg-white/[0.03] p-4">
@@ -101,7 +117,7 @@ function HeroWithUploadSection({
                     {isZh ? '快速参数' : 'Quick Params'}
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {['16:9', '9:16', '5s', 'HD'].map((item) => (
+                    {(activeMode === 'video' ? ['16:9', '9:16', '5s', '8s'] : activeMode === 'image' ? ['1:1', '4:5', 'HD', 'Prompt'] : ['Anime', 'Portrait', 'Style', 'HD']).map((item) => (
                       <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/60">
                         {item}
                       </span>
@@ -109,10 +125,14 @@ function HeroWithUploadSection({
                   </div>
                 </div>
                 <Link
-                  href="/ai-image/animeify"
+                  href={activeMode === 'video' ? '/text-to-video' : activeMode === 'image' ? '/ai-image/flux-pro' : '/ai-image/animeify'}
                   className="inline-flex items-center justify-center gap-2 rounded-[18px] bg-primary px-5 py-4 text-sm font-medium text-black transition-transform hover:translate-y-[-1px]"
                 >
-                  {isZh ? '进入 Animeify Studio' : 'Open Animeify Studio'} <ArrowRight className="h-4 w-4" />
+                  {activeMode === 'video'
+                    ? (isZh ? '进入 AI 视频' : 'Open AI Video')
+                    : activeMode === 'image'
+                      ? (isZh ? '进入 AI 图片' : 'Open AI Image')
+                      : (isZh ? '进入 Animeify Studio' : 'Open Animeify Studio')} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -133,7 +153,7 @@ function HeroWithUploadSection({
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">{t('tool_subtitle')}</p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {imaveoModels.map((model) => (
+              {activeModels.map((model) => (
                 <Link
                   key={model.slug}
                   href={model.href}
@@ -170,14 +190,18 @@ function HeroTab({
   label,
   active = false,
   hot = false,
+  onClick,
 }: {
   icon: React.ReactNode;
   label: string;
   active?: boolean;
   hot?: boolean;
+  onClick?: () => void;
 }) {
   return (
-    <div
+    <button
+      type="button"
+      onClick={onClick}
       className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm ${
         active ? 'bg-white/[0.06] text-white' : 'text-white/55'
       }`}
@@ -189,7 +213,7 @@ function HeroTab({
           HOT
         </span>
       ) : null}
-    </div>
+    </button>
   );
 }
 

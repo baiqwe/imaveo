@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { imaveoArticles } from "@/config/imaveo";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -41,10 +42,10 @@ export default async function BlogPage(props: { params: Promise<{ locale: string
                 <h2 className="mt-4 text-2xl font-medium text-white">{article.title[localeKey]}</h2>
                 <p className="mt-3 text-sm leading-7 text-white/58">{article.excerpt[localeKey]}</p>
                 <Link
-                  href={`/${locale}/pricing`}
-                  className="mt-6 inline-flex items-center text-sm text-primary"
+                  href={`/${locale}${article.href}`}
+                  className="mt-6 inline-flex items-center gap-2 text-sm text-primary"
                 >
-                  {isZh ? "查看定价与模型" : "Explore models and pricing"}
+                  {isZh ? "阅读全文" : "Read article"} <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>
             ))}

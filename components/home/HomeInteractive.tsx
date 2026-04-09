@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { ArrowRight, ImageIcon, PlaySquare, Sparkles } from 'lucide-react';
 import { AnimeImageEditor } from '@/components/feature/anime-image-editor';
 import type { AnimeStyleId } from '@/config/landing-pages';
@@ -27,11 +27,19 @@ function HeroWithUploadSection({
 }) {
   const t = useTranslations('hero');
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const pathParts = pathname?.split('/') || [];
   const locale = pathParts[1] === 'en' || pathParts[1] === 'zh' ? pathParts[1] : 'en';
   const localeKey = locale as 'en' | 'zh';
   const isZh = locale === 'zh';
   const [activeMode, setActiveMode] = useState<'video' | 'image' | 'anime'>('anime');
+  const modeFromQuery = searchParams?.get('mode');
+
+  useEffect(() => {
+    if (modeFromQuery === 'video' || modeFromQuery === 'image' || modeFromQuery === 'anime') {
+      setActiveMode(modeFromQuery);
+    }
+  }, [modeFromQuery]);
   const activeModels = imaveoModels.filter((model) =>
     activeMode === 'video' ? model.category === 'video' : model.category === 'image'
   );
@@ -72,7 +80,7 @@ function HeroWithUploadSection({
             ))}
           </div>
 
-            <div className="mt-12 w-full max-w-4xl rounded-[28px] border border-[#3b2910] bg-[#09090d]/88 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
+            <div id="hero-console" className="mt-12 w-full max-w-4xl scroll-mt-24 rounded-[28px] border border-[#3b2910] bg-[#09090d]/88 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
               <div className="flex flex-wrap items-center gap-2 border-b border-white/8 pb-4 text-left">
               <HeroTab icon={<PlaySquare className="h-4 w-4" />} label={isZh ? 'AI 视频' : 'AI Video'} active={activeMode === 'video'} onClick={() => setActiveMode('video')} />
               <HeroTab icon={<ImageIcon className="h-4 w-4" />} label={isZh ? 'AI 图片' : 'AI Image'} active={activeMode === 'image'} onClick={() => setActiveMode('image')} />
@@ -145,7 +153,7 @@ function HeroWithUploadSection({
           </div>
         </div>
 
-        <div className="mx-auto mt-14 max-w-6xl rounded-[30px] border border-white/10 bg-black/55 p-4 shadow-[0_25px_80px_rgba(0,0,0,0.35)] md:p-6">
+        <div id="animeify-studio" className="mx-auto mt-14 max-w-6xl scroll-mt-24 rounded-[30px] border border-white/10 bg-black/55 p-4 shadow-[0_25px_80px_rgba(0,0,0,0.35)] md:p-6">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div className="text-left">
               <div className="section-label">Animeify Studio</div>

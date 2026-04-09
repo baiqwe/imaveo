@@ -107,3 +107,44 @@ export function HowToSchema({ name, description, steps }: HowToSchemaProps) {
   );
 }
 
+interface ArticleSchemaProps {
+  headline: string;
+  description: string;
+  url: string;
+  locale: string;
+  publishedAt?: string;
+  updatedAt?: string;
+}
+
+export function ArticleSchema({ headline, description, url, locale, publishedAt, updatedAt }: ArticleSchemaProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": headline,
+    "description": description,
+    "inLanguage": locale,
+    "mainEntityOfPage": new URL(url, site.siteUrl).toString(),
+    "author": {
+      "@type": "Organization",
+      "name": site.siteName,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": site.siteName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": new URL(site.ogImagePath, site.siteUrl).toString(),
+      },
+    },
+    "image": [new URL(site.ogImagePath, site.siteUrl).toString()],
+    ...(publishedAt ? { "datePublished": publishedAt } : {}),
+    ...(updatedAt ? { "dateModified": updatedAt } : {}),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}

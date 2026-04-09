@@ -1,3 +1,5 @@
+import { imaveoArticles as articleCatalog } from "@/config/imaveo-articles";
+
 export type ToolCategory = "video" | "image" | "audio";
 export type GenerationMode = "text-to-video" | "image-to-video" | "text-to-image" | "anime";
 export type ProviderId = "vertex" | "kling" | "fal" | "replicate";
@@ -73,6 +75,9 @@ export type ImaveoArticle = {
   slug: string;
   href: string;
   category: string;
+  readTime: string;
+  publishedAt: string;
+  updatedAt: string;
   title: {
     en: string;
     zh: string;
@@ -81,7 +86,46 @@ export type ImaveoArticle = {
     en: string;
     zh: string;
   };
+  seo: {
+    en: {
+      title: string;
+      description: string;
+      keywords: string[];
+    };
+    zh: {
+      title: string;
+      description: string;
+      keywords: string[];
+    };
+  };
+  sections: Array<{
+    heading: {
+      en: string;
+      zh: string;
+    };
+    paragraphs: {
+      en: string[];
+      zh: string[];
+    };
+  }>;
+  takeaways: {
+    en: string[];
+    zh: string[];
+  };
+  cta: {
+    href: string;
+    label: {
+      en: string;
+      zh: string;
+    };
+    description: {
+      en: string;
+      zh: string;
+    };
+  };
 };
+
+export const imaveoArticles = articleCatalog;
 
 export const imaveoTools: ImaveoTool[] = [
   {
@@ -306,48 +350,6 @@ export const imaveoModels: ImaveoModel[] = [
   },
 ];
 
-export const imaveoArticles: ImaveoArticle[] = [
-  {
-    slug: "veo-vs-sora",
-    href: "/blog",
-    category: "MODEL REVIEW",
-    title: {
-      en: "Veo 3.1 vs Sora 2: which model should creators pick in 2026?",
-      zh: "Veo 3.1 vs Sora 2：2026 年创作者该选谁？",
-    },
-    excerpt: {
-      en: "Compare motion realism, prompt adherence, and cost curves before you buy credits.",
-      zh: "在充值前先比较运动真实度、提示词理解和成本曲线。",
-    },
-  },
-  {
-    slug: "anime-avatar-prompts",
-    href: "/blog",
-    category: "PROMPT GUIDE",
-    title: {
-      en: "How to generate a perfect anime avatar with Animeify prompts",
-      zh: "如何用 Animeify 提示词生成一张完美二次元头像",
-    },
-    excerpt: {
-      en: "A prompt formula for cosplay shots, profile pictures, and creator branding.",
-      zh: "适用于 Cos 照、社交头像和创作者品牌图的一套提示词模板。",
-    },
-  },
-  {
-    slug: "ai-video-workflow",
-    href: "/blog",
-    category: "WORKFLOW",
-    title: {
-      en: "The Imaveo workflow: from still image to publish-ready short video",
-      zh: "Imaveo 工作流：从一张静图到可发布的短视频",
-    },
-    excerpt: {
-      en: "A practical production loop for ideation, image keyframes, and video generation.",
-      zh: "一套从创意、关键帧到视频生成的实用生产流程。",
-    },
-  },
-];
-
 export const modelConfig = Object.fromEntries(
   imaveoModels.map((model) => [
     model.slug,
@@ -366,4 +368,8 @@ export function getImaveoModel(slug: string, category?: "video" | "image") {
 
 export function getImaveoTool(slug: string) {
   return imaveoTools.find((tool) => tool.slug === slug);
+}
+
+export function getImaveoArticle(slug: string) {
+  return imaveoArticles.find((article) => article.slug === slug);
 }

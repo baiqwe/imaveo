@@ -2,8 +2,9 @@ import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 import { locales } from "@/i18n/routing";
 import { indexableLandingPageSlugs } from "@/config/landing-pages";
+import { imaveoArticles, imaveoModels } from "@/config/imaveo";
 
-const staticPages = ["", "pricing", "privacy", "terms", "about"];
+const staticPages = ["", "pricing", "privacy", "terms", "about", "blog", "my-creations", "ai-video", "ai-image", "text-to-video", "image-to-video"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           languages: {
             en: new URL(page ? `/en/${page}` : "/en", site.siteUrl).toString(),
             zh: new URL(page ? `/zh/${page}` : "/zh", site.siteUrl).toString(),
+            "x-default": new URL(page ? `/en/${page}` : "/en", site.siteUrl).toString(),
           },
         },
       } satisfies MetadataRoute.Sitemap[number];
@@ -36,10 +38,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           en: new URL(`/en/${slug}`, site.siteUrl).toString(),
           zh: new URL(`/zh/${slug}`, site.siteUrl).toString(),
+          "x-default": new URL(`/en/${slug}`, site.siteUrl).toString(),
         },
       },
     }))
   );
 
-  return [...staticEntries, ...landingEntries];
+  const modelEntries = locales.flatMap((locale) =>
+    imaveoModels.map((model) => ({
+      url: new URL(`/${locale}${model.href}`, site.siteUrl).toString(),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+      alternates: {
+        languages: {
+          en: new URL(`/en${model.href}`, site.siteUrl).toString(),
+          zh: new URL(`/zh${model.href}`, site.siteUrl).toString(),
+          "x-default": new URL(`/en${model.href}`, site.siteUrl).toString(),
+        },
+      },
+    }))
+  );
+
+  const articleEntries = locales.flatMap((locale) =>
+    imaveoArticles.map((article) => ({
+      url: new URL(`/${locale}${article.href}`, site.siteUrl).toString(),
+      lastModified: new Date(article.updatedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.75,
+      alternates: {
+        languages: {
+          en: new URL(`/en${article.href}`, site.siteUrl).toString(),
+          zh: new URL(`/zh${article.href}`, site.siteUrl).toString(),
+          "x-default": new URL(`/en${article.href}`, site.siteUrl).toString(),
+        },
+      },
+    }))
+  );
+
+  return [...staticEntries, ...landingEntries, ...modelEntries, ...articleEntries];
 }

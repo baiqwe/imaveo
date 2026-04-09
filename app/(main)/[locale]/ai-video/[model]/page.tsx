@@ -83,10 +83,10 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               <span className="rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-black">
                 {item.badge}
               </span>
-              <span className="text-sm uppercase tracking-[0.18em] text-white/40">{item.provider}</span>
+              <span className="text-sm uppercase tracking-[0.18em] text-zinc-500">{item.provider}</span>
             </div>
-            <h1 className="mt-5 text-5xl font-medium tracking-[-0.05em] text-white">{item.labels[localeKey]}</h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-white/58">{item.descriptions[localeKey]}</p>
+            <h1 className={`mt-5 text-5xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>{item.labels[localeKey]}</h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">{item.descriptions[localeKey]}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {item.strengths[localeKey].map((strength) => (
@@ -103,7 +103,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "回到 AI 视频中心" : "Back to AI video hub"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "查看所有 AI 视频模型和工作流入口。" : "See all AI video models and workflow entry points."}
                 </div>
               </Link>
@@ -113,7 +113,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Workflow" : "Workflow"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "查看对应工作流" : "Open matching workflow"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "进入与该模型最相关的工具页和场景页。" : "Open the workflow page most aligned to this model."}
                 </div>
               </Link>
@@ -123,7 +123,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Pricing" : "Pricing"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "查看套餐与 Credits" : "View plans and credits"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "对比订阅方案和按次购买的 Credits。" : "Compare subscriptions and pay-as-you-go credits."}
                 </div>
               </Link>

@@ -3,13 +3,16 @@ import { getImaveoModel, getImaveoTool } from "@/config/imaveo";
 
 export function buildLocaleAlternates(pathname: string) {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const normalizedWithLocale = /^\/(en|zh)(?=\/|$)/.test(normalizedPath) ? normalizedPath : `/en${normalizedPath}`;
+  const localizedPath = (locale: "en" | "zh") =>
+    normalizedWithLocale.replace(/^\/(en|zh)(?=\/|$)/, `/${locale}`);
 
   return {
-    canonical: normalizedPath,
+    canonical: buildAbsoluteUrl(normalizedWithLocale),
     languages: {
-      en: normalizedPath.replace(/^\/(en|zh)(?=\/|$)/, "/en"),
-      zh: normalizedPath.replace(/^\/(en|zh)(?=\/|$)/, "/zh"),
-      "x-default": normalizedPath.replace(/^\/(en|zh)(?=\/|$)/, "/en"),
+      en: buildAbsoluteUrl(localizedPath("en")),
+      zh: buildAbsoluteUrl(localizedPath("zh")),
+      "x-default": buildAbsoluteUrl(localizedPath("en")),
     },
   };
 }

@@ -39,7 +39,7 @@ export default function Header() {
   const imageModels = imaveoModels.filter((model) => model.category === "image");
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#06080d]/78 backdrop-blur-xl">
+    <header className="sticky top-0 z-[100] w-full border-b border-white/10 bg-[#06080d]/78 backdrop-blur-xl">
       <div className="container flex h-20 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-8">
           <Logo />
@@ -183,7 +183,7 @@ function MegaMenu({
         <ChevronDown className="h-4 w-4 text-white/40 transition-transform group-hover:rotate-180" />
       </button>
 
-      <div className="pointer-events-none absolute left-0 top-full pt-4 opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+      <div className="pointer-events-none absolute left-0 top-full z-[110] pt-4 opacity-0 transition-all duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
         <div className="w-[520px] rounded-[24px] border border-[#3b2910] bg-[#0b0b10]/96 p-5 shadow-[0_25px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl">
           <div className="grid grid-cols-[1.1fr_0.9fr] gap-6">
             <div className="border-r border-white/8 pr-6">

@@ -58,10 +58,10 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
 
           <div className="rounded-[36px] border border-white/10 bg-white/[0.03] p-8 md:p-10">
             <div className="section-label">Text to Video</div>
-            <h1 className="mt-3 text-5xl font-medium tracking-[-0.05em] text-white">
+            <h1 className={`mt-3 text-5xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
               {isZh ? "一句话生成 AI 视频" : "Generate AI videos from a single prompt"}
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-white/58">
+            <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
               {isZh
                 ? "这个页面用于承接文生视频类搜索与转化，并把用户导向最合适的视频模型、定价页和品牌首页。"
                 : "This page captures text-to-video intent and routes users into the right video model pages, pricing, and the brand hub."}
@@ -74,7 +74,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               >
                 <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "AI 视频中心" : "AI Video Hub"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "浏览所有视频模型与工作流。" : "Explore all video models and workflows."}
                 </div>
               </Link>
@@ -84,7 +84,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               >
                 <div className="section-label">{isZh ? "Pricing" : "Pricing"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "套餐与 Credits" : "Plans and credits"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "比较订阅与按次购买方案。" : "Compare subscriptions and pay-as-you-go credits."}
                 </div>
               </Link>
@@ -94,7 +94,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               >
                 <div className="section-label">{isZh ? "Brand" : "Brand"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "返回首页中枢" : "Back to the hub"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "回到品牌首页，继续切换其他工作流。" : "Return to the brand console and switch into other workflows."}
                 </div>
               </Link>
@@ -114,7 +114,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
                         {model.badge}
                       </div>
                       <h2 className="mt-4 text-2xl font-medium text-white">{model.labels[localeKey]}</h2>
-                      <p className="mt-3 text-sm leading-7 text-white/52">{model.descriptions[localeKey]}</p>
+                      <p className="mt-3 text-sm leading-7 text-zinc-400">{model.descriptions[localeKey]}</p>
                     </div>
                     <Film className="h-5 w-5 text-white/35" />
                   </div>

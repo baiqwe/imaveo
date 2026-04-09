@@ -61,10 +61,10 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
 
           <section className="rounded-[36px] border border-white/10 bg-white/[0.03] p-8 md:p-10">
             <div className="section-label">AI Image Hub</div>
-            <h1 className="mt-3 text-5xl font-medium tracking-[-0.05em] text-white">
+            <h1 className={`mt-3 text-5xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
               {isZh ? "AI 图片模型与工作流中心" : "The hub for AI image models and workflows"}
             </h1>
-            <p className="mt-4 max-w-4xl text-base leading-7 text-white/58">
+            <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
                 ? "这个 pillar 页负责承接 AI 图片生成的品牌词和大类词，再把权重分发到 Flux、Animeify 以及更细分的图片内页。"
                 : "This pillar page captures broad AI image demand, then distributes authority into Flux, Animeify, and more specialized image pages."}
@@ -80,9 +80,9 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
                         {model.badge}
                       </div>
                       <div className="mt-4 text-2xl font-medium text-white">{model.labels[localeKey]}</div>
-                      <div className="mt-2 text-sm leading-7 text-white/52">{model.descriptions[localeKey]}</div>
+                      <div className="mt-2 text-sm leading-7 text-zinc-400">{model.descriptions[localeKey]}</div>
                     </div>
-                    <ArrowRight className="h-5 w-5 text-white/30" />
+                    <ArrowRight className="h-5 w-5 text-zinc-500" />
                   </div>
                 </Link>
               ))}

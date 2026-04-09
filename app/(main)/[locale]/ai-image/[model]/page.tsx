@@ -84,10 +84,10 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
               <span className="rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-black">
                 {item.badge}
               </span>
-              <span className="text-sm uppercase tracking-[0.18em] text-white/40">{item.provider}</span>
+              <span className="text-sm uppercase tracking-[0.18em] text-zinc-500">{item.provider}</span>
             </div>
-            <h1 className="mt-5 text-5xl font-medium tracking-[-0.05em] text-white">{item.labels[localeKey]}</h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-white/58">{item.descriptions[localeKey]}</p>
+            <h1 className={`mt-5 text-5xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>{item.labels[localeKey]}</h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">{item.descriptions[localeKey]}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {item.strengths[localeKey].map((strength) => (
@@ -104,7 +104,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "回到 AI 图片中心" : "Back to AI image hub"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "查看所有图片模型和品牌视觉入口。" : "See all image models and brand visual workflows."}
                 </div>
               </Link>
@@ -114,7 +114,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Library" : "Library"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "查看创作资产" : "Open my creations"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "统一查看已生成的图片和收藏作品。" : "Review finished images and saved creative outputs in one place."}
                 </div>
               </Link>
@@ -124,7 +124,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
               >
                 <div className="section-label">{isZh ? "Pricing" : "Pricing"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "查看套餐与 Credits" : "View plans and credits"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "按频率选择订阅或按次付费方案。" : "Pick subscriptions or pay-as-you-go credits based on volume."}
                 </div>
               </Link>

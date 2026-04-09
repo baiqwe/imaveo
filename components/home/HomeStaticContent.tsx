@@ -42,11 +42,11 @@ export default async function HomeStaticContent({ locale }: Props) {
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="section-label">Core System</div>
-                <h2 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-white">
+                <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                   {isZh ? "一个站点，承接视频、图片和二次元专用工作流" : "One hub for video, image, and anime-specialized creation"}
                 </h2>
               </div>
-              <p className="max-w-xl text-sm leading-7 text-white/58">
+              <p className="max-w-xl text-sm leading-7 text-zinc-300">
                 {isZh
                   ? "首页现在不再只是一张落地页，而是产品中枢。你的 SEO 流量、模型详情、价格页和创作资产都会围绕这个核心框架展开。"
                   : "The homepage now acts as a product hub, not just a landing page. SEO, pricing, model pages, and creation assets all radiate from this same frame."}
@@ -63,7 +63,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-medium text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/58">{item.desc}</p>
+                  <p className="mt-3 text-sm leading-7 text-zinc-300">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -77,11 +77,11 @@ export default async function HomeStaticContent({ locale }: Props) {
             <div className="mb-10 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
               <div>
                 <div className="section-label">Model Board</div>
-                <h2 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-white">
+                <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                   {isZh ? "用详情页承接高意图搜索" : "Turn high-intent searches into model landing pages"}
                 </h2>
               </div>
-              <p className="text-sm leading-7 text-white/58">
+              <p className="text-sm leading-7 text-zinc-300">
                 {isZh
                   ? "每个模型页都可以继续扩展为 SEO 入口、价格锚点和示例库。当前已补上视频与图片模型详情页骨架，后续可直接接接口与案例。"
                   : "Each model page can become an SEO entry, a pricing anchor, and a showcase page. The route skeleton is now in place for both video and image models."}
@@ -104,9 +104,9 @@ export default async function HomeStaticContent({ locale }: Props) {
                         <span className="text-sm uppercase tracking-[0.22em] text-white/35">{model.provider}</span>
                       </div>
                       <h3 className="mt-4 text-2xl font-medium text-white">{model.labels[localeKey]}</h3>
-                      <p className="mt-3 text-sm leading-7 text-white/58">{model.descriptions[localeKey]}</p>
+                      <p className="mt-3 text-sm leading-7 text-zinc-300">{model.descriptions[localeKey]}</p>
                     </div>
-                    <ArrowRight className="h-5 w-5 text-white/30 transition-colors group-hover:text-primary" />
+                    <ArrowRight className="h-5 w-5 text-zinc-500 transition-colors group-hover:text-primary" />
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {model.strengths[localeKey].map((strength) => (
@@ -131,7 +131,7 @@ export default async function HomeStaticContent({ locale }: Props) {
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="section-label">Workflow Grid</div>
-                <h2 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-white">
+                <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                   {isZh ? "导航不再按页面组织，而是按工作流组织" : "Organize navigation around workflows, not generic pages"}
                 </h2>
               </div>
@@ -155,7 +155,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                       </span>
                     ) : null}
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-white/58">{tool.descriptions[localeKey]}</p>
+                  <p className="mt-3 text-sm leading-7 text-zinc-300">{tool.descriptions[localeKey]}</p>
                 </Link>
               ))}
             </div>
@@ -168,10 +168,10 @@ export default async function HomeStaticContent({ locale }: Props) {
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-7">
               <div className="section-label">Pricing Logic</div>
-              <h2 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-white">
+              <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                 {isZh ? "订阅 + 加油包双轨并行" : "Subscription and top-up packs on the same surface"}
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/58">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300">
                 {isZh
                   ? "定价页继续复用现有 Creem 集成，但视觉上改成更克制的双卡逻辑：左边订阅，右边积分包，用单次成本和权益差距推动升级。"
                   : "Keep the current Creem integration, but frame pricing as a cleaner dual-track story: subscriptions on the left, refill packs on the right."}
@@ -194,7 +194,7 @@ export default async function HomeStaticContent({ locale }: Props) {
 
             <div className="rounded-[32px] border border-white/10 bg-black/40 p-7">
               <div className="section-label">SEO Engine</div>
-              <h2 className="mt-3 text-3xl font-medium tracking-[-0.05em] text-white">
+              <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                 {isZh ? "博客页负责吃下模型评测和提示词长尾词" : "The blog becomes your long-tail acquisition engine"}
               </h2>
               <div className="mt-6 space-y-3">
@@ -202,7 +202,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                   <div key={article.slug} className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4">
                     <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{article.category}</div>
                     <div className="mt-2 text-base font-medium text-white">{article.title[localeKey]}</div>
-                    <p className="mt-2 text-sm leading-6 text-white/52">{article.excerpt[localeKey]}</p>
+                    <p className="mt-2 text-sm leading-6 text-zinc-400">{article.excerpt[localeKey]}</p>
                   </div>
                 ))}
               </div>
@@ -217,7 +217,7 @@ export default async function HomeStaticContent({ locale }: Props) {
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
               <div>
                 <div className="section-label">Animeify Layer</div>
-                <h2 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-white">
+                <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                   {isZh ? "Animeify 作为 Imaveo 的专属子品牌继续存在" : "Animeify stays alive as a specialized layer inside Imaveo"}
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-white/66">

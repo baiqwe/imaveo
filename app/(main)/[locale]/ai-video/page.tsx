@@ -61,10 +61,10 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
 
           <section className="rounded-[36px] border border-white/10 bg-white/[0.03] p-8 md:p-10">
             <div className="section-label">AI Video Hub</div>
-            <h1 className="mt-3 text-5xl font-medium tracking-[-0.05em] text-white">
+            <h1 className={`mt-3 text-5xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
               {isZh ? "AI 视频模型与工作流中心" : "The hub for AI video models and workflows"}
             </h1>
-            <p className="mt-4 max-w-4xl text-base leading-7 text-white/58">
+            <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
                 ? "这个 pillar 页负责承接品牌词下的 AI 视频大类搜索，再把权重分发给 Veo、Kling 以及文生视频、图生视频等 cluster 页面。"
                 : "This pillar page captures broad AI video demand, then distributes authority into Veo, Kling, text-to-video, and image-to-video cluster pages."}
@@ -74,12 +74,12 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
               <Link href={`/${locale}/text-to-video`} className="rounded-[28px] border border-white/10 bg-black/25 p-6 transition-colors hover:border-primary/35 hover:bg-white/[0.04]">
                 <div className="section-label">{isZh ? "Workflow" : "Workflow"}</div>
                 <div className="mt-3 text-2xl font-medium text-white">{isZh ? "文生视频" : "Text to Video"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">{isZh ? "从一句提示词直接生成视频。" : "Generate videos directly from prompts."}</div>
+                <div className="mt-2 text-sm leading-7 text-zinc-400">{isZh ? "从一句提示词直接生成视频。" : "Generate videos directly from prompts."}</div>
               </Link>
               <Link href={`/${locale}/image-to-video`} className="rounded-[28px] border border-white/10 bg-black/25 p-6 transition-colors hover:border-primary/35 hover:bg-white/[0.04]">
                 <div className="section-label">{isZh ? "Workflow" : "Workflow"}</div>
                 <div className="mt-3 text-2xl font-medium text-white">{isZh ? "图生视频" : "Image to Video"}</div>
-                <div className="mt-2 text-sm leading-7 text-white/52">{isZh ? "把静态图像动画化为短视频。" : "Animate still images into short videos."}</div>
+                <div className="mt-2 text-sm leading-7 text-zinc-400">{isZh ? "把静态图像动画化为短视频。" : "Animate still images into short videos."}</div>
               </Link>
             </div>
 
@@ -93,9 +93,9 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
                         {model.badge}
                       </div>
                       <div className="mt-4 text-2xl font-medium text-white">{model.labels[localeKey]}</div>
-                      <div className="mt-2 text-sm leading-7 text-white/52">{model.descriptions[localeKey]}</div>
+                      <div className="mt-2 text-sm leading-7 text-zinc-400">{model.descriptions[localeKey]}</div>
                     </div>
-                    <ArrowRight className="h-5 w-5 text-white/30" />
+                    <ArrowRight className="h-5 w-5 text-zinc-500" />
                   </div>
                 </Link>
               ))}

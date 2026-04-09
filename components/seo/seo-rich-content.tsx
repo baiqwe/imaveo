@@ -61,8 +61,8 @@ export function SeoRichContent({
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">{overviewLabel}</div>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{introTitle}</h2>
-        <div className="mt-4 space-y-4 text-sm leading-7 text-white/58">
+        <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>{introTitle}</h2>
+        <div className="mt-4 space-y-4 text-sm leading-7 text-zinc-300">
           {overviewParagraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -71,12 +71,12 @@ export function SeoRichContent({
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">{howToLabel}</div>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{stepsTitle}</h2>
+        <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>{stepsTitle}</h2>
         <ol className="mt-5 grid gap-4 md:grid-cols-3">
           {steps.map((step, index) => (
             <li key={step} className="rounded-[24px] border border-white/10 bg-black/25 p-5">
               <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{isZh ? `第 ${index + 1} 步` : `Step ${index + 1}`}</div>
-              <div className="mt-3 text-sm leading-7 text-white/68">{step}</div>
+              <div className="mt-3 text-sm leading-7 text-zinc-300">{step}</div>
             </li>
           ))}
         </ol>
@@ -84,10 +84,10 @@ export function SeoRichContent({
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">{useCasesLabel}</div>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{useCasesTitle}</h2>
+        <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>{useCasesTitle}</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
           {useCases.map((useCase) => (
-            <div key={useCase} className="rounded-[22px] border border-white/10 bg-black/25 p-5 text-sm leading-7 text-white/62">
+            <div key={useCase} className="rounded-[22px] border border-white/10 bg-black/25 p-5 text-sm leading-7 text-zinc-300">
               {useCase}
             </div>
           ))}
@@ -96,12 +96,12 @@ export function SeoRichContent({
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">FAQ</div>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{faqTitle}</h2>
+        <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>{faqTitle}</h2>
         <div className="mt-5 grid gap-4">
           {faqs.map((faq) => (
             <div key={faq.question} className="rounded-[24px] border border-white/10 bg-black/25 p-5">
               <div className="text-lg font-medium text-white">{faq.question}</div>
-              <div className="mt-3 text-sm leading-7 text-white/58">{faq.answer}</div>
+              <div className="mt-3 text-sm leading-7 text-zinc-300">{faq.answer}</div>
             </div>
           ))}
         </div>
@@ -109,7 +109,7 @@ export function SeoRichContent({
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">{internalLinksLabel}</div>
-        <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{relatedTitle}</h2>
+        <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>{relatedTitle}</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
           {relatedLinks.map((link) => (
             <Link
@@ -118,7 +118,7 @@ export function SeoRichContent({
               className="rounded-[24px] border border-white/10 bg-black/25 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
             >
               <div className="text-base font-medium text-white">{link.label}</div>
-              {link.description ? <div className="mt-2 text-sm leading-6 text-white/48">{link.description}</div> : null}
+              {link.description ? <div className="mt-2 text-sm leading-6 text-zinc-400">{link.description}</div> : null}
             </Link>
           ))}
         </div>

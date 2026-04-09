@@ -42,6 +42,12 @@ export function SeoRichContent({
   relatedLinks,
 }: SeoRichContentProps) {
   const isZh = locale === "zh";
+  const overviewParagraphs = introBody.length > 0 ? introBody : [keyword];
+
+  if (process.env.NODE_ENV !== "production" && introBody.length === 0) {
+    console.warn(`[SeoRichContent] introBody is empty for keyword "${keyword}"`);
+  }
+
   const howToSteps = steps.map((step) => ({ name: step, text: step }));
   const overviewLabel = isZh ? "概览" : "Overview";
   const howToLabel = isZh ? "使用步骤" : "How To";
@@ -51,13 +57,13 @@ export function SeoRichContent({
   return (
     <div className="space-y-10">
       <FAQSchema items={faqs} />
-      <HowToSchema name={keyword} description={introBody[0] ?? keyword} steps={howToSteps} />
+      <HowToSchema name={keyword} description={overviewParagraphs[0]} steps={howToSteps} />
 
       <section className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
         <div className="section-label">{overviewLabel}</div>
         <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{introTitle}</h2>
         <div className="mt-4 space-y-4 text-sm leading-7 text-white/58">
-          {introBody.map((paragraph) => (
+          {overviewParagraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>

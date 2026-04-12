@@ -8,6 +8,7 @@ import { AnimeImageEditor } from '@/components/feature/anime-image-editor';
 import type { AnimeStyleId } from '@/config/landing-pages';
 import { imaveoModels } from '@/config/imaveo';
 import { Link } from '@/i18n/routing';
+import { buildStudioPath } from '@/utils/studio';
 
 interface HomeInteractiveProps {
   onShowStaticContent: (show: boolean) => void;
@@ -64,7 +65,7 @@ function HeroWithUploadSection({
             {t('title')} <span className="text-primary">{t('title_highlight')}</span>
           </h1>
 
-          <p className="mt-6 max-w-4xl text-lg leading-9 text-white/72 md:text-[1.9rem] md:leading-[1.45]">
+          <p className="mt-6 max-w-4xl text-lg leading-9 text-zinc-300 md:text-[1.9rem] md:leading-[1.45]">
             {t('subtitle')}
           </p>
 
@@ -72,16 +73,21 @@ function HeroWithUploadSection({
             {imaveoModels.map((model) => (
               <Link
                 key={model.slug}
-                href={model.href}
-                className="rounded-full border border-white/10 bg-black/30 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/70 transition-colors hover:border-primary/40 hover:text-primary"
+                href={buildStudioPath({
+                  mode: model.category === 'video' ? (model.mode === 'image-to-video' ? 'image-to-video' : 'text-to-video') : model.slug === 'animeify' ? 'image-to-image' : 'text-to-image',
+                  model: model.slug,
+                  style: model.slug === 'animeify' ? 'anime' : undefined,
+                  source: 'home-chip',
+                })}
+                className="rounded-full border border-zinc-800 bg-black/30 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-zinc-300 transition-colors hover:border-primary/40 hover:text-primary"
               >
                 {model.labels[localeKey]}
               </Link>
             ))}
           </div>
 
-            <div id="hero-console" className="mt-12 w-full max-w-4xl scroll-mt-24 rounded-[28px] border border-[#3b2910] bg-[#09090d]/88 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
-              <div className="flex flex-wrap items-center gap-2 border-b border-white/8 pb-4 text-left">
+            <div id="hero-console" className="mt-12 w-full max-w-4xl scroll-mt-24 rounded-[28px] border border-zinc-800 bg-[#09090d]/94 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-5">
+              <div className="flex flex-wrap items-center gap-2 border-b border-zinc-800 pb-4 text-left">
               <HeroTab icon={<PlaySquare className="h-4 w-4" />} label={isZh ? 'AI 视频' : 'AI Video'} active={activeMode === 'video'} onClick={() => setActiveMode('video')} />
               <HeroTab icon={<ImageIcon className="h-4 w-4" />} label={isZh ? 'AI 图片' : 'AI Image'} active={activeMode === 'image'} onClick={() => setActiveMode('image')} />
               <HeroTab icon={<Sparkles className="h-4 w-4" />} label="Animeify" hot active={activeMode === 'anime'} onClick={() => setActiveMode('anime')} />
@@ -111,29 +117,33 @@ function HeroWithUploadSection({
               </div>
 
               <div className="flex flex-col gap-3 text-left md:min-w-[220px]">
-                <div className="rounded-[22px] border border-white/8 bg-white/[0.03] p-4">
-                  <div className="text-[11px] uppercase tracking-[0.2em] text-white/35">
+                  <div className="rounded-[22px] border border-zinc-800 bg-white/[0.03] p-4">
+                    <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                     {isZh ? '默认模型' : 'Default Model'}
                   </div>
                   <div className="mt-2 text-lg font-medium text-white">{activeLabel}</div>
-                  <div className="mt-2 text-sm leading-6 text-white/45">
+                    <div className="mt-2 text-sm leading-6 text-zinc-400">
                     {isZh ? '点击标签切换模式，后续会接更细的参数面板。' : 'Switch modes with tabs. A deeper parameter sheet can plug in later.'}
                   </div>
                 </div>
-                <div className="rounded-[22px] border border-white/8 bg-white/[0.03] p-4">
-                  <div className="text-[11px] uppercase tracking-[0.2em] text-white/35">
+                <div className="rounded-[22px] border border-zinc-800 bg-white/[0.03] p-4">
+                  <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">
                     {isZh ? '快速参数' : 'Quick Params'}
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {(activeMode === 'video' ? ['16:9', '9:16', '5s', '8s'] : activeMode === 'image' ? ['1:1', '4:5', 'HD', 'Prompt'] : ['Anime', 'Portrait', 'Style', 'HD']).map((item) => (
-                      <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/60">
+                      <span key={item} className="rounded-full border border-zinc-800 px-3 py-1 text-xs text-zinc-300">
                         {item}
                       </span>
                     ))}
                   </div>
                 </div>
                 <Link
-                  href={activeMode === 'video' ? '/text-to-video' : activeMode === 'image' ? '/ai-image/flux-pro' : '/ai-image/animeify'}
+                  href={activeMode === 'video'
+                    ? buildStudioPath({ mode: 'text-to-video', model: 'veo-3', source: 'home-hero' })
+                    : activeMode === 'image'
+                      ? buildStudioPath({ mode: 'text-to-image', model: 'flux-pro', source: 'home-hero' })
+                      : buildStudioPath({ mode: 'image-to-image', model: 'animeify', style: 'anime', source: 'home-hero' })}
                   className="inline-flex items-center justify-center gap-2 rounded-[18px] bg-primary px-5 py-4 text-sm font-medium text-black transition-transform hover:translate-y-[-1px]"
                 >
                   {activeMode === 'video'
@@ -146,26 +156,31 @@ function HeroWithUploadSection({
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-white/55">
+          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-zinc-400">
             <span>{t('feature_1')}</span>
             <span>{t('feature_2')}</span>
             <span>{t('feature_3')}</span>
           </div>
         </div>
 
-        <div id="animeify-studio" className="mx-auto mt-14 max-w-6xl scroll-mt-24 rounded-[30px] border border-white/10 bg-black/55 p-4 shadow-[0_25px_80px_rgba(0,0,0,0.35)] md:p-6">
+        <div id="animeify-studio" className="mx-auto mt-14 max-w-6xl scroll-mt-24 rounded-[30px] border border-zinc-800 bg-black/55 p-4 shadow-[0_25px_80px_rgba(0,0,0,0.35)] md:p-6">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div className="text-left">
               <div className="section-label">Animeify Studio</div>
-              <h2 className="mt-2 text-3xl font-medium tracking-[-0.04em] text-white">{t('tool_title')}</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-white/58">{t('tool_subtitle')}</p>
+              <h2 className={`mt-2 text-3xl font-medium text-white ${isZh ? 'tracking-normal' : 'tracking-[-0.04em]'}`}>{t('tool_title')}</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-300">{t('tool_subtitle')}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               {activeModels.map((model) => (
                 <Link
                   key={model.slug}
-                  href={model.href}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white/55 transition-colors hover:border-primary/45 hover:text-primary"
+                  href={buildStudioPath({
+                    mode: model.slug === 'animeify' ? 'image-to-image' : 'text-to-image',
+                    model: model.slug,
+                    style: model.slug === 'animeify' ? 'anime' : undefined,
+                    source: 'home-animeify',
+                  })}
+                  className="rounded-full border border-zinc-800 bg-white/[0.03] px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-zinc-400 transition-colors hover:border-primary/45 hover:text-primary"
                 >
                   #{model.labels[localeKey]}
                 </Link>
@@ -211,7 +226,7 @@ function HeroTab({
       type="button"
       onClick={onClick}
       className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm ${
-        active ? 'bg-white/[0.06] text-white' : 'text-white/55'
+        active ? 'bg-white/[0.06] text-white' : 'text-zinc-400'
       }`}
     >
       {icon}

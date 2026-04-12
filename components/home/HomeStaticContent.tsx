@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, Clock3, ImageIcon, Layers3, PlaySquare, Sparkles, WandSparkles } from "lucide-react";
 import { imaveoArticles, imaveoModels, imaveoTools } from "@/config/imaveo";
+import { buildStudioHrefFromPath } from "@/utils/studio";
 
 type Props = { locale: string };
 
@@ -36,7 +37,7 @@ export default async function HomeStaticContent({ locale }: Props) {
 
   return (
     <>
-      <section className="border-b border-white/10 py-20">
+      <section className="border-b border-zinc-800 py-20">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -57,7 +58,7 @@ export default async function HomeStaticContent({ locale }: Props) {
               {featureBlocks.map((item) => (
                 <div
                   key={item.title}
-                  className="group rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 transition-colors hover:border-primary/30 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]"
+                  className="group rounded-[30px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 transition-colors hover:border-primary/30 hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]"
                 >
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10">
                     {item.icon}
@@ -92,8 +93,8 @@ export default async function HomeStaticContent({ locale }: Props) {
               {imaveoModels.map((model) => (
                 <Link
                   key={model.slug}
-                  href={`${localePrefix}${model.href}`}
-                  className="group rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-6 transition-colors hover:border-primary/45 hover:bg-white/[0.05]"
+                  href={buildStudioHrefFromPath(locale, model.href, "home-model-board")}
+                  className="group rounded-[28px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-6 transition-colors hover:border-primary/45 hover:bg-white/[0.05]"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -101,7 +102,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                         <span className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-black">
                           {model.badge}
                         </span>
-                        <span className="text-sm uppercase tracking-[0.22em] text-white/35">{model.provider}</span>
+                        <span className="text-sm uppercase tracking-[0.22em] text-zinc-500">{model.provider}</span>
                       </div>
                       <h3 className="mt-4 text-2xl font-medium text-white">{model.labels[localeKey]}</h3>
                       <p className="mt-3 text-sm leading-7 text-zinc-300">{model.descriptions[localeKey]}</p>
@@ -112,7 +113,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                     {model.strengths[localeKey].map((strength) => (
                       <span
                         key={strength}
-                        className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/45"
+                        className="rounded-full border border-zinc-800 px-3 py-1 text-[11px] text-zinc-400"
                       >
                         {strength}
                       </span>
@@ -125,7 +126,7 @@ export default async function HomeStaticContent({ locale }: Props) {
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-white/[0.02] py-20" id="tools">
+      <section className="border-y border-zinc-800 bg-white/[0.02] py-20" id="tools">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -144,8 +145,8 @@ export default async function HomeStaticContent({ locale }: Props) {
               {imaveoTools.map((tool) => (
                 <Link
                   key={tool.slug}
-                  href={`${localePrefix}${tool.href}`}
-                  className="rounded-[24px] border border-white/10 bg-black/35 p-5 transition-colors hover:border-primary/45 hover:bg-white/[0.05]"
+                  href={buildStudioHrefFromPath(locale, tool.href, "home-tool-grid")}
+                  className="rounded-[24px] border border-zinc-800 bg-black/35 p-5 transition-colors hover:border-primary/45 hover:bg-white/[0.05]"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-lg font-medium text-white">{tool.labels[localeKey]}</div>
@@ -166,7 +167,7 @@ export default async function HomeStaticContent({ locale }: Props) {
       <section className="py-20">
         <div className="container px-4 md:px-6">
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-7">
+            <div className="rounded-[32px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-7">
               <div className="section-label">Pricing Logic</div>
               <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                 {isZh ? "订阅 + 加油包双轨并行" : "Subscription and top-up packs on the same surface"}
@@ -192,14 +193,14 @@ export default async function HomeStaticContent({ locale }: Props) {
               </div>
             </div>
 
-            <div className="rounded-[32px] border border-white/10 bg-black/40 p-7">
+            <div className="rounded-[32px] border border-zinc-800 bg-black/40 p-7">
               <div className="section-label">SEO Engine</div>
               <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                 {isZh ? "博客页负责吃下模型评测和提示词长尾词" : "The blog becomes your long-tail acquisition engine"}
               </h2>
               <div className="mt-6 space-y-3">
                 {imaveoArticles.map((article) => (
-                  <div key={article.slug} className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4">
+                  <div key={article.slug} className="rounded-[24px] border border-zinc-800 bg-white/[0.03] p-4">
                     <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{article.category}</div>
                     <div className="mt-2 text-base font-medium text-white">{article.title[localeKey]}</div>
                     <p className="mt-2 text-sm leading-6 text-zinc-400">{article.excerpt[localeKey]}</p>
@@ -220,7 +221,7 @@ export default async function HomeStaticContent({ locale }: Props) {
                 <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                   {isZh ? "Animeify 作为 Imaveo 的专属子品牌继续存在" : "Animeify stays alive as a specialized layer inside Imaveo"}
                 </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/66">
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300">
                   {isZh
                     ? "你后续只需要在 `/ai-image/animeify` 或自定义域名入口注入樱花粉 / 青色变量，就能保留二次元子品牌，同时共享主站的支付、账号和资产系统。"
                     : "A route-level accent swap on `/ai-image/animeify` can preserve the anime-specific sub-brand while sharing the same billing, auth, and asset systems."}
@@ -258,12 +259,12 @@ export default async function HomeStaticContent({ locale }: Props) {
 
 function MiniPanel({ icon, title, desc }: { icon: ReactNode; title: string; desc: string }) {
   return (
-    <div className="rounded-[22px] border border-white/10 bg-black/30 p-4">
+    <div className="rounded-[22px] border border-zinc-800 bg-black/30 p-4">
       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10">
         {icon}
       </div>
       <div className="text-sm font-medium text-white">{title}</div>
-      <div className="mt-2 text-sm leading-6 text-white/55">{desc}</div>
+      <div className="mt-2 text-sm leading-6 text-zinc-400">{desc}</div>
     </div>
   );
 }

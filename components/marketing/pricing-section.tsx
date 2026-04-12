@@ -105,10 +105,10 @@ export function PricingSection({ locale }: PricingSectionProps) {
                         options?.dimmed
                             ? options?.yearly
                                 ? "text-slate-400 line-through"
-                                : "text-muted-foreground line-through"
+                                : "text-slate-500 line-through"
                             : options?.yearly
                                 ? "text-slate-100"
-                                : "text-foreground/90"
+                                : "text-slate-900"
                     )}
                 >
                     <Check
@@ -117,7 +117,7 @@ export function PricingSection({ locale }: PricingSectionProps) {
                             options?.dimmed
                                 ? options?.yearly
                                     ? "text-slate-500"
-                                    : "text-muted-foreground/70"
+                                    : "text-slate-400"
                                 : options?.yearly
                                     ? "text-emerald-300"
                                     : "text-primary"
@@ -139,24 +139,24 @@ export function PricingSection({ locale }: PricingSectionProps) {
         const cardClass = isYearly
             ? "border-slate-800 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.22),transparent_30%),linear-gradient(180deg,#111827_0%,#020617_100%)] text-white shadow-[0_35px_120px_-35px_rgba(15,23,42,0.9)]"
             : isMonthly
-                ? "border-primary/50 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,245,255,0.95))] shadow-[0_30px_110px_-40px_rgba(147,51,234,0.55)]"
-                : "border-border/70 bg-white/95 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.3)]";
+                ? "border-primary/60 bg-[linear-gradient(180deg,rgba(255,255,255,1),rgba(250,246,255,0.98))] shadow-[0_30px_110px_-40px_rgba(147,51,234,0.48)]"
+                : "border-slate-300 bg-white shadow-[0_20px_60px_-40px_rgba(15,23,42,0.22)]";
 
         const badgeClass = isYearly
             ? "bg-amber-300 text-slate-950"
             : isMonthly
                 ? "bg-rose-500 text-white"
-                : "bg-muted text-foreground";
+                : "bg-slate-100 text-slate-900";
 
         const buttonClass = isYearly
             ? "bg-white text-slate-950 hover:bg-slate-100"
             : isMonthly
                 ? "group relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90"
-                : "border border-border bg-background text-foreground hover:bg-muted";
+                : "border border-slate-300 bg-white text-slate-950 hover:bg-slate-50";
 
-        const textMuted = isYearly ? "text-slate-300" : "text-muted-foreground";
-        const divider = isYearly ? "border-white/10" : "border-border/60";
-        const anchorClass = isYearly ? "text-emerald-300" : isMonthly ? "text-primary" : "text-foreground";
+        const textMuted = isYearly ? "text-slate-300" : "text-slate-600";
+        const divider = isYearly ? "border-white/10" : "border-slate-200";
+        const anchorClass = isYearly ? "text-emerald-300" : isMonthly ? "text-primary" : "text-slate-950";
 
         const coreFeatures = isStarter
             ? [
@@ -231,7 +231,7 @@ export function PricingSection({ locale }: PricingSectionProps) {
                     </div>
 
                     <div className="flex items-end gap-2">
-                        <span className={cn("text-5xl font-black tracking-tight", isYearly ? "text-white" : "text-foreground")}>
+                        <span className={cn("text-5xl font-black tracking-tight", isYearly ? "text-white" : "text-slate-950")}>
                             {formatPrice(plan.price)}
                         </span>
                         {plan.interval ? (
@@ -254,7 +254,7 @@ export function PricingSection({ locale }: PricingSectionProps) {
                         </p>
                     )}
 
-                    <div className={cn("rounded-2xl border px-4 py-4", isYearly ? "border-white/10 bg-white/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : isMonthly ? "border-primary/15 bg-primary/5" : "border-border/60 bg-muted/30")}>
+                    <div className={cn("rounded-2xl border px-4 py-4", isYearly ? "border-white/10 bg-white/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]" : isMonthly ? "border-primary/20 bg-primary/5" : "border-slate-200 bg-slate-50")}>
                         <p className={cn("text-xs font-semibold uppercase tracking-[0.22em]", textMuted)}>
                             {t("price_per_image")}
                         </p>
@@ -276,7 +276,7 @@ export function PricingSection({ locale }: PricingSectionProps) {
                     {renderFeatures(coreFeatures, { yearly: isYearly })}
 
                     {missingFeatures.length > 0 ? (
-                        <div className={cn("mt-5 rounded-2xl border px-4 py-4", isYearly ? "border-white/10 bg-white/5" : "border-border/50 bg-muted/20")}>
+                        <div className={cn("mt-5 rounded-2xl border px-4 py-4", isYearly ? "border-white/10 bg-white/5" : "border-slate-200 bg-slate-50")}>
                             <p className={cn("mb-3 text-xs font-semibold uppercase tracking-[0.22em]", textMuted)}>
                                 {t("missing_features")}
                             </p>
@@ -315,11 +315,11 @@ export function PricingSection({ locale }: PricingSectionProps) {
 
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-4xl text-center">
-                    <span className="inline-flex rounded-full border border-primary/15 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-primary shadow-sm">
+                    <span className="inline-flex rounded-full border border-primary/20 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-primary shadow-sm">
                         {t("eyebrow")}
                     </span>
                     <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">{t("title")}</h2>
-                    <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{t("subtitle")}</p>
+                    <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">{t("subtitle")}</p>
                 </div>
 
                 <div className="mt-14 overflow-x-auto overflow-y-visible pb-6 pt-6 [scrollbar-width:none]">
@@ -328,7 +328,7 @@ export function PricingSection({ locale }: PricingSectionProps) {
                     </div>
                 </div>
 
-                <div className="mt-12 rounded-[28px] border border-amber-300/50 bg-amber-50 px-6 py-5 shadow-sm">
+                <div className="mt-12 rounded-[28px] border border-amber-300/60 bg-amber-50 px-6 py-5 shadow-sm">
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-800">{t("faq_kicker")}</p>
                     <p className="mt-3 text-base leading-8 text-amber-950">{t("artist_anchor")}</p>
                 </div>

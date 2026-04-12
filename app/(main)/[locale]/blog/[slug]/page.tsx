@@ -9,6 +9,7 @@ import { getImaveoArticle, imaveoArticles } from "@/config/imaveo";
 import { site } from "@/config/site";
 import { locales } from "@/i18n/routing";
 import { buildAbsoluteUrl, buildLocaleAlternates } from "@/utils/seo/metadata";
+import { buildStudioHrefFromPath } from "@/utils/studio";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -125,7 +126,7 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
             eyebrow={isZh ? "Next Step" : "Next Step"}
             title={isZh ? "把阅读兴趣转成一次真实操作" : "Turn reading intent into a real next action"}
             description={article.cta.description[localeKey]}
-            primaryHref={`/${locale}${article.cta.href}`}
+            primaryHref={buildStudioHrefFromPath(locale, article.cta.href, "blog-cta")}
             primaryLabel={article.cta.label[localeKey]}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "Compare plans and credits"}

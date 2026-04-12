@@ -6,6 +6,7 @@
   },
   "nav": {
     "home": "Home",
+    "create": "Studio",
     "tools": "Tools",
     "models": "Models",
     "ai_video": "AI Video",

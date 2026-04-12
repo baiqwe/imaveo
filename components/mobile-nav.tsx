@@ -34,13 +34,13 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="flex flex-col border-white/10 bg-black text-white">
+      <SheetContent side="left" className="flex flex-col border-zinc-800 bg-[#050505] text-white">
         <SheetHeader>
           <SheetTitle className="text-white">{currentLocale === 'zh' ? '导航' : 'Navigation'}</SheetTitle>
         </SheetHeader>
 
-        <div className="mt-4 flex items-center gap-2 border-b border-white/10 pb-4">
-          <span className="text-sm text-white/45">
+        <div className="mt-4 flex items-center gap-2 border-b border-zinc-800 pb-4">
+          <span className="text-sm text-zinc-500">
             {currentLocale === 'zh' ? '语言:' : 'Language:'}
           </span>
           <Link
@@ -48,7 +48,7 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
             locale="en"
             className={`rounded-full px-3 py-1.5 text-sm transition-colors ${currentLocale === 'en'
               ? 'bg-primary text-primary-foreground'
-              : 'bg-white/5 text-white/60 hover:text-white'
+              : 'bg-white/5 text-zinc-300 hover:text-white'
               }`}
           >
             EN
@@ -58,7 +58,7 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
             locale="zh"
             className={`rounded-full px-3 py-1.5 text-sm transition-colors ${currentLocale === 'zh'
               ? 'bg-primary text-primary-foreground'
-              : 'bg-white/5 text-white/60 hover:text-white'
+              : 'bg-white/5 text-zinc-300 hover:text-white'
               }`}
           >
             中文
@@ -70,13 +70,13 @@ export function MobileNav({ items, user, loading = false, isDashboard, currentLo
             <Link
               key={item.href}
               href={item.href}
-              className="text-lg font-semibold text-white/70 transition-colors hover:text-primary"
+              className="text-lg font-semibold text-zinc-300 transition-colors hover:text-primary"
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <div className="mt-auto border-t border-white/10 pt-4">
+        <div className="mt-auto border-t border-zinc-800 pt-4">
           {loading ? (
             <div className="flex flex-col gap-2">
               <Skeleton className="h-10 w-full" />

@@ -20,7 +20,7 @@ export function Logo() {
         alt={`${site.siteName} Logo`}
         width={34}
         height={34}
-        className="rounded-xl border border-white/10 bg-white/5 p-1.5"
+        className="rounded-xl border border-zinc-800 bg-zinc-950 p-1.5"
       />
       <div className="flex flex-col leading-none">
         <div className="flex items-center gap-2">
@@ -29,7 +29,7 @@ export function Logo() {
             Beta
           </span>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.28em] text-white/45">Image + Veo</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-zinc-400">Image + Veo</span>
       </div>
     </Link>
   );

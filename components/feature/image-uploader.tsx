@@ -13,6 +13,7 @@ interface ImageUploaderProps {
 export default function ImageUploader({ onImageSelect, onHeicConvert }: ImageUploaderProps) {
     const t = useTranslations('uploader');
     const [error, setError] = useState<string>('');
+    const inputLabel = t('browse');
 
     const onDrop = useCallback(async (acceptedFiles: File[]) => {
         setError('');
@@ -79,21 +80,21 @@ export default function ImageUploader({ onImageSelect, onHeicConvert }: ImageUpl
                     }
         `}
             >
-                <input {...getInputProps()} />
+                <input {...getInputProps({ 'aria-label': inputLabel })} />
 
                 <div className="flex flex-col items-center gap-4">
                     <div className={`
             p-4 rounded-full transition-colors
             ${isDragActive ? 'bg-primary/20' : 'bg-muted'}
           `}>
-                        <Upload className={`w-8 h-8 ${isDragActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                        <Upload className={`h-8 w-8 ${isDragActive ? 'text-primary' : 'text-foreground/80'}`} />
                     </div>
 
                     <div className="space-y-2">
                         <p className="text-lg font-medium">
                             {isDragActive ? t('drop_zone').split(',')[0] : t('drop_zone')}
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-foreground/75">
                             {t('supported_formats')}
                         </p>
                     </div>

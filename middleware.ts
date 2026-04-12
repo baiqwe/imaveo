@@ -9,13 +9,18 @@ const intlMiddleware = createIntlMiddleware(routing)
 export async function middleware(request: NextRequest) {
   // 1. 先运行 intl 中间件，获取基础 Response (包含语言 Cookie 和重定向逻辑)
   let response = intlMiddleware(request)
+  const pathname = request.nextUrl.pathname
+  const localeMatch = pathname.match(/^\/(en|zh)(?=\/|$)/)
+  const currentLocale = localeMatch?.[1] ?? routing.defaultLocale
+
+  request.cookies.set("NEXT_LOCALE", currentLocale)
+  response.cookies.set("NEXT_LOCALE", currentLocale)
 
   // Preview mode: allow local UI review without Supabase env configured.
   if (!hasSupabaseEnv()) {
     return response
   }
 
-  const pathname = request.nextUrl.pathname
   const isProtectedRoute =
     /^\/dashboard(?:\/|$)/.test(pathname) ||
     /^\/(en|zh)\/dashboard(?:\/|$)/.test(pathname)

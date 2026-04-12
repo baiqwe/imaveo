@@ -10,6 +10,7 @@ import { site } from "@/config/site";
 import { getImaveoModel, imaveoModels } from "@/config/imaveo";
 import { locales } from "@/i18n/routing";
 import { buildAbsoluteUrl, buildLocaleAlternates, getModelMetadata } from "@/utils/seo/metadata";
+import { buildStudioHref } from "@/utils/studio";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -152,7 +153,12 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
                   ? `如果你是在看 ${item.labels.zh}，通常已经带着明确结果需求而来。先进入首页图片控制台，再决定是否切到 Animeify Studio 做更快的首张成片。`
                   : `If you are exploring ${item.labels.en}, you usually already have an outcome in mind. Start with the home image console, then branch into Animeify Studio if you want the fastest first usable result.`
             }
-            primaryHref={item.slug === "animeify" ? `/${locale}/?mode=anime#animeify-studio` : `/${locale}/?mode=image#hero-console`}
+            primaryHref={buildStudioHref(locale, {
+              mode: item.slug === "animeify" ? "image-to-image" : "text-to-image",
+              model: item.slug,
+              style: item.slug === "animeify" ? "anime" : undefined,
+              source: "seo-image-model",
+            })}
             primaryLabel={item.slug === "animeify" ? (isZh ? "打开 Animeify Studio" : "Open Animeify Studio") : isZh ? "打开图片控制台" : "Open image console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}

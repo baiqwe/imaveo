@@ -28,7 +28,7 @@ export function SeoConversionPanel({
         <div>
           <div className="section-label">{eyebrow}</div>
           <h2 className="mt-3 text-3xl font-medium tracking-[-0.04em] text-white">{title}</h2>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/65">{description}</p>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-300">{description}</p>
 
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
@@ -40,7 +40,7 @@ export function SeoConversionPanel({
             {secondaryHref && secondaryLabel ? (
               <Link
                 href={secondaryHref}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/25 px-6 py-3 text-sm text-white/74 transition-colors hover:border-primary/35 hover:text-white"
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black/25 px-6 py-3 text-sm text-zinc-300 transition-colors hover:border-primary/35 hover:text-white"
               >
                 {secondaryLabel}
               </Link>
@@ -48,11 +48,11 @@ export function SeoConversionPanel({
           </div>
         </div>
 
-        <div className="rounded-[24px] border border-white/10 bg-black/30 p-5">
-          <div className="text-[11px] uppercase tracking-[0.2em] text-white/35">Why This Converts</div>
+        <div className="rounded-[24px] border border-zinc-800 bg-black/30 p-5">
+          <div className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Why This Converts</div>
           <div className="mt-4 space-y-3">
             {highlights.map((highlight) => (
-              <div key={highlight} className="flex items-start gap-3 text-sm leading-6 text-white/68">
+              <div key={highlight} className="flex items-start gap-3 text-sm leading-6 text-zinc-300">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-primary" />
                 <span>{highlight}</span>
               </div>

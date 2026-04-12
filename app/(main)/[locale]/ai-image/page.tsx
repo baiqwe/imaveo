@@ -7,6 +7,7 @@ import { SeoRichContent } from "@/components/seo/seo-rich-content";
 import { imaveoModels } from "@/config/imaveo";
 import { site } from "@/config/site";
 import { buildAbsoluteUrl, buildLocaleAlternates } from "@/utils/seo/metadata";
+import { buildStudioHref } from "@/utils/studio";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
@@ -97,9 +98,9 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
                 ? "如果你已经知道自己想做封面、海报或品牌视觉，直接进入首页的图片控制台；如果你想先拿到一张稳定可用的结果，也可以直接切进 Animeify Studio 上传图片开始生成。"
                 : "If you already know you need posters, covers, or branded visuals, jump straight into the home image console. If you want the fastest path to a first usable result, go directly into Animeify Studio and upload an image."
             }
-            primaryHref={`/${locale}/?mode=image#hero-console`}
+            primaryHref={buildStudioHref(locale, { mode: "text-to-image", model: "flux-pro", source: "seo-ai-image" })}
             primaryLabel={isZh ? "打开图片控制台" : "Open image console"}
-            secondaryHref={`/${locale}/?mode=anime#animeify-studio`}
+            secondaryHref={buildStudioHref(locale, { mode: "image-to-image", model: "animeify", style: "anime", source: "seo-ai-image" })}
             secondaryLabel={isZh ? "直接进入 Animeify Studio" : "Open Animeify Studio"}
             highlights={[
               isZh ? "保留现有站内真实入口，不额外分叉新的转化路径" : "Reuses the existing live entry instead of splitting traffic into a fake flow",

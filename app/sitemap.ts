@@ -4,7 +4,7 @@ import { locales } from "@/i18n/routing";
 import { indexableLandingPageSlugs } from "@/config/landing-pages";
 import { imaveoArticles, imaveoModels } from "@/config/imaveo";
 
-const staticPages = ["", "pricing", "privacy", "terms", "about", "blog", "my-creations", "ai-video", "ai-image", "text-to-video", "image-to-video"];
+const staticPages = ["", "create", "pricing", "privacy", "terms", "about", "blog", "my-creations", "ai-video", "ai-image", "text-to-video", "image-to-video"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

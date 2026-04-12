@@ -7,6 +7,7 @@ import { SeoRichContent } from "@/components/seo/seo-rich-content";
 import { imaveoModels } from "@/config/imaveo";
 import { site } from "@/config/site";
 import { buildAbsoluteUrl, buildLocaleAlternates } from "@/utils/seo/metadata";
+import { buildStudioHref } from "@/utils/studio";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
@@ -110,7 +111,7 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
                 ? "这类访客通常已经知道自己要做视频，不需要再读太多解释。最短路径是直接进入首页的视频控制台，再按 Veo、Kling、文生视频或图生视频继续分流。"
                 : "Visitors landing here usually already know they want to make a video. The shortest path is to enter the home video console first, then branch into Veo, Kling, text-to-video, or image-to-video based on intent."
             }
-            primaryHref={`/${locale}/?mode=video#hero-console`}
+            primaryHref={buildStudioHref(locale, { mode: "text-to-video", model: "veo-3", source: "seo-ai-video" })}
             primaryLabel={isZh ? "打开视频控制台" : "Open video console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "先看套餐与 Credits" : "Compare plans and credits"}

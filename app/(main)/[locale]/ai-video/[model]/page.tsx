@@ -9,6 +9,7 @@ import { site } from "@/config/site";
 import { getImaveoModel, imaveoModels } from "@/config/imaveo";
 import { locales } from "@/i18n/routing";
 import { buildAbsoluteUrl, buildLocaleAlternates, getModelMetadata } from "@/utils/seo/metadata";
+import { buildStudioHref } from "@/utils/studio";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -147,7 +148,11 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
                 ? `如果用户已经在看 ${item.labels.zh} 这种模型页，说明他已经进入比较阶段。最有效的动作不是再读一屏内容，而是直接进入视频控制台或对应工作流，继续往生成动作推进。`
                 : `If a visitor is already on a model page like ${item.labels.en}, they are in comparison mode. The most effective next step is not another paragraph, but a direct route into the video console or matching workflow.`
             }
-            primaryHref={`/${locale}/?mode=video#hero-console`}
+            primaryHref={buildStudioHref(locale, {
+              mode: item.mode === "image-to-video" ? "image-to-video" : "text-to-video",
+              model: item.slug,
+              source: "seo-video-model",
+            })}
             primaryLabel={isZh ? `试用 ${item.labels.zh} 路径` : `Launch ${item.labels.en} flow`}
             secondaryHref={`/${locale}/${item.mode}`}
             secondaryLabel={isZh ? "先看对应工作流" : "Open matching workflow"}

@@ -7,6 +7,7 @@ import { SeoRichContent } from "@/components/seo/seo-rich-content";
 import { imaveoModels } from "@/config/imaveo";
 import { site } from "@/config/site";
 import { buildAbsoluteUrl, buildLocaleAlternates, getToolMetadata } from "@/utils/seo/metadata";
+import { buildStudioHref } from "@/utils/studio";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
@@ -140,7 +141,7 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
                 ? "图生视频用户通常需要先确认模型和路径，再进入真实工作台。这里把入口压缩到最短：先开视频控制台，再根据模型卡片切到最适合的路径。"
                 : "Image-to-video visitors usually need a quick model and workflow decision before they start. This panel shortens the path: open the video console first, then switch to the best-fit model from the model cards."
             }
-            primaryHref={`/${locale}/?mode=video#hero-console`}
+            primaryHref={buildStudioHref(locale, { mode: "image-to-video", model: "kling-2-6", source: "seo-image-to-video" })}
             primaryLabel={isZh ? "打开图生视频入口" : "Open image-to-video entry"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "比较 Credits 与订阅" : "Compare credits and subscriptions"}

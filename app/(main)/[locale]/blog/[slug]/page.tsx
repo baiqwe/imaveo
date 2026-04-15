@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock3 } from "lucide-react";
-import { ArticleSchema } from "@/components/breadcrumb-schema";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { getImaveoArticle, imaveoArticles } from "@/config/imaveo";
@@ -66,6 +66,13 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
     <section className="py-16 md:py-20">
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-5xl space-y-10">
+          <BreadcrumbSchema
+            items={[
+              { name: isZh ? "首页" : "Home", url: `/${locale}` },
+              { name: isZh ? "博客" : "Blog", url: `/${locale}/blog` },
+              { name: article.title[localeKey], url: `/${locale}${article.href}` },
+            ]}
+          />
           <ArticleSchema
             headline={article.title[localeKey]}
             description={article.excerpt[localeKey]}
@@ -95,13 +102,13 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
               </div>
             </div>
             <h1 className="mt-4 text-4xl font-medium tracking-[-0.05em] text-white md:text-5xl">{article.title[localeKey]}</h1>
-            <p className="mt-5 max-w-4xl text-base leading-8 text-white/62">{article.excerpt[localeKey]}</p>
+            <p className="mt-5 max-w-4xl text-base leading-8 text-zinc-300">{article.excerpt[localeKey]}</p>
 
             <div className="mt-10 space-y-10">
               {article.sections.map((section) => (
                 <section key={section.heading.en} className="space-y-4">
                   <h2 className="text-2xl font-medium tracking-[-0.03em] text-white">{section.heading[localeKey]}</h2>
-                  <div className="space-y-4 text-sm leading-8 text-white/62">
+                  <div className="space-y-4 text-sm leading-8 text-zinc-300">
                     {section.paragraphs[localeKey].map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
@@ -115,7 +122,7 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
             <div className="section-label">{isZh ? "Key Takeaways" : "Key Takeaways"}</div>
             <div className="mt-5 grid gap-4 md:grid-cols-3">
               {article.takeaways[localeKey].map((item) => (
-                <div key={item} className="rounded-[22px] border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-white/66">
+                <div key={item} className="rounded-[22px] border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-zinc-300">
                   {item}
                 </div>
               ))}
@@ -149,7 +156,7 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
                   >
                     <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{entry.category}</div>
                     <div className="mt-3 text-xl font-medium text-white">{entry.title[localeKey]}</div>
-                    <div className="mt-2 text-sm leading-7 text-white/54">{entry.excerpt[localeKey]}</div>
+                    <div className="mt-2 text-sm leading-7 text-zinc-300">{entry.excerpt[localeKey]}</div>
                     <div className="mt-4 inline-flex items-center gap-2 text-sm text-primary">
                       {isZh ? "继续阅读" : "Read next"} <ArrowRight className="h-4 w-4" />
                     </div>

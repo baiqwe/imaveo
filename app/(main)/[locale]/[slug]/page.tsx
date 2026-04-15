@@ -10,6 +10,8 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { FAQSchema, HowToSchema } from "@/components/breadcrumb-schema";
 import { buildLocaleAlternates } from "@/utils/seo/metadata";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return locales.flatMap((locale) =>
     landingPageSlugs.map((slug) => ({
@@ -24,7 +26,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale, slug } = params;
 
   const page = getLocalizedLandingPage(slug, locale);
-  if (!page) return {};
+  if (!page) notFound();
 
   const isPrimaryAlias = page.slug === "photo-to-anime";
   const canonical = isPrimaryAlias ? `/${locale}` : `/${locale}/${page.slug}`;
@@ -134,13 +136,13 @@ export default async function LandingPage(props: { params: Promise<{ locale: str
             <div className="space-y-4">
               <div className="rounded-xl border border-border bg-muted/10 p-5">
                 <p className="text-sm text-muted-foreground">
-                  {locale === "zh" ? "想先试通用模式？" : "Want to start with the general converter?"}{" "}
+                  {locale === "zh" ? "想先试通用创作入口？" : "Want to start from the general creation entry?"}{" "}
                   <Link href={`${localePrefix}`} className="font-medium text-primary hover:underline">
-                    {locale === "zh" ? "返回照片转二次元 AI 生成器首页" : "Go back to the Photo to Anime AI Converter home page"}
+                    {locale === "zh" ? "返回首页" : "Go back to the homepage"}
                   </Link>
                   {locale === "zh"
-                    ? "，再根据结果切换到这个风格页做更强的定向生成。"
-                    : " and then switch back to this style page when you want a more targeted look."}
+                    ? "，再根据需要切换到这个细分页面继续查看。"
+                    : " and then return to this detailed page if you want a more targeted style."}
                 </p>
               </div>
               <h2 className="text-3xl font-bold tracking-tight">

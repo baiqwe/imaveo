@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Imaveo - AI Video, AI Image, and Animeify in One Creation Hub",
-    "description": "Imaveo is an AI visual creation hub for video, image, and anime-first workflows. Explore Veo, Kling, Flux, and Animeify from one dark, creator-focused interface.",
-    "keywords": "imaveo, ai video generator, ai image generator, animeify, veo 3, kling 2.6, flux pro, ai creation hub"
+    "title": "Imaveo - AI Video and AI Image Creation Platform",
+    "description": "Imaveo is an AI visual creation platform that combines text-to-image, image-to-image, text-to-video, image-to-video, and leading models in one workspace.",
+    "keywords": "imaveo, ai video generator, ai image generator, text to video, image to video, text to image, image to image, veo 3, kling 2.6, flux pro"
   },
   "nav": {
     "home": "Home",
@@ -20,15 +20,15 @@
     "sign_out": "Sign Out"
   },
   "hero": {
-    "badge": "AI Video • AI Image • Animeify",
+    "badge": "AI Video • AI Image • Studio",
     "title": "One dark hub for",
     "title_highlight": "visual AI creation",
-    "subtitle": "Route creators across Veo, Kling, Flux, and Animeify from a single premium workspace built for prompts, assets, and conversion.",
+    "subtitle": "Use Veo, Kling, Flux, and other leading models from one workspace built for text-to-image, image-to-image, text-to-video, and image-to-video.",
     "feature_1": "Scenario-first workflows",
     "feature_2": "Hot model switching",
     "feature_3": "Unified asset foundation",
     "tool_title": "Launch the first workflow",
-    "tool_subtitle": "Use Animeify as the fastest route to first value, then expand into video and broader image generation."
+    "tool_subtitle": "Choose a creation mode first, then switch models and parameters inside one clear workflow."
   },
   "uploader": {
     "title": "Upload Your Image",
@@ -107,7 +107,7 @@
     "faq_title": "Frequently asked questions"
   },
   "footer": {
-    "tagline": "The AI creation hub for video, image, and anime-specialized workflows.",
+    "tagline": "The AI creation platform for video and image workflows.",
     "legal": "Legal",
     "link_privacy": "Privacy Policy",
     "link_terms": "Terms of Service",
@@ -120,7 +120,7 @@
     "eyebrow": "Creator Pricing",
     "title": "Four cards. One obvious upgrade path.",
     "subtitle": "Put buy-out packs and Pro subscriptions on the same plane, and the math starts selling for you. The lower the per-image cost and the richer the privileges, the easier the decision becomes.",
-    "artist_anchor": "Commissioning a human artist for a custom anime portrait can cost $30-$50 and take weeks. Animeify Pro gives you 100 studio-quality generations instantly for less than the price of one commission.",
+    "artist_anchor": "If you create posters, thumbnails, product shots, or short videos regularly, a subscription usually beats one-off purchases on cost and speed. Start with credits, then upgrade once the workflow becomes repeatable.",
     "buyout_label": "Buy-out",
     "subscription_label": "Pro",
     "one_time_payment": "One-time payment",

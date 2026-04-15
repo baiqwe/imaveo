@@ -152,5 +152,5 @@ export function getLocalizedLandingPage(slug: string, locale: string): LandingPa
   };
 }
 
-export const landingPageSlugs = Object.keys(landingPages);
-export const indexableLandingPageSlugs = landingPageSlugs.filter((slug) => slug !== "photo-to-anime");
+export const landingPageSlugs: string[] = [];
+export const indexableLandingPageSlugs: string[] = [];

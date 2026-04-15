@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { AnimeImageEditor } from "@/components/feature/anime-image-editor";
+import { WebPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -66,9 +66,62 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
   if (!item) notFound();
 
   const siblingModels = imaveoModels.filter((entry) => entry.category === "image" && entry.slug !== item.slug);
+  const recommendedWorkflowHref = `/${locale}/create?mode=text-to-image&model=${item.slug}`;
+  const recommendedWorkflowLabel = isZh ? "文生图 / Studio" : "Text to Image / Studio";
+  const defaultAspectRatio = item.generationDefaults?.aspectRatio ?? "1:1";
+  const defaultStyle = item.generationDefaults?.style ?? (isZh ? "营销视觉" : "Marketing visual");
+  const pathRecommendations = [
+    {
+      label: isZh ? "最快起步路径" : "Fastest path",
+      title: isZh ? `先进入 ${recommendedWorkflowLabel}` : `Start with ${recommendedWorkflowLabel}`,
+      description: isZh
+        ? `如果你要用 ${item.labels.zh} 做品牌视觉，先在 Studio 里用文生图模式起一个稳定版本。`
+        : `If you are using ${item.labels.en} for branded visuals, begin with text-to-image in the Studio and create a stable first version.`,
+      href: recommendedWorkflowHref,
+    },
+    {
+      label: isZh ? "模型比较路径" : "Compare path",
+      title: isZh ? "回到 AI 图片中心继续比较" : "Compare from the AI image hub",
+      description: isZh
+        ? "如果还在不同图片模型之间比较，回到图片中心再横向看模型和结果方向。"
+        : "If you are still comparing image models, return to the AI image hub and compare model fit by outcome.",
+      href: `/${locale}/ai-image`,
+    },
+    {
+      label: isZh ? "后续承接路径" : "Follow-through path",
+      title: isZh ? "生成后进入资产库管理结果" : "Manage outputs in the creations library",
+      description: isZh
+        ? "用创作资产页承接复看、下载和后续筛选，让图片链路更完整。"
+        : "Use the creations library for review, download, and later filtering so the image workflow feels complete.",
+      href: `/${locale}/my-creations`,
+    },
+  ];
+  const parameterGuidance = [
+    {
+      label: isZh ? "推荐比例" : "Suggested ratio",
+      value: defaultAspectRatio,
+      description: isZh ? "先用这个比例起第一版，便于验证主体、文案和版式。" : "Use this ratio first to validate subject framing, copy placement, and overall composition.",
+    },
+    {
+      label: isZh ? "推荐风格" : "Suggested style",
+      value: defaultStyle,
+      description: isZh ? "先用默认风格建立稳定结果，再决定是否做更激进的风格化。" : "Start with the default style for a stable result, then branch into stronger stylization if needed.",
+    },
+    {
+      label: isZh ? "最适合的 workflow" : "Best-fit workflow",
+      value: recommendedWorkflowLabel,
+      description: isZh ? "优先沿这个 workflow 进入，减少用户在不匹配的生成方式上浪费时间。" : "Prefer this workflow so users do not waste time inside a mismatched generation mode.",
+    },
+  ];
 
   return (
     <section className="py-16 md:py-20">
+      <WebPageSchema
+        name={`${item.labels[localeKey]} | Imaveo`}
+        description={item.descriptions[localeKey]}
+        url={`/${locale}/ai-image/${item.slug}`}
+        locale={locale}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs
@@ -141,50 +194,66 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
             </div>
           </div>
 
+          <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
+              <div className="section-label">{isZh ? "Recommended Path" : "Recommended Path"}</div>
+              <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
+                {isZh ? `${item.labels.zh} 更适合怎么承接用户` : `How ${item.labels.en} should route users`}
+              </h2>
+              <div className="mt-5 grid gap-4">
+                {pathRecommendations.map((path) => (
+                  <Link
+                    key={path.href + path.title}
+                    href={path.href}
+                    className="rounded-[24px] border border-white/10 bg-black/25 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
+                  >
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{path.label}</div>
+                    <div className="mt-3 text-xl font-medium text-white">{path.title}</div>
+                    <div className="mt-2 text-sm leading-7 text-zinc-300">{path.description}</div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
+              <div className="section-label">{isZh ? "Parameter Guide" : "Parameter Guide"}</div>
+              <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
+                {isZh ? `${item.labels.zh} 的默认参数建议` : `Suggested starting parameters for ${item.labels.en}`}
+              </h2>
+              <div className="mt-5 space-y-4">
+                {parameterGuidance.map((entry) => (
+                  <div key={entry.label} className="rounded-[24px] border border-white/10 bg-black/25 p-5">
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{entry.label}</div>
+                    <div className="mt-3 text-2xl font-medium text-white">{entry.value}</div>
+                    <div className="mt-2 text-sm leading-7 text-zinc-300">{entry.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <SeoConversionPanel
             eyebrow={isZh ? "Take Action" : "Take Action"}
             title={isZh ? `把 ${item.labels.zh} 的兴趣转成第一次生成` : `Turn ${item.labels.en} interest into a first generation`}
             description={
-              item.slug === "animeify"
-                ? isZh
-                  ? "Animeify 已经有现成的上传与生成链路，所以这里最短的转化路径就是直接进入 Studio，上传一张图开始生成。"
-                  : "Animeify already has a live upload-and-generate flow, so the fastest conversion path here is to open the Studio and upload an image immediately."
-                : isZh
-                  ? `如果你是在看 ${item.labels.zh}，通常已经带着明确结果需求而来。先进入首页图片控制台，再决定是否切到 Animeify Studio 做更快的首张成片。`
-                  : `If you are exploring ${item.labels.en}, you usually already have an outcome in mind. Start with the home image console, then branch into Animeify Studio if you want the fastest first usable result.`
+              isZh
+                ? `如果你正在查看 ${item.labels.zh}，通常已经知道自己想要的结果方向。直接进入创作中心，写下提示词并从这个模型开始生成即可。`
+                : `If you are exploring ${item.labels.en}, you likely already know the kind of result you want. Open the Studio, write your prompt, and start with this model directly.`
             }
             primaryHref={buildStudioHref(locale, {
-              mode: item.slug === "animeify" ? "image-to-image" : "text-to-image",
+              mode: "text-to-image",
               model: item.slug,
-              style: item.slug === "animeify" ? "anime" : undefined,
               source: "seo-image-model",
             })}
-            primaryLabel={item.slug === "animeify" ? (isZh ? "打开 Animeify Studio" : "Open Animeify Studio") : isZh ? "打开图片控制台" : "Open image console"}
+            primaryLabel={isZh ? "打开图片控制台" : "Open image console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}
             highlights={[
               isZh ? "把模型页流量直接压进可点击的转化入口" : "Compresses model-page traffic into a clickable conversion path",
-              isZh ? "Animeify 可直接接入真实上传与生成工作流" : "Animeify can route directly into the live upload-and-generate workflow",
-              isZh ? "Flux 等通用模型仍可先回到图片控制台统一分流" : "General models like Flux can still branch through the shared image console",
+              isZh ? "直接用当前模型开始生成，减少决策成本" : "Start directly with the current model to reduce decision friction",
+              isZh ? "也可以返回图片中心继续比较不同模型" : "You can still return to the image hub and compare alternatives",
             ]}
           />
-
-          {item.slug === "animeify" ? (
-            <div className="rounded-[32px] border border-white/10 bg-black/45 p-6 md:p-8">
-              <AnimeImageEditor
-                locale={locale}
-                title={isZh ? "直接上传一张图，立即试 Animeify" : "Upload one image and try Animeify now"}
-                subtitle={
-                  isZh
-                    ? "这里接的是站内已经可用的真实工作流，不是演示按钮。上传后可以直接生成、对比和下载。"
-                    : "This uses the live workflow already available in the product, not a demo CTA. Upload, generate, compare, and download without leaving the page."
-                }
-                defaultStyle={"standard"}
-                hideStyleSelector={false}
-                compact={false}
-              />
-            </div>
-          ) : null}
 
           <SeoRichContent
             locale={localeKey}
@@ -201,7 +270,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
             stepsTitle={isZh ? `如何在 Imaveo 上使用 ${item.labels.zh}` : `How to use ${item.labels.en} on Imaveo`}
             steps={[
               isZh ? `先进入 ${item.labels.zh} 页面，确认它是否匹配你的图像风格目标。` : `Open the ${item.labels.en} page and confirm it matches your visual goals.`,
-              isZh ? "根据任务写提示词，或直接选择 Animeify 这类垂直工作流生成特定风格。" : "Write a prompt or select a specialized workflow such as Animeify depending on the style you need.",
+              isZh ? "根据任务写提示词，再在创作中心里调整比例、风格和质量。" : "Write a prompt, then adjust ratio, style, and quality inside the Studio.",
               isZh ? "生成后进入创作资产页统一管理结果，并根据频率切换套餐。" : "Manage outputs from the creations library and upgrade plans when the workflow becomes repeatable.",
             ]}
             useCasesTitle={isZh ? `${item.labels.zh} 适合哪些场景？` : `When should creators use ${item.labels.en}?`}

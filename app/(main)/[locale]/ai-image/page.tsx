@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ImageIcon } from "lucide-react";
+import { CollectionPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -15,8 +16,8 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const pathname = `/${locale}/ai-image`;
   const title = isZh ? "AI 图片模型中心 | Imaveo" : "AI Image Models Hub | Imaveo";
   const description = isZh
-    ? "浏览 Imaveo 上的 AI 图片模型，包括 Flux 与 Animeify，并按封面、海报、头像等不同场景选择工具。"
-    : "Explore AI image models on Imaveo including Flux and Animeify, and choose the right tool for covers, posters, avatars, and branded visuals.";
+    ? "浏览 Imaveo 上的 AI 图片模型，并按封面、海报、商品图和品牌视觉等场景选择工具。"
+    : "Explore AI image models on Imaveo and choose the right tool for covers, posters, product visuals, and branded image work.";
   const ogDescription = isZh ? "一个承接 AI 图片模型和图片工作流搜索的中心页。" : "A central page that captures AI image model and workflow demand.";
   const ogImage = new URL(site.ogImagePath, site.siteUrl).toString();
 
@@ -50,6 +51,16 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
 
   return (
     <div className="py-16 md:py-20">
+      <CollectionPageSchema
+        name={isZh ? "Imaveo AI 图片中心" : "Imaveo AI Image Hub"}
+        description={isZh ? "浏览 Imaveo 上的 AI 图片模型、工作流和相关入口。" : "Explore AI image models, workflows, and related entry points on Imaveo."}
+        url={`/${locale}/ai-image`}
+        locale={locale}
+        items={models.map((model) => ({
+          name: model.labels[localeKey],
+          url: `/${locale}${model.href}`,
+        }))}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs
@@ -67,8 +78,8 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             </h1>
             <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "这个 pillar 页负责承接 AI 图片生成的品牌词和大类词，再把权重分发到 Flux、Animeify 以及更细分的图片内页。"
-                : "This pillar page captures broad AI image demand, then distributes authority into Flux, Animeify, and more specialized image pages."}
+                ? "在这里比较主流图片模型，快速判断哪一种更适合海报、缩略图、商品图或品牌主视觉。"
+                : "Compare leading image models here and decide which one best fits posters, thumbnails, product shots, or branded visuals."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -95,17 +106,17 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             title={isZh ? "从这里进入真实的图片生成入口" : "Jump from SEO traffic into a real image generation entry"}
             description={
               isZh
-                ? "如果你已经知道自己想做封面、海报或品牌视觉，直接进入首页的图片控制台；如果你想先拿到一张稳定可用的结果，也可以直接切进 Animeify Studio 上传图片开始生成。"
-                : "If you already know you need posters, covers, or branded visuals, jump straight into the home image console. If you want the fastest path to a first usable result, go directly into Animeify Studio and upload an image."
+                ? "如果你已经知道自己想做封面、海报、广告图或品牌视觉，直接进入创作中心开始生成，再根据结果切换模型。"
+                : "If you already know you need covers, posters, ad visuals, or brand assets, open the Studio and start generating right away, then switch models as needed."
             }
             primaryHref={buildStudioHref(locale, { mode: "text-to-image", model: "flux-pro", source: "seo-ai-image" })}
             primaryLabel={isZh ? "打开图片控制台" : "Open image console"}
-            secondaryHref={buildStudioHref(locale, { mode: "image-to-image", model: "animeify", style: "anime", source: "seo-ai-image" })}
-            secondaryLabel={isZh ? "直接进入 Animeify Studio" : "Open Animeify Studio"}
+            secondaryHref={`/${locale}/pricing`}
+            secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}
             highlights={[
-              isZh ? "保留现有站内真实入口，不额外分叉新的转化路径" : "Reuses the existing live entry instead of splitting traffic into a fake flow",
-              isZh ? "更适合把模型页、工作流页和首页控制台串成一个 funnel" : "Connects model pages, workflow pages, and the home console into one funnel",
-              isZh ? "让搜索流量在首屏就能做动作，而不是只读内容" : "Lets search traffic take action immediately instead of only reading copy",
+              isZh ? "一个入口承接不同图片任务，不需要额外跳转" : "One image entry point handles multiple image-generation jobs",
+              isZh ? "适合把模型页、工作流页和创作中心串成一条完整路径" : "Connects model pages, workflow pages, and the Studio into one path",
+              isZh ? "先开始生成，再根据结果切换模型更高效" : "Start generating first, then change models based on the result you need",
             ]}
           />
 
@@ -116,21 +127,21 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             introBody={[
               isZh
                 ? "AI 图片中心是品牌站中的另一个 pillar。它负责承接大类图片生成需求，再把用户引导到更具体的模型页和工作流页。"
-                : "The AI image hub is another pillar inside the brand site. It captures broad image-generation demand and routes users into more specific model pages and workflows.",
+                : "The AI image hub is the place to compare image-generation options before moving into a specific model page or straight into the Studio.",
               isZh
-                ? "对 SEO 来说，这种中心页可以帮助模型页获得更稳定的上层内链，也能让站点在 Google 看起来更像一个完整产品，而不是零散工具集合。"
-                : "For SEO, this structure helps model pages receive stronger top-down internal links and makes the whole site look like a complete product rather than a loose collection of tools.",
+                ? "对创作者来说，这种中心页能先把场景分清楚，再决定用哪个模型、更适合走文生图还是图生图。"
+                : "For creators, this kind of hub clarifies the job first, then helps decide which model and workflow make the most sense.",
             ]}
             stepsTitle={isZh ? "如何使用 Imaveo 选择图片模型" : "How to choose the right image model on Imaveo"}
             steps={[
               isZh ? "先判断你要生成的是品牌视觉、海报还是人物头像。" : "Decide whether you need brand visuals, posters, or portraits.",
-              isZh ? "再根据结果风格进入 Flux 或 Animeify 等模型页。" : "Visit Flux or Animeify model pages depending on your target style.",
+              isZh ? "再根据结果类型进入对应模型页，或直接打开创作中心开始生成。" : "Then move into the matching model page or go straight to the Studio to start generating.",
               isZh ? "最后根据频率选择订阅或 Credits 包。" : "Choose subscriptions or credits packs based on how often you generate.",
             ]}
             useCasesTitle={isZh ? "哪些搜索意图适合 AI 图片中心？" : "Which search intents does the AI image hub capture?"}
             useCases={[
               isZh ? "搜索『AI 图片生成器』的泛意图用户" : "Broad users searching for 'AI image generator'",
-              isZh ? "搜索 Flux、Animeify 等模型关键词的用户" : "Users searching model terms like Flux and Animeify",
+              isZh ? "搜索 Flux 等模型关键词的用户" : "Users searching for model terms such as Flux",
               isZh ? "搜索海报、封面、品牌图等结果导向词的用户" : "Users searching outcome-driven terms like posters, hero art, and brand visuals",
               isZh ? "需要统一比较模型、价格和工作流的创作者" : "Creators who want to compare models, pricing, and workflows in one place",
             ]}
@@ -143,10 +154,10 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
                   : "Because image models, style terms, and outcome-driven keywords form a whole search cluster. A pillar page organizes those intents and distributes authority over time.",
               },
               {
-                question: isZh ? "Animeify 应该单独做品牌还是挂在 Imaveo 下？" : "Should Animeify be its own brand or stay under Imaveo?",
+                question: isZh ? "AI 图片中心和创作中心有什么区别？" : "What is the difference between the AI image hub and the Studio?",
                 answer: isZh
-                  ? "从 SEO 和商业化角度看，更建议保留它的子品牌属性，但继续挂在 Imaveo 主站下，复用权重、支付和账户系统。"
-                  : "From both SEO and monetization perspectives, it works better as a specialized sub-brand inside Imaveo, sharing the same authority, billing, and account system.",
+                  ? "AI 图片中心负责比较模型与场景，创作中心负责真正开始生成。前者适合了解选项，后者适合直接动手。"
+                  : "The AI image hub helps you compare models and use cases, while the Studio is where you actually start generating. One is for orientation, the other is for action.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}

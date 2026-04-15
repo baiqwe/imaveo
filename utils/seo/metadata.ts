@@ -24,16 +24,16 @@ export function buildAbsoluteUrl(pathname: string) {
 export function getHubMetadata(locale: "en" | "zh") {
   if (locale === "zh") {
     return {
-      title: "Imaveo - 聚合 Veo、Flux、Animeify 的 AI 创作平台",
-      description: "Imaveo 把 AI 视频、AI 图片与 Animeify 聚合进同一个高质感创作中枢，面向内容创作者与工作流玩家。",
-      keywords: ["Imaveo", "AI创作平台", "Veo", "Flux", "Animeify", "AI视频生成", "AI图片生成"],
+      title: "Imaveo - AI 视频与 AI 图片创作平台",
+      description: "Imaveo 提供文生图、图生图、文生视频、图生视频和模型切换能力，帮助创作者更快从想法走到成片。",
+      keywords: ["Imaveo", "AI创作平台", "AI视频生成", "AI图片生成", "文生视频", "图生视频", "文生图", "图生图"],
     };
   }
 
   return {
-    title: "Imaveo - The AI hub for Veo, Flux, and Animeify",
-    description: "Imaveo is a premium AI creation hub for video, image, and anime-specialized workflows built around creators and conversion-ready tools.",
-    keywords: ["Imaveo", "AI creation hub", "Veo", "Flux", "Animeify", "AI video generator", "AI image generator"],
+    title: "Imaveo - AI video and image creation platform",
+    description: "Imaveo helps creators generate images and videos with text-to-image, image-to-image, text-to-video, image-to-video, and flexible model switching.",
+    keywords: ["Imaveo", "AI creation platform", "AI video generator", "AI image generator", "text to video", "image to video", "text to image", "image to image"],
   };
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clapperboard } from "lucide-react";
+import { CollectionPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -50,6 +51,20 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
 
   return (
     <div className="py-16 md:py-20">
+      <CollectionPageSchema
+        name={isZh ? "Imaveo AI 视频中心" : "Imaveo AI Video Hub"}
+        description={isZh ? "浏览 Imaveo 上的 AI 视频模型、工作流和相关入口。" : "Explore AI video models, workflows, and related entry points on Imaveo."}
+        url={`/${locale}/ai-video`}
+        locale={locale}
+        items={[
+          { name: isZh ? "文生视频" : "Text to Video", url: `/${locale}/text-to-video` },
+          { name: isZh ? "图生视频" : "Image to Video", url: `/${locale}/image-to-video` },
+          ...models.map((model) => ({
+            name: model.labels[localeKey],
+            url: `/${locale}${model.href}`,
+          })),
+        ]}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs

@@ -55,8 +55,8 @@ export function Footer() {
             <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-300">{t("tagline")}</p>
             <p className="mt-2 text-xs text-zinc-400">
               {isZh
-                ? "Imaveo 聚合 AI 视频、图片和 Animeify 专属入口，统一管理生成资产与额度。"
-                : "Imaveo brings AI video, AI image, and Animeify into one premium creation hub."}
+                ? "Imaveo 把文生图、图生图、文生视频和图生视频放进一个统一工作流。"
+                : "Imaveo brings text-to-image, image-to-image, text-to-video, and image-to-video into one workflow."}
             </p>
           </div>
 
@@ -110,14 +110,24 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-[28px] border border-zinc-800 bg-zinc-950/70 p-5">
-          <div className="section-label mb-3">{isZh ? "内容引擎" : "Editorial Engine"}</div>
+        <div className="mt-14 rounded-[32px] border border-zinc-700/95 bg-[linear-gradient(180deg,rgba(18,18,22,0.98),rgba(9,9,11,0.98))] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.34)] ring-1 ring-white/8">
+          <div className="section-label mb-3">{isZh ? "内容中心" : "Editorial Hub"}</div>
+          <div className="mb-5 max-w-2xl">
+            <h3 className="text-xl font-semibold text-white">
+              {isZh ? "继续阅读模型解析、提示词和工作流指南" : "Keep exploring model breakdowns, prompts, and workflow guides"}
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              {isZh
+                ? "从内容库继续了解模型选择、参数设置和创作路径，再回到创作中心开始生成。"
+                : "Use the content hub to learn model choices, prompt structures, and workflow decisions before jumping back into the Studio."}
+            </p>
+          </div>
           <div className="grid gap-3 md:grid-cols-3">
             {imaveoArticles.map((article) => (
               <Link
                 key={article.slug}
                 href={article.href}
-                className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4 transition-colors hover:border-primary/40 hover:bg-zinc-900"
+                className="rounded-2xl border border-zinc-700/75 bg-black/45 p-4 transition-colors hover:border-primary/40 hover:bg-zinc-900"
               >
                 <div className="text-[11px] uppercase tracking-[0.2em] text-primary/90">{article.category}</div>
                 <div className="mt-2 text-sm font-medium text-white">
@@ -128,11 +138,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-800 pt-8 md:flex-row">
-          <p className="text-center text-sm text-zinc-400 md:text-left">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-900 pt-8 md:flex-row">
+          <p className="text-center text-sm text-zinc-500 md:text-left">
             © {new Date().getFullYear()} {t("brand")}. {t("rights")}
           </p>
-          <p className="text-center text-sm text-zinc-400 md:text-right">{t("built_by")}</p>
+          <p className="text-center text-sm text-zinc-500 md:text-right">{t("built_by")}</p>
         </div>
       </div>
     </footer>

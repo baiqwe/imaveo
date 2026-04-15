@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ImageIcon, Sparkles } from "lucide-react";
+import { CollectionPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -44,9 +45,46 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
   const isZh = locale === "zh";
   const localeKey = locale as "en" | "zh";
   const videoModels = imaveoModels.filter((model) => model.mode === "image-to-video" || model.category === "video");
+  const decisionCards = [
+    {
+      label: isZh ? "适合谁" : "Best for",
+      title: isZh ? "先有静图，再延展成动态镜头的人" : "Creators who already have a still image and need motion next",
+      description: isZh
+        ? "如果你的角色、产品图或海报已经定稿，图生视频通常比文生视频更稳。"
+        : "If the character art, product still, or poster is already approved, image-to-video is usually the more stable path than text-to-video.",
+    },
+    {
+      label: isZh ? "默认起手参数" : "Starter setup",
+      title: isZh ? "9:16 + 5 秒 + Kling 2.6" : "9:16 + 5s + Kling 2.6",
+      description: isZh
+        ? "先用较短时长和竖屏比例验证运动方向，再根据结果决定是否切到更高质量模型。"
+        : "Begin with a shorter duration and a vertical ratio to validate motion direction before moving into a heavier model.",
+    },
+    {
+      label: isZh ? "下一步" : "Next step",
+      title: isZh ? "把首帧和模型一起带进创作中心" : "Carry the first frame and model choice into the Studio",
+      description: isZh
+        ? "这类需求最怕路径中断，所以最好从 workflow 页直接进入 Studio。"
+        : "This workflow is sensitive to path friction, so the best move is to go directly from the workflow page into the Studio.",
+    },
+  ];
 
   return (
     <section className="py-16 md:py-20">
+      <CollectionPageSchema
+        name={isZh ? "Imaveo 图生视频" : "Imaveo Image to Video"}
+        description={isZh ? "查看图生视频工作流、相关视频模型和价格入口。" : "Explore the image-to-video workflow, relevant video models, and pricing entry points."}
+        url={`/${locale}/image-to-video`}
+        locale={locale}
+        items={[
+          { name: isZh ? "AI 视频中心" : "AI Video Hub", url: `/${locale}/ai-video` },
+          { name: isZh ? "价格方案" : "Pricing", url: `/${locale}/pricing` },
+          ...videoModels.map((model) => ({
+            name: model.labels[localeKey],
+            url: `/${locale}${model.href}`,
+          })),
+        ]}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs
@@ -132,6 +170,16 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
               </Link>
             </div>
           </div>
+
+          <section className="grid gap-4 md:grid-cols-3">
+            {decisionCards.map((card) => (
+              <div key={card.title} className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{card.label}</div>
+                <h2 className="mt-3 text-2xl font-medium text-white">{card.title}</h2>
+                <p className="mt-3 text-sm leading-7 text-zinc-300">{card.description}</p>
+              </div>
+            ))}
+          </section>
 
           <SeoConversionPanel
             eyebrow={isZh ? "Workflow Entry" : "Workflow Entry"}

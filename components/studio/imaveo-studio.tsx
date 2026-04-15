@@ -18,7 +18,6 @@ import {
   Upload,
   Wand2,
 } from "lucide-react";
-import { AnimeImageEditor } from "@/components/feature/anime-image-editor";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -134,11 +133,24 @@ const quantityMap: Record<StudioMode, string[]> = {
 };
 
 const recentSeeds = [
-  { id: "A1", status: "Live", color: "from-[#f5c518]/30", kind: "Animeify" },
+  { id: "A1", status: "Live", color: "from-[#f5c518]/30", kind: "Flux Pro" },
   { id: "B4", status: "Queued", color: "from-cyan-400/20", kind: "Veo 3.1" },
   { id: "C7", status: "Draft", color: "from-pink-400/20", kind: "Flux Pro" },
   { id: "D2", status: "Live", color: "from-emerald-400/20", kind: "Kling 2.6" },
 ];
+
+const studioSignals = {
+  en: [
+    { label: "Unified", value: "4 modes" },
+    { label: "Models", value: "Veo / Kling / Flux" },
+    { label: "Surface", value: "One prompt + one control plane" },
+  ],
+  zh: [
+    { label: "统一入口", value: "4 种模式" },
+    { label: "模型矩阵", value: "Veo / Kling / Flux" },
+    { label: "工作面", value: "一个 Prompt + 一套控制平面" },
+  ],
+};
 
 const promptExamples: Record<StudioMode, { en: string; zh: string }[]> = {
   "text-to-image": [
@@ -146,8 +158,8 @@ const promptExamples: Record<StudioMode, { en: string; zh: string }[]> = {
     { en: "cinematic sci-fi movie poster, neon haze, bold title composition", zh: "电影感科幻海报，霓虹雾气，大标题构图" },
   ],
   "image-to-image": [
-    { en: "anime portrait, cleaner linework, warm rim light, preserve hair color", zh: "二次元人像，更干净的线稿，暖色轮廓光，保留发色" },
-    { en: "refine the uploaded portrait into polished illustration, balanced shadows", zh: "把上传的人像优化成更精致插画，阴影更均衡" },
+    { en: "refine the uploaded portrait into polished editorial artwork, balanced shadows", zh: "把上传的人像优化成更精致的视觉成片，阴影更均衡" },
+    { en: "transform the source image into a clean product campaign visual with better lighting", zh: "把原图转换成更干净的广告视觉，提升光线与质感" },
   ],
   "text-to-video": [
     { en: "a lone astronaut walking through a rain-soaked alley, slow push-in, moody blue light", zh: "孤独宇航员穿过雨夜小巷，镜头缓慢推进，蓝色冷光氛围" },
@@ -195,20 +207,20 @@ function StudioSidebar({
   const strengths = model?.strengths[isZh ? "zh" : "en"] ?? [];
 
   return (
-    <div className="space-y-5 rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+    <div className="aurora-stage space-y-5 rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
       <div>
-        <div className="section-label">Studio Guide</div>
-        <h2 className={`mt-3 text-2xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
-          {isZh ? "生成器结构已经统一" : "The generator is now structured as one production surface"}
+        <div className="section-label">{isZh ? "使用说明" : "Studio Guide"}</div>
+        <h2 className={`display-serif mt-3 text-2xl font-medium text-white ${isZh ? "tracking-normal" : ""}`}>
+          {isZh ? "从模式、提示词到模型都在一个面板里完成" : "Move from mode to prompt to model inside one surface"}
         </h2>
         <p className="mt-3 text-sm leading-7 text-zinc-400">
           {isZh
             ? "先切换创作大类，再写 prompt，随后根据当前模式展开参数与模型。"
-            : "Switch the generation category first, then write the prompt, then expand parameters and model controls for the current mode."}
+            : "Switch the creation mode first, then write the prompt and adjust parameters and model selection for the current job."}
         </p>
       </div>
 
-      <div className="rounded-[24px] border border-primary/20 bg-[linear-gradient(180deg,rgba(245,197,24,0.14),rgba(245,197,24,0.02))] p-4">
+      <div className="panel-lift rounded-[24px] border border-primary/20 bg-[linear-gradient(180deg,rgba(245,197,24,0.14),rgba(245,197,24,0.02))] p-4">
         <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{isZh ? "当前模式" : "Current Mode"}</div>
         <div className="mt-3 flex items-center gap-2 text-base font-medium text-white">
           {currentMode.icon}
@@ -217,13 +229,13 @@ function StudioSidebar({
         <div className="mt-2 text-sm leading-6 text-zinc-300">{currentMode.description[isZh ? "zh" : "en"]}</div>
       </div>
 
-      <div className="rounded-[24px] border border-zinc-800 bg-black/25 p-4">
+      <div className="panel-lift rounded-[24px] border border-zinc-800 bg-black/25 p-4">
         <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{isZh ? "当前模型" : "Selected Model"}</div>
         <div className="mt-3 text-lg font-medium text-white">{model?.labels[isZh ? "zh" : "en"] ?? "Imaveo"}</div>
         <div className="mt-2 text-sm leading-6 text-zinc-400">{model?.descriptions[isZh ? "zh" : "en"]}</div>
       </div>
 
-      <div className="rounded-[24px] border border-zinc-800 bg-black/25 p-4">
+      <div className="panel-lift rounded-[24px] border border-zinc-800 bg-black/25 p-4">
         <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{isZh ? "模型优势" : "Strengths"}</div>
         <div className="mt-4 space-y-3">
           {strengths.map((strength) => (
@@ -244,7 +256,7 @@ function ChipRow({ locale, groups }: { locale: string; groups: GeneratorChipGrou
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       {groups.map((group) => (
-        <div key={group.key} className="rounded-[24px] border border-zinc-800 bg-black/25 p-4">
+        <div key={group.key} className="panel-lift rounded-[24px] border border-zinc-800 bg-black/25 p-4">
           <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-zinc-500">
             {group.icon}
             {group.label[isZh ? "zh" : "en"]}
@@ -362,18 +374,30 @@ function GeneratorPanel({
   };
 
   return (
-    <div className="rounded-[34px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(47,32,22,0.72),rgba(20,14,11,0.95))] p-5 shadow-[0_32px_90px_rgba(0,0,0,0.34)] md:p-7">
+    <div className="aurora-stage rounded-[34px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(47,32,22,0.72),rgba(20,14,11,0.95))] p-5 shadow-[0_32px_90px_rgba(0,0,0,0.34)] md:p-7">
       <div className="mx-auto max-w-3xl text-center">
         <div className="section-label">{isZh ? "Generator Surface" : "Generator Surface"}</div>
-        <h2 className={`mt-4 text-4xl font-medium text-[#ffb221] md:text-5xl ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
+        <h2 className={`display-serif mt-4 text-4xl font-medium text-[#ffb221] md:text-5xl ${isZh ? "tracking-normal" : ""}`}>
           {mode.includes("video") ? (isZh ? "AI 视频生成器" : "AI Video Generator") : isZh ? "AI 图片生成器" : "AI Image Generator"}
         </h2>
         <p className="mt-4 text-lg leading-8 text-zinc-300">
           {currentMode.description[isZh ? "zh" : "en"]}
         </p>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          {studioSignals[isZh ? "zh" : "en"].map((signal, index) => (
+            <div
+              key={signal.label}
+              data-delay={index}
+              className="delayed-rise rounded-full border border-white/10 bg-black/25 px-4 py-2 text-left"
+            >
+              <div className="text-[10px] uppercase tracking-[0.22em] text-zinc-500">{signal.label}</div>
+              <div className="mt-1 text-sm text-zinc-200">{signal.value}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="mx-auto mt-8 max-w-3xl rounded-[28px] border border-[#3e3026] bg-[#2a1f18]/85 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+      <div className="mx-auto mt-8 max-w-3xl rounded-[28px] border border-[#3e3026] bg-[#2a1f18]/85 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] subtle-orbit">
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           {studioModes.map((item) => (
             <button
@@ -408,7 +432,7 @@ function GeneratorPanel({
 
         <div className="mt-5 grid gap-5 lg:grid-cols-[180px_minmax(0,1fr)]">
           {needsSourceImage ? (
-            <div className="rounded-[24px] border border-[#4c392b] bg-[#2a1f18]/80 p-4">
+            <div className="panel-lift rounded-[24px] border border-[#4c392b] bg-[#2a1f18]/80 p-4">
               {sourcePreview ? (
                 <>
                   <img src={sourcePreview} alt="Source preview" className="h-36 w-full rounded-[18px] object-cover" />
@@ -456,7 +480,7 @@ function GeneratorPanel({
         </div>
 
         <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div className="rounded-[24px] border border-[#3e3026] bg-[#2a1f18]/80 p-4">
+          <div className="panel-lift rounded-[24px] border border-[#3e3026] bg-[#2a1f18]/80 p-4">
             <div className="mb-3 text-[11px] uppercase tracking-[0.22em] text-zinc-500">{isZh ? "模型切换" : "Model Switch"}</div>
             <Select value={selectedModelId} onValueChange={onModelChange}>
               <SelectTrigger className="h-16 rounded-[20px] border-zinc-700 bg-[#1a130f] px-4 text-left text-white focus:ring-primary/35 focus:ring-offset-0">
@@ -510,17 +534,17 @@ function NonLivePanel({
   const isZh = locale === "zh";
 
   return (
-    <div className="rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.32)]">
+    <div className="aurora-stage rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.32)]">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <div className="section-label">{isZh ? "Next Layer" : "Next Layer"}</div>
-          <h3 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
-            {isZh ? "参数和模型已经统一，生成调度器正在分阶段接入" : "The generator structure is unified, and the dispatcher is rolling out mode by mode"}
+          <div className="section-label">{isZh ? "下一步" : "Next Step"}</div>
+          <h3 className={`display-serif mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : ""}`}>
+            {isZh ? "先确定创意与参数，再进入对应生成链路" : "Lock the creative brief first, then continue into the right generation path"}
           </h3>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-300">
             {isZh
-              ? "你现在已经可以在 Studio 里先把方式、prompt、参数和模型定下来。图片工作流已经接通，视频链路会沿用这套面板继续接入。"
-              : "You can already lock the generation type, prompt, parameters, and model inside Studio. The image workflow is live now, and video will plug into this same surface next."}
+              ? "你可以先在这里确定模式、提示词、参数和模型，再进入更具体的工作流继续创作。"
+              : "Use this Studio to set the mode, prompt, parameters, and model first, then continue into the most suitable workflow."}
           </p>
         </div>
         <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-primary">
@@ -529,17 +553,17 @@ function NonLivePanel({
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="rounded-[24px] border border-zinc-800 bg-black/25 p-5">
+        <div className="panel-lift rounded-[24px] border border-zinc-800 bg-black/25 p-5">
           <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{isZh ? "当前创意概览" : "Current Brief"}</div>
           <div className="mt-4 space-y-3 text-sm leading-7 text-zinc-300">
             <div className="flex items-start gap-3">
               <CheckCircle2 className="mt-1 h-4 w-4 flex-none text-primary" />
               <span>{isZh ? "先在这个统一生成器里完成模式切换和参数配置。" : "Use this unified generator to lock the mode and parameters first."}</span>
             </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-1 h-4 w-4 flex-none text-primary" />
-              <span>{isZh ? "当前 prompt 会成为后续接入正式 dispatcher 的基础输入。" : "The current prompt becomes the base input for the full dispatcher once the mode goes live."}</span>
-            </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-1 h-4 w-4 flex-none text-primary" />
+                <span>{isZh ? "当前 prompt 会直接成为你继续生成时的基础输入。" : "The current prompt becomes the base input when you continue into generation."}</span>
+              </div>
             {prompt ? (
               <div className="rounded-[20px] border border-zinc-800 bg-zinc-950/80 p-4 text-zinc-200">
                 {prompt}
@@ -549,14 +573,14 @@ function NonLivePanel({
         </div>
 
         <div className="space-y-4">
-          <div className="rounded-[24px] border border-zinc-800 bg-black/25 p-5">
+          <div className="panel-lift rounded-[24px] border border-zinc-800 bg-black/25 p-5">
             <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{isZh ? "当前模型" : "Current Model"}</div>
             <div className="mt-3 text-xl font-medium text-white">{model?.labels[isZh ? "zh" : "en"] ?? "Imaveo"}</div>
             <p className="mt-2 text-sm leading-7 text-zinc-300">{model?.descriptions[isZh ? "zh" : "en"]}</p>
           </div>
 
-          <div className="rounded-[24px] border border-zinc-800 bg-[radial-gradient(circle_at_top,rgba(245,197,24,0.12),rgba(0,0,0,0.92)_65%)] p-5">
-            <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{isZh ? "建议路径" : "Suggested Path"}</div>
+          <div className="panel-lift rounded-[24px] border border-zinc-800 bg-[radial-gradient(circle_at_top,rgba(245,197,24,0.12),rgba(0,0,0,0.92)_65%)] p-5">
+            <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{isZh ? "建议路径" : "Recommended Path"}</div>
             <div className="mt-4 space-y-3 text-sm leading-7 text-zinc-300">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-1 h-4 w-4 flex-none text-primary" />
@@ -564,7 +588,7 @@ function NonLivePanel({
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-1 h-4 w-4 flex-none text-primary" />
-                <span>{isZh ? "如果要立即真实生成，切到图生图并使用 Animeify。" : "If you need a live generation path right now, switch to image-to-image with Animeify."}</span>
+                <span>{isZh ? "如果当前任务已经明确，直接进入对应模式继续生成即可。" : "If your task is already clear, continue directly into the matching generation mode."}</span>
               </div>
             </div>
             <div className="mt-5 flex flex-wrap gap-3">
@@ -603,7 +627,7 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
     if (!currentModelIsValid) {
       const fallback = availableModels[0];
       setSelectedModelId(fallback?.slug ?? "");
-      setSelectedStyle(fallback?.slug === "animeify" ? "Anime" : "");
+      setSelectedStyle("");
     }
   }, [availableModels, mode, selectedModelId]);
 
@@ -626,7 +650,7 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   }, [mode, pathname, router, selectedModelId, selectedStyle]);
 
   const selectedModel = availableModels.find((model) => model.slug === selectedModelId) ?? availableModels[0];
-  const liveGeneration = mode === "image-to-image" && selectedModel?.slug === "animeify";
+  const liveGeneration = false;
 
   const handlePickSource = () => {
     fileInputRef.current?.click();
@@ -648,7 +672,7 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   const mobileSidebar = <StudioSidebar locale={locale} mode={mode} model={selectedModel} />;
 
   return (
-    <section className="min-h-[calc(100vh-5rem)] bg-[radial-gradient(circle_at_top,rgba(245,197,24,0.12),transparent_20%),linear-gradient(180deg,#080808,#020202)] py-8 md:py-10">
+    <section className="aurora-stage min-h-[calc(100vh-5rem)] bg-[radial-gradient(circle_at_top,rgba(245,197,24,0.12),transparent_20%),linear-gradient(180deg,#080808,#020202)] py-8 md:py-10">
       <input
         ref={fileInputRef}
         type="file"
@@ -663,13 +687,13 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="section-label">Imaveo Studio</div>
-              <h1 className={`mt-3 text-4xl font-medium text-white md:text-5xl ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                {isZh ? "把所有创作入口统一收口到同一个工作台" : "Route every creation path into one production-ready studio"}
+              <h1 className={`display-serif mt-3 text-4xl font-medium text-white md:text-5xl ${isZh ? "tracking-normal" : ""}`}>
+                {isZh ? "在一个工作台里完成四种创作模式" : "Create across four modes in one Studio"}
               </h1>
               <p className="mt-4 max-w-4xl text-base leading-8 text-zinc-300">
                 {isZh
-                  ? "生成器现在按统一顺序组织：先切换创作大类，再输入 prompt，然后展开参数配置和模型切换。"
-                  : "The generator now follows one consistent order: switch the generation type, write the prompt, then adjust parameters and model selection."}
+                  ? "先切换创作模式，再输入 prompt，然后调整参数与模型，让图片和视频工作流都更清晰。"
+                  : "Switch the creation mode first, then write the prompt and adjust parameters and models so both image and video workflows stay clear."}
               </p>
             </div>
 
@@ -686,9 +710,9 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
                 </SheetTrigger>
                 <SheetContent side="left" className="w-full max-w-md border-zinc-800 bg-[#050505] p-4 text-white sm:max-w-md">
                   <SheetHeader className="mb-4">
-                    <SheetTitle className="text-white">{isZh ? "Studio 说明面板" : "Studio guide"}</SheetTitle>
+                    <SheetTitle className="text-white">{isZh ? "Studio 使用说明" : "Studio guide"}</SheetTitle>
                     <SheetDescription className="text-zinc-400">
-                      {isZh ? "移动端把辅助说明折叠到这里，主区域只保留生成器本体。" : "On mobile, guidance collapses here so the generator remains the main focus."}
+                      {isZh ? "移动端把辅助说明折叠到这里，主区域保持生成器为核心。" : "On mobile, guidance collapses here so the generator stays as the main focus."}
                     </SheetDescription>
                   </SheetHeader>
                   {mobileSidebar}
@@ -725,39 +749,22 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
                 onClearSource={() => setSourcePreview("")}
               />
 
-              {liveGeneration ? (
-                <div id="live-editor" className="rounded-[32px] border border-zinc-800 bg-[#070707]/92 p-4 md:p-6">
-                  <AnimeImageEditor
-                    locale={locale}
-                    title={isZh ? "继续进入 Animeify 真实编辑器" : "Continue into the live Animeify editor"}
-                    subtitle={
-                      isZh
-                        ? "上面的统一生成器负责切换方式、Prompt、参数和模型；下面这一层保留当前已接通的真实图生图生成链路。"
-                        : "The unified generator above handles category, prompt, parameters, and model switching; the live editor below keeps the current image-to-image generation path intact."
-                    }
-                    defaultStyle={"standard"}
-                    hideStyleSelector={false}
-                    compact
-                  />
-                </div>
-              ) : (
-                <NonLivePanel locale={locale} mode={mode} model={selectedModel} prompt={prompt} />
-              )}
+              <NonLivePanel locale={locale} mode={mode} model={selectedModel} prompt={prompt} />
             </main>
 
             <aside className="hidden xl:block">
-              <div className="sticky top-24 space-y-4 rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+              <div className="aurora-stage sticky top-24 space-y-4 rounded-[30px] border border-zinc-800 bg-[#090909]/92 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
                 <div className="flex items-center gap-2 text-sm font-medium text-white">
                   <History className="h-4 w-4 text-primary" />
                   {isZh ? "最近创作" : "Recent creations"}
                 </div>
                 <p className="text-sm leading-7 text-zinc-400">
-                  {isZh ? "右侧保留最近创作与复用位，后续直接接入真实 generations 数据流。" : "The right rail remains the place for recent creations and reuse actions, and will connect to real generations data next."}
+                  {isZh ? "右侧用于查看最近创作与复用参数，帮助你更快开启下一次生成。" : "Use the right rail to revisit recent creations and reuse settings for the next run."}
                 </p>
                 <div className="space-y-3">
                   {recentSeeds.map((item) => (
-                    <div key={item.id} className="rounded-[22px] border border-zinc-800 bg-black/30 p-3">
-                      <div className={`mb-3 h-24 rounded-[18px] bg-gradient-to-br ${item.color} to-transparent`} />
+                    <div key={item.id} className="panel-lift rounded-[22px] border border-zinc-800 bg-black/30 p-3">
+                      <div className={`mb-3 h-24 rounded-[18px] bg-gradient-to-br ${item.color} to-transparent subtle-orbit`} />
                       <div className="flex items-center justify-between gap-3">
                         <div>
                           <div className="text-sm font-medium text-white">{item.kind}</div>

@@ -11,8 +11,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {
         title: isZh ? "定价方案 | Imaveo" : "Pricing Plans | Imaveo",
         description: isZh
-            ? "查看 Imaveo 的订阅方案和 Credits 包，适合 AI 视频、AI 图片与 Animeify 创作需求。"
-            : "Explore Imaveo subscription plans and credits packs for AI video, AI image, and Animeify workflows.",
+            ? "查看 Imaveo 的订阅方案和 Credits 包，适合 AI 视频与 AI 图片创作需求。"
+            : "Explore Imaveo subscription plans and credits packs for AI video and AI image workflows.",
         alternates: buildLocaleAlternates(`/${locale}/pricing`),
         openGraph: {
             title: isZh ? "定价方案 | Imaveo" : "Pricing Plans | Imaveo",

@@ -8,8 +8,8 @@ export async function SoftwareApplicationSchema({ locale }: { locale: string }) 
         "@type": "SoftwareApplication",
         "name": site.siteName,
         "description": isZh
-            ? "Imaveo 是聚合 AI 视频、AI 图片与 Animeify 的创作平台。"
-            : "Imaveo is a creation platform that unifies AI video, AI image, and Animeify workflows.",
+            ? "Imaveo 是聚合 AI 视频与 AI 图片工作流的创作平台。"
+            : "Imaveo is a creation platform that unifies AI video and AI image workflows.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Web Browser",
         "offers": {
@@ -20,7 +20,8 @@ export async function SoftwareApplicationSchema({ locale }: { locale: string }) 
         "featureList": [
             "AI video generation hub",
             "AI image generation hub",
-            "Animeify portrait workflow",
+            "Text-to-image and image-to-image modes",
+            "Text-to-video and image-to-video modes",
             "Credits packs and subscriptions",
             "Localized English and Chinese pages"
         ],

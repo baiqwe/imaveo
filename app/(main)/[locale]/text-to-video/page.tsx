@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Film, Sparkles } from "lucide-react";
+import { CollectionPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -44,9 +45,46 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
   const isZh = locale === "zh";
   const localeKey = locale as "en" | "zh";
   const videoModels = imaveoModels.filter((model) => model.category === "video");
+  const decisionCards = [
+    {
+      label: isZh ? "适合谁" : "Best for",
+      title: isZh ? "先有想法，再找最合适模型的人" : "Creators who know the idea first and choose the model second",
+      description: isZh
+        ? "如果你已经知道要生成什么场景，但还没决定 Veo 还是 Kling，文生视频页就是最好的中间层。"
+        : "If you already know the scene you want but have not committed to Veo or Kling yet, this page works as the best middle layer.",
+    },
+    {
+      label: isZh ? "默认起手参数" : "Starter setup",
+      title: isZh ? "16:9 + 8 秒 + Veo 3.1" : "16:9 + 8s + Veo 3.1",
+      description: isZh
+        ? "先用横屏和较短时长验证镜头感，确认方向后再扩展到其他比例和模型。"
+        : "Use a horizontal ratio and a shorter duration first to validate motion quality, then expand into other ratios and models.",
+    },
+    {
+      label: isZh ? "下一步" : "Next step",
+      title: isZh ? "直接进入创作中心试第一条片子" : "Move straight into the Studio and test the first clip",
+      description: isZh
+        ? "如果你已经有提示词，不需要继续停在说明页，直接进入 Studio 会更短。"
+        : "If you already have the prompt, do not stay on the explanatory page any longer than necessary. The Studio is the shortest path.",
+    },
+  ];
 
   return (
     <section className="py-16 md:py-20">
+      <CollectionPageSchema
+        name={isZh ? "Imaveo 文生视频" : "Imaveo Text to Video"}
+        description={isZh ? "查看文生视频工作流、相关视频模型和价格入口。" : "Explore the text-to-video workflow, relevant video models, and pricing entry points."}
+        url={`/${locale}/text-to-video`}
+        locale={locale}
+        items={[
+          { name: isZh ? "AI 视频中心" : "AI Video Hub", url: `/${locale}/ai-video` },
+          { name: isZh ? "价格方案" : "Pricing", url: `/${locale}/pricing` },
+          ...videoModels.map((model) => ({
+            name: model.labels[localeKey],
+            url: `/${locale}${model.href}`,
+          })),
+        ]}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs
@@ -132,6 +170,16 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               </Link>
             </div>
           </div>
+
+          <section className="grid gap-4 md:grid-cols-3">
+            {decisionCards.map((card) => (
+              <div key={card.title} className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{card.label}</div>
+                <h2 className="mt-3 text-2xl font-medium text-white">{card.title}</h2>
+                <p className="mt-3 text-sm leading-7 text-zinc-300">{card.description}</p>
+              </div>
+            ))}
+          </section>
 
           <SeoConversionPanel
             eyebrow={isZh ? "Conversion Entry" : "Conversion Entry"}

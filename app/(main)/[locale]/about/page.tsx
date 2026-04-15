@@ -12,10 +12,10 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale } = params;
   const isZh = locale === "zh";
 
-  const title = isZh ? `关于我们 | ${site.siteName}` : `About | ${site.siteName}`;
+  const title = isZh ? "关于我们" : "About";
   const description = isZh
-    ? "我们打造照片转二次元的 AI 工具：更简单的工作流、更清晰的风格选择、更好的出图体验。"
-    : "We build Photo-to-Anime AI tools with simple workflows, clear style choices, and great results.";
+    ? "了解 Imaveo：一个把 AI 视频与 AI 图片工作流整合到一起的创作平台。"
+    : "Learn about Imaveo, the creation platform that brings AI video and AI image workflows into one place.";
 
   const ogImage = new URL(site.ogImagePath, site.siteUrl).toString();
 
@@ -73,13 +73,13 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             </h1>
             <p className="text-lg text-muted-foreground">
               {isZh
-                ? "把你的照片转换成高质量的动漫风格图像，用于头像、社交分享、创作灵感。"
-                : "Turn your photos into high-quality anime-style images for avatars, sharing, and creative inspiration."}
+                ? "把 AI 图片与 AI 视频工作流放到同一个产品里，帮助创作者更快从想法走到成片。"
+                : "Bring AI image and AI video workflows into one product so creators can move from idea to output faster."}
             </p>
             <p className="text-sm text-muted-foreground">
               {isZh
-                ? `${site.siteName} 是一个面向动漫爱好者、Coser、创作者和游戏玩家的独立工具站，专注于把真实照片快速转换成更稳定、更好看的二次元风格图像。`
-                : `${site.siteName} is an independent tool built for anime fans, cosplayers, creators, and gamers who want fast, high-quality anime transformations from real photos.`}
+                ? `${site.siteName} 面向内容团队、独立创作者与品牌运营，提供文生图、图生图、文生视频、图生视频和模型切换能力。`
+                : `${site.siteName} is built for teams, solo creators, and marketers who need text-to-image, image-to-image, text-to-video, image-to-video, and flexible model switching.`}
             </p>
           </div>
 
@@ -88,11 +88,11 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Sparkles className="w-5 h-5 text-primary" />
-                  {isZh ? "风格优先" : "Style First"}
+                  {isZh ? "结果导向" : "Result First"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                {isZh ? "围绕二次元用户的审美与细节偏好设计风格与参数。" : "Designed around anime aesthetics and creator expectations."}
+                {isZh ? "围绕创作者的真实任务设计模型入口、参数层级和创作路径。" : "Built around real creator jobs, with clear model entry points, parameters, and workflows."}
               </CardContent>
             </Card>
 
@@ -100,11 +100,11 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Zap className="w-5 h-5 text-primary" />
-                  {isZh ? "简单工作流" : "Simple Workflow"}
+                  {isZh ? "统一工作流" : "Unified Workflow"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                {isZh ? "上传 → 选风格 → 调浓度 → 生成下载。" : "Upload → pick a style → adjust intensity → generate & download."}
+                {isZh ? "在一个工作台里完成模式切换、提示词输入、参数调整和后续管理。" : "Handle mode switching, prompting, parameter tuning, and output management from one workspace."}
               </CardContent>
             </Card>
 

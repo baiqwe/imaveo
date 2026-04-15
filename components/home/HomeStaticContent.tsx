@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight, Clock3, ImageIcon, Layers3, PlaySquare, Sparkles, WandSparkles } from "lucide-react";
+import { ArrowRight, Clock3, ImageIcon, PlaySquare } from "lucide-react";
 import { imaveoArticles, imaveoModels, imaveoTools } from "@/config/imaveo";
 import { buildStudioHrefFromPath } from "@/utils/studio";
 
@@ -23,15 +23,15 @@ export default async function HomeStaticContent({ locale }: Props) {
       icon: <ImageIcon className="h-5 w-5 text-primary" />,
       title: isZh ? "图片模型矩阵" : "Image model matrix",
       desc: isZh
-        ? "Flux、Animeify 等图片模型集中展示，便于按任务快速切换。"
-        : "Switch between Flux, Animeify, and more according to the job you need to finish.",
+        ? "统一展示主流图片模型，便于按任务快速切换。"
+        : "Browse image models in one place and switch according to the job you need to finish.",
     },
     {
       icon: <Clock3 className="h-5 w-5 text-primary" />,
       title: isZh ? "资产与状态统一管理" : "One place for assets and statuses",
       desc: isZh
-        ? "后续接入 Supabase Realtime 后，生成状态和成片会实时回流到创作库。"
-        : "Ready for a realtime creation library once the Supabase generation status flow is wired in.",
+        ? "创作记录、模型选择和后续结果回看都可以在同一条链路里完成。"
+        : "Creation history, model choices, and output review can stay in one continuous flow.",
     },
   ];
 
@@ -44,13 +44,13 @@ export default async function HomeStaticContent({ locale }: Props) {
               <div>
                 <div className="section-label">Core System</div>
                 <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                  {isZh ? "一个站点，承接视频、图片和二次元专用工作流" : "One hub for video, image, and anime-specialized creation"}
+                  {isZh ? "一个站点，承接视频与图片创作" : "One hub for AI video and image creation"}
                 </h2>
               </div>
               <p className="max-w-xl text-sm leading-7 text-zinc-300">
                 {isZh
-                  ? "首页现在不再只是一张落地页，而是产品中枢。你的 SEO 流量、模型详情、价格页和创作资产都会围绕这个核心框架展开。"
-                  : "The homepage now acts as a product hub, not just a landing page. SEO, pricing, model pages, and creation assets all radiate from this same frame."}
+                  ? "在这里快速选择创作任务、切换模型、查看价格，并进入统一的创作中心开始生成。"
+                  : "Use the homepage to choose a workflow, compare models, review pricing, and enter the Studio from one clear starting point."}
               </p>
             </div>
 
@@ -79,13 +79,13 @@ export default async function HomeStaticContent({ locale }: Props) {
               <div>
                 <div className="section-label">Model Board</div>
                 <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                  {isZh ? "用详情页承接高意图搜索" : "Turn high-intent searches into model landing pages"}
+                  {isZh ? "按模型能力选择合适的创作入口" : "Choose the right model for the job"}
                 </h2>
               </div>
               <p className="text-sm leading-7 text-zinc-300">
                 {isZh
-                  ? "每个模型页都可以继续扩展为 SEO 入口、价格锚点和示例库。当前已补上视频与图片模型详情页骨架，后续可直接接接口与案例。"
-                  : "Each model page can become an SEO entry, a pricing anchor, and a showcase page. The route skeleton is now in place for both video and image models."}
+                  ? "不同模型擅长的结果不同。先了解它们的强项，再进入创作中心会更容易得到稳定结果。"
+                  : "Each model is better at different kinds of output. Reviewing their strengths first makes the Studio faster and easier to use."}
               </p>
             </div>
 
@@ -133,7 +133,7 @@ export default async function HomeStaticContent({ locale }: Props) {
               <div>
                 <div className="section-label">Workflow Grid</div>
                 <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                  {isZh ? "导航不再按页面组织，而是按工作流组织" : "Organize navigation around workflows, not generic pages"}
+                  {isZh ? "按创作任务快速进入" : "Enter by the task you want to create"}
                 </h2>
               </div>
               <Link href={`${localePrefix}/my-creations`} className="text-sm text-primary">
@@ -170,12 +170,12 @@ export default async function HomeStaticContent({ locale }: Props) {
             <div className="rounded-[32px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-7">
               <div className="section-label">Pricing Logic</div>
               <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                {isZh ? "订阅 + 加油包双轨并行" : "Subscription and top-up packs on the same surface"}
+                {isZh ? "订阅与积分包都清楚可选" : "Subscriptions and credits packs, clearly separated"}
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300">
                 {isZh
-                  ? "定价页继续复用现有 Creem 集成，但视觉上改成更克制的双卡逻辑：左边订阅，右边积分包，用单次成本和权益差距推动升级。"
-                  : "Keep the current Creem integration, but frame pricing as a cleaner dual-track story: subscriptions on the left, refill packs on the right."}
+                  ? "按使用频率决定更适合订阅还是按次购买，让团队和个人创作者都能找到合适方案。"
+                  : "Choose between subscriptions and pay-as-you-go packs based on how often you create and how much flexibility you need."}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
@@ -188,15 +188,15 @@ export default async function HomeStaticContent({ locale }: Props) {
                   href={`${localePrefix}/blog`}
                   className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm text-white/70 transition-colors hover:border-primary/40 hover:text-white"
                 >
-                  {isZh ? "阅读 SEO Hub" : "Read the SEO hub"}
+                  {isZh ? "阅读使用指南" : "Read the guides"}
                 </Link>
               </div>
             </div>
 
             <div className="rounded-[32px] border border-zinc-800 bg-black/40 p-7">
-              <div className="section-label">SEO Engine</div>
+              <div className="section-label">{isZh ? "内容中心" : "Editorial Hub"}</div>
               <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                {isZh ? "博客页负责吃下模型评测和提示词长尾词" : "The blog becomes your long-tail acquisition engine"}
+                {isZh ? "在指南与评测里找到更具体的创作思路" : "Find practical guidance, prompt ideas, and model reviews"}
               </h2>
               <div className="mt-6 space-y-3">
                 {imaveoArticles.map((article) => (
@@ -206,48 +206,6 @@ export default async function HomeStaticContent({ locale }: Props) {
                     <p className="mt-2 text-sm leading-6 text-zinc-400">{article.excerpt[localeKey]}</p>
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="pb-24">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto max-w-6xl rounded-[36px] border border-primary/20 bg-[radial-gradient(circle_at_top,rgba(245,197,24,0.18),rgba(0,0,0,0.88)_55%)] p-8 md:p-10">
-            <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-              <div>
-                <div className="section-label">Animeify Layer</div>
-                <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
-                  {isZh ? "Animeify 作为 Imaveo 的专属子品牌继续存在" : "Animeify stays alive as a specialized layer inside Imaveo"}
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300">
-                  {isZh
-                    ? "你后续只需要在 `/ai-image/animeify` 或自定义域名入口注入樱花粉 / 青色变量，就能保留二次元子品牌，同时共享主站的支付、账号和资产系统。"
-                    : "A route-level accent swap on `/ai-image/animeify` can preserve the anime-specific sub-brand while sharing the same billing, auth, and asset systems."}
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <MiniPanel
-                  icon={<Sparkles className="h-4 w-4 text-primary" />}
-                  title={isZh ? "独立皮肤" : "Independent skin"}
-                  desc={isZh ? "按路由切换 CSS 变量即可。" : "Switch CSS variables by route or domain."}
-                />
-                <MiniPanel
-                  icon={<WandSparkles className="h-4 w-4 text-primary" />}
-                  title={isZh ? "模型特化" : "Model specialization"}
-                  desc={isZh ? "默认指向动漫专用权重与参数。" : "Default to your anime-tuned weights and presets."}
-                />
-                <MiniPanel
-                  icon={<Layers3 className="h-4 w-4 text-primary" />}
-                  title={isZh ? "共享底座" : "Shared foundation"}
-                  desc={isZh ? "账号、支付、资产和 SEO 都复用。" : "Reuse auth, billing, assets, and SEO."}
-                />
-                <MiniPanel
-                  icon={<ArrowRight className="h-4 w-4 text-primary" />}
-                  title={isZh ? "专属入口" : "Featured entry"}
-                  desc={isZh ? "在导航和首页模型标签里持续曝光。" : "Keep it visible in nav and featured tags."}
-                />
               </div>
             </div>
           </div>

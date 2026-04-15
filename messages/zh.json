@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "Imaveo - 聚合 AI 视频、AI 图片与 Animeify 的创作中枢",
-    "description": "Imaveo 是面向大众创作者的 AI 视觉创作聚合站，把 Veo、Kling、Flux 和 Animeify 放进同一个暗色极简工作台。",
-    "keywords": "imaveo, ai视频生成, ai图片生成, animeify, veo 3, kling 2.6, flux pro, ai创作平台"
+    "title": "Imaveo - AI 视频与 AI 图片创作平台",
+    "description": "Imaveo 是面向创作者的 AI 视觉创作平台，整合文生图、图生图、文生视频、图生视频和热门模型。",
+    "keywords": "imaveo, ai视频生成, ai图片生成, 文生视频, 图生视频, 文生图, 图生图, veo 3, kling 2.6, flux pro"
   },
   "nav": {
     "home": "首页",
@@ -20,15 +20,15 @@
     "sign_out": "退出"
   },
   "hero": {
-    "badge": "AI 视频 • AI 图片 • Animeify",
+    "badge": "AI 视频 • AI 图片 • 创作中心",
     "title": "一个暗色极简的",
     "title_highlight": "AI 视觉创作中枢",
-    "subtitle": "把 Veo、Kling、Flux 和 Animeify 聚合到同一个高级工作台里，围绕提示词、资产和转化路径统一组织。",
+    "subtitle": "把 Veo、Kling、Flux 等热门模型放进同一个工作台，在一个地方完成文生图、图生图、文生视频和图生视频。",
     "feature_1": "按场景组织工作流",
     "feature_2": "热门模型即时切换",
     "feature_3": "统一资产底座",
     "tool_title": "启动第一个工作流",
-    "tool_subtitle": "先用 Animeify 获得最快的首个成果，再扩展到视频和更广泛的图片生成模型。"
+    "tool_subtitle": "先选择创作任务，再切换模型和参数，快速进入真实的生成流程。"
   },
   "uploader": {
     "title": "上传图片",
@@ -107,7 +107,7 @@
     "faq_title": "常见问题"
   },
   "footer": {
-    "tagline": "面向创作者的 AI 视频、AI 图片与二次元专属工作流中枢。",
+    "tagline": "面向创作者的 AI 视频与 AI 图片工作流平台。",
     "legal": "法律条款",
     "link_privacy": "隐私政策",
     "link_terms": "服务条款",
@@ -120,7 +120,7 @@
     "eyebrow": "创作者定价",
     "title": "四张卡片，把升级路径讲明白。",
     "subtitle": "当买断包和专业版订阅放在同一视觉平面时，用户会自动对比单张成本和特权差距。只要订阅卡片足够强，转化就会自然发生。",
-    "artist_anchor": "找真人画师约一张定制二次元头像，往往要花 30 到 50 美元，还要等上几周。Animeify 专业版用不到一单约稿的价格，就能立刻给你 100 次工作室级生成机会。",
+    "artist_anchor": "如果你需要持续制作海报、封面、商品图或短视频素材，订阅方案会比零散购买更省，也更适合高频迭代。你可以先按次购买体验，再根据使用频率升级。",
     "buyout_label": "买断",
     "subscription_label": "专业版",
     "one_time_payment": "一次性付款",

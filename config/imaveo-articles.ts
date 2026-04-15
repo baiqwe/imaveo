@@ -2,6 +2,107 @@ import type { ImaveoArticle } from "@/config/imaveo";
 
 export const imaveoArticles: ImaveoArticle[] = [
   {
+    slug: "what-is-imaveo-studio",
+    href: "/blog/what-is-imaveo-studio",
+    category: "PLATFORM GUIDE",
+    readTime: "6 min",
+    publishedAt: "2026-04-15",
+    updatedAt: "2026-04-15",
+    title: {
+      en: "What is Imaveo Studio and why does it matter for creators?",
+      zh: "什么是 Imaveo Studio，它为什么对创作者重要？",
+    },
+    excerpt: {
+      en: "A clear explanation of how Imaveo brings image generation, video generation, and model switching into one creative workspace.",
+      zh: "解释 Imaveo 如何把图片生成、视频生成和模型切换放进一个统一的创作工作台。",
+    },
+    seo: {
+      en: {
+        title: "What is Imaveo Studio? | Imaveo Blog",
+        description: "Understand what Imaveo Studio is, how it connects workflows and models, and why a unified workspace matters for creators.",
+        keywords: ["imaveo studio", "what is imaveo", "ai creator workspace", "imaveo create"],
+      },
+      zh: {
+        title: "什么是 Imaveo Studio？ | Imaveo 博客",
+        description: "解释 Imaveo Studio 是什么、它如何连接工作流和模型，以及统一工作台为什么更适合创作者。",
+        keywords: ["Imaveo Studio", "什么是 Imaveo", "AI创作工作台", "Imaveo 创作中心"],
+      },
+    },
+    sections: [
+      {
+        heading: {
+          en: "Why a unified workspace matters",
+          zh: "为什么统一工作台很重要",
+        },
+        paragraphs: {
+          en: [
+            "Most creator tools make users choose between separate pages for image generation, video generation, and model exploration. That structure may be fine for product demos, but it creates friction when the real job is to move from one creative step into the next without losing context.",
+            "Imaveo Studio matters because it turns those disconnected actions into one continuous surface. A creator can start with a still image, switch into video intent, compare models, and keep moving without treating every task as a new session.",
+          ],
+          zh: [
+            "很多创作工具会把生图、生成视频和模型探索拆到多个页面里。这样的结构对演示产品功能也许足够，但对于真实创作来说，最大的成本恰恰来自上下文不断中断。",
+            "Imaveo Studio 的意义就在于它把这些分散动作收成一个连续工作面。创作者可以从静图开始，再切到视频意图，再比较模型，而不需要把每一步都当成全新的会话。",
+          ],
+        },
+      },
+      {
+        heading: {
+          en: "How it fits the SEO architecture",
+          zh: "它在 SEO 架构里承担什么角色",
+        },
+        paragraphs: {
+          en: [
+            "Studio is not meant to replace every SEO landing page. Hub pages, workflow pages, and model pages still exist to capture specific search intents. The Studio is where those intents converge once the visitor is ready to act.",
+            "That distinction matters. Search pages explain and rank, while the Studio converts. When both are forced into one page, the site often becomes worse at both discovery and conversion.",
+          ],
+          zh: [
+            "Studio 并不是为了取代所有 SEO 落地页。Hub 页、workflow 页和 model 页仍然负责承接不同类型的搜索意图，而 Studio 负责在用户准备行动时成为统一创作入口。",
+            "这个角色分工非常重要。搜索页负责解释和收录，Studio 负责转化。如果把这两种职责强行挤在一个页面里，最后往往既不利于发现，也不利于转化。",
+          ],
+        },
+      },
+      {
+        heading: {
+          en: "What creators should do next",
+          zh: "创作者下一步应该怎么用",
+        },
+        paragraphs: {
+          en: [
+            "If the goal is exploration, start from a hub or workflow page first. If the goal is action, move into the Studio early. The more specific the idea becomes, the more valuable a unified workspace becomes.",
+            "That is why Imaveo treats the Studio as the conversion core rather than as a stand-alone landing page. It is where the comparison phase ends and the production phase begins.",
+          ],
+          zh: [
+            "如果目标是探索，先从 hub 或 workflow 页进入会更合理；如果目标已经是执行，就应该尽早切进 Studio。创意越具体，统一工作台的价值就越明显。",
+            "这也是为什么 Imaveo 把 Studio 视为转化核心，而不是孤立的落地页。它是比较阶段结束、生产阶段开始的地方。",
+          ],
+        },
+      },
+    ],
+    takeaways: {
+      en: [
+        "Imaveo Studio unifies image, video, and model switching into one production surface.",
+        "SEO pages still matter, but they should funnel into the Studio instead of competing with it.",
+        "A unified workspace becomes more valuable as creator intent becomes more concrete.",
+      ],
+      zh: [
+        "Imaveo Studio 把图片、视频和模型切换收进一个统一工作面。",
+        "SEO 页面依然重要，但它们应该把流量收口到 Studio，而不是和它互相竞争。",
+        "创作者意图越具体，统一工作台的价值就越高。",
+      ],
+    },
+    cta: {
+      href: "/create",
+      label: {
+        en: "Open Imaveo Studio",
+        zh: "打开 Imaveo Studio",
+      },
+      description: {
+        en: "Move from explanation into the actual Studio workspace.",
+        zh: "从解释页直接进入真实的创作工作台。",
+      },
+    },
+  },
+  {
     slug: "veo-vs-sora",
     href: "/blog/veo-vs-sora",
     category: "MODEL REVIEW",
@@ -103,107 +204,6 @@ export const imaveoArticles: ImaveoArticle[] = [
     },
   },
   {
-    slug: "anime-avatar-prompts",
-    href: "/blog/anime-avatar-prompts",
-    category: "PROMPT GUIDE",
-    readTime: "6 min",
-    publishedAt: "2026-04-09",
-    updatedAt: "2026-04-09",
-    title: {
-      en: "How to generate a perfect anime avatar with Animeify prompts",
-      zh: "如何用 Animeify 提示词生成一张完美二次元头像",
-    },
-    excerpt: {
-      en: "A prompt formula for cosplay shots, profile pictures, and creator branding.",
-      zh: "适用于 Cos 照、社交头像和创作者品牌图的一套提示词模板。",
-    },
-    seo: {
-      en: {
-        title: "Animeify prompt guide for better avatars | Imaveo Blog",
-        description: "A practical Animeify prompt framework for profile pictures, cosplay portraits, and creator branding images with fewer failed generations.",
-        keywords: ["animeify prompts", "anime avatar prompts", "photo to anime prompts", "anime portrait guide"],
-      },
-      zh: {
-        title: "Animeify 提示词指南 | Imaveo 博客",
-        description: "面向头像、Cos 照和创作者品牌图的 Animeify 提示词公式，帮助你更稳定地得到可用成片。",
-        keywords: ["Animeify 提示词", "二次元头像提示词", "照片转动漫提示词", "动漫人像指南"],
-      },
-    },
-    sections: [
-      {
-        heading: {
-          en: "Start with the role of the image",
-          zh: "先明确这张图在承担什么角色",
-        },
-        paragraphs: {
-          en: [
-            "The strongest Animeify prompts usually begin with intent, not with visual adjectives. A profile picture, a cosplay remake, and a creator-branding portrait all need different emotional weight, crop discipline, and styling instructions.",
-            "When the role is clear, the rest of the prompt becomes easier to control. You can decide whether the image should feel usable, expressive, commercial, or highly stylized before adding visual details.",
-          ],
-          zh: [
-            "最好用的 Animeify 提示词通常不是从视觉形容词开始，而是先从用途开始。头像、Cos 改绘和创作者品牌图，对情绪、裁切和风格约束的要求完全不同。",
-            "当用途足够明确时，后面的描述会更容易控制。你可以先决定它要更偏可用、表达型、商业型还是强风格化，再补视觉细节。",
-          ],
-        },
-      },
-      {
-        heading: {
-          en: "Use a stable prompt spine",
-          zh: "用一条稳定的提示词骨架",
-        },
-        paragraphs: {
-          en: [
-            "A useful Animeify structure is: subject + camera crop + mood + rendering cues + cleanup constraints. This keeps the prompt readable while making sure the model knows who the character is, how tightly the portrait is framed, and what details should remain consistent.",
-            "The cleanup part is often underrated. Constraints like clean facial features, consistent hair silhouette, and controlled background detail help prevent the model from spending too much attention on elements that do not improve the final avatar.",
-          ],
-          zh: [
-            "一个稳定好用的 Animeify 结构是：主体 + 镜头裁切 + 情绪氛围 + 渲染线索 + 清理约束。这样既能让提示词保持可读，也能让模型明确角色是谁、镜头有多近、哪些细节必须保持稳定。",
-            "最后这层清理约束很容易被忽略。像面部干净、发型轮廓稳定、背景细节受控这类限制，能减少模型把注意力浪费在对头像并不加分的部分上。",
-          ],
-        },
-      },
-      {
-        heading: {
-          en: "Iterate with one variable at a time",
-          zh: "每次只改一个变量",
-        },
-        paragraphs: {
-          en: [
-            "Most failed prompt sessions come from changing too many things at once. If you alter camera angle, styling mood, color treatment, and character pose in the same pass, you cannot tell which variable actually improved or hurt the result.",
-            "A cleaner workflow is to lock the identity first, then iterate on mood, then refine polish. This sequence saves credits and creates a reusable prompt pattern the team can return to later.",
-          ],
-          zh: [
-            "大多数失败的提示词实验，并不是因为写得不够花哨，而是一次改动了太多变量。如果同一轮同时改镜头、情绪、配色和姿势，你很难知道真正起作用的是哪一部分。",
-            "更稳的做法是先锁定人物识别，再迭代氛围，最后补精修。这样不仅更省额度，也更容易沉淀出团队可以反复复用的提示词模板。",
-          ],
-        },
-      },
-    ],
-    takeaways: {
-      en: [
-        "Write prompts around the job the image must perform, not only around aesthetics.",
-        "Use a repeatable prompt spine so Animeify gets identity, crop, and mood instructions clearly.",
-        "Change one variable at a time to learn what actually improves the output.",
-      ],
-      zh: [
-        "提示词先围绕图片用途展开，而不是只堆视觉形容词。",
-        "用固定骨架组织提示词，让 Animeify 清楚主体、裁切和情绪。",
-        "每次只改一个变量，才能知道什么真的提升了结果。",
-      ],
-    },
-    cta: {
-      href: "/ai-image/animeify",
-      label: {
-        en: "Open Animeify Studio",
-        zh: "打开 Animeify Studio",
-      },
-      description: {
-        en: "Try the prompt pattern in a live Animeify workflow.",
-        zh: "把这套提示词直接带进真实的 Animeify 工作流。",
-      },
-    },
-  },
-  {
     slug: "ai-video-workflow",
     href: "/blog/ai-video-workflow",
     category: "WORKFLOW",
@@ -301,6 +301,107 @@ export const imaveoArticles: ImaveoArticle[] = [
       description: {
         en: "Use the workflow article as a bridge into the product flow.",
         zh: "把这篇流程文章直接接到产品工作流里。",
+      },
+    },
+  },
+  {
+    slug: "best-text-to-video-prompts",
+    href: "/blog/best-text-to-video-prompts",
+    category: "PROMPT GUIDE",
+    readTime: "7 min",
+    publishedAt: "2026-04-15",
+    updatedAt: "2026-04-15",
+    title: {
+      en: "Best text-to-video prompts for cinematic clips and social shorts",
+      zh: "最适合电影感短片和社媒短视频的文生视频提示词",
+    },
+    excerpt: {
+      en: "A prompt framework for camera motion, scene pacing, and output-ready AI clips.",
+      zh: "一套围绕镜头运动、场景节奏和成片导向的文生视频提示词框架。",
+    },
+    seo: {
+      en: {
+        title: "Best text-to-video prompts | Imaveo Blog",
+        description: "Use a practical prompt framework for cinematic AI video clips, camera motion, and short-form social output on Imaveo.",
+        keywords: ["text to video prompts", "ai video prompt guide", "cinematic video prompts", "best text to video prompts"],
+      },
+      zh: {
+        title: "最佳文生视频提示词 | Imaveo 博客",
+        description: "用一套更实用的提示词结构组织电影感 AI 视频、镜头运动和短视频输出。",
+        keywords: ["文生视频提示词", "AI视频提示词", "电影感提示词", "最佳文生视频 prompt"],
+      },
+    },
+    sections: [
+      {
+        heading: {
+          en: "Start with motion, not decoration",
+          zh: "先写运动，再写修饰",
+        },
+        paragraphs: {
+          en: [
+            "Most weak text-to-video prompts spend too much time on decorative adjectives and too little time on motion logic. A better structure begins with subject, action, camera movement, pacing, and mood before adding style detail.",
+            "That ordering matters because video is judged by movement over time. If the motion arc is vague, beautiful adjectives cannot rescue a weak clip.",
+          ],
+          zh: [
+            "很多差的文生视频提示词会把大量篇幅花在修饰词上，却没有交代清楚运动逻辑。更好的结构应该先写主体、动作、镜头运动、节奏和氛围，再补风格线索。",
+            "这种顺序之所以重要，是因为视频的核心是时间里的运动。如果运动弧线本身模糊，再多华丽形容词也救不了成片。",
+          ],
+        },
+      },
+      {
+        heading: {
+          en: "Use one shot intention at a time",
+          zh: "一次只表达一个镜头意图",
+        },
+        paragraphs: {
+          en: [
+            "Prompts fail when they try to include every good idea in one generation. Slow dolly-in, aerial reveal, close-up emotion, and crowd action are all strong directions individually, but they compete when packed into the same prompt.",
+            "A better workflow is to treat each prompt as one shot intention. That makes results easier to evaluate and helps the team learn which prompt spine is actually reusable.",
+          ],
+          zh: [
+            "提示词容易失败，往往不是因为信息不够，而是因为把太多好想法塞进了一次生成里。缓慢推进、俯拍揭示、特写情绪和群像动作单独看都不错，但放在同一个 prompt 里就会互相竞争。",
+            "更好的做法是把每次生成当成一个明确镜头意图。这样结果更容易判断，也更容易沉淀出真正可复用的提示词骨架。",
+          ],
+        },
+      },
+      {
+        heading: {
+          en: "Turn prompt quality into workflow efficiency",
+          zh: "把提示词质量转成 workflow 效率",
+        },
+        paragraphs: {
+          en: [
+            "Prompt quality is not just about prettier output. In production, a strong prompt reduces retries and improves clip usability on the first pass. That changes the cost structure of the whole workflow.",
+            "This is why creators should think of prompts as operational assets. Once a working prompt pattern appears, it should be saved, named, and reused instead of reinvented from scratch every time.",
+          ],
+          zh: [
+            "提示词质量不只是为了让结果更好看。在真实生产里，一个强提示词意味着更少重试和更高首稿可用率，这会直接改变整条工作流的成本结构。",
+            "所以创作者应该把提示词看成运营资产。一旦一套结构被验证可用，就应该保存、命名并复用，而不是每次都重新发明。",
+          ],
+        },
+      },
+    ],
+    takeaways: {
+      en: [
+        "Organize prompts around subject, motion, camera, pacing, and mood in that order.",
+        "Treat every prompt as one shot intention rather than a list of every possible effect.",
+        "Save working prompt patterns because they lower cost and improve output stability over time.",
+      ],
+      zh: [
+        "提示词优先按主体、运动、镜头、节奏、氛围来组织。",
+        "每个 prompt 只表达一个镜头意图，不要把所有效果都塞进去。",
+        "把可用 prompt 当成资产保存下来，它会持续降低成本并提高稳定性。",
+      ],
+    },
+    cta: {
+      href: "/text-to-video",
+      label: {
+        en: "Open text-to-video",
+        zh: "打开文生视频工作流",
+      },
+      description: {
+        en: "Take the prompt framework into the text-to-video workflow.",
+        zh: "把这套提示词框架直接带进文生视频工作流。",
       },
     },
   },

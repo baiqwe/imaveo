@@ -175,30 +175,6 @@ export const imaveoTools: ImaveoTool[] = [
     },
   },
   {
-    slug: "animeify",
-    category: "image",
-    mode: "anime",
-    href: "/ai-image/animeify",
-    hot: true,
-    labels: { en: "Animeify", zh: "Animeify" },
-    descriptions: {
-      en: "Specialized anime portrait workflow inside Imaveo.",
-      zh: "Imaveo 内置的二次元专属工作流。",
-    },
-    seo: {
-      en: {
-        title: "Animeify AI Generator | Imaveo",
-        description: "Create anime portraits, avatars, and stylized character art with Imaveo's Animeify workflow.",
-        keywords: ["animeify", "anime avatar generator", "photo to anime", "anime ai image"],
-      },
-      zh: {
-        title: "Animeify 二次元生成器 | Imaveo",
-        description: "使用 Imaveo 的 Animeify 工作流生成二次元头像、动漫角色图和风格化人像。",
-        keywords: ["Animeify", "二次元头像生成", "照片转动漫", "动漫AI绘图"],
-      },
-    },
-  },
-  {
     slug: "ai-image",
     category: "image",
     mode: "text-to-image",
@@ -316,37 +292,6 @@ export const imaveoModels: ImaveoModel[] = [
       },
     },
     generationDefaults: { aspectRatio: "1:1" },
-  },
-  {
-    slug: "animeify",
-    category: "image",
-    provider: "Replicate",
-    providerId: "replicate",
-    href: "/ai-image/animeify",
-    badge: "PINK",
-    mode: "anime",
-    labels: { en: "Animeify", zh: "Animeify" },
-    descriptions: {
-      en: "Domain-specific anime image pipeline optimized for portraits.",
-      zh: "针对人像优化的二次元图片生成链路。",
-    },
-    strengths: {
-      en: ["Portrait-first", "Anime-specialized weights", "Brandable outputs"],
-      zh: ["人像优先", "动漫专用权重", "更适合品牌输出"],
-    },
-    seo: {
-      en: {
-        title: "Animeify Photo to Anime Generator | Imaveo",
-        description: "Turn photos into anime-style avatars and portraits with Animeify on Imaveo using anime-specialized image weights.",
-        keywords: ["animeify", "photo to anime", "anime portrait generator", "anime avatar maker"],
-      },
-      zh: {
-        title: "Animeify 照片转动漫生成器 | Imaveo",
-        description: "通过 Imaveo 的 Animeify 专属模型，把照片变成二次元头像和动漫风人像。",
-        keywords: ["Animeify", "照片转动漫", "二次元头像生成器", "动漫人像"],
-      },
-    },
-    generationDefaults: { style: "standard" },
   },
 ];
 

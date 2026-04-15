@@ -41,6 +41,14 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   );
 }
 
+function toAbsoluteUrl(url: string) {
+  try {
+    return new URL(url, site.siteUrl).toString();
+  } catch {
+    return site.siteUrl;
+  }
+}
+
 // FAQ 结构化数据组件 - 帮助 Google 展示常见问题
 interface FAQItem {
   question: string;
@@ -139,6 +147,122 @@ export function ArticleSchema({ headline, description, url, locale, publishedAt,
     "image": [new URL(site.ogImagePath, site.siteUrl).toString()],
     ...(publishedAt ? { "datePublished": publishedAt } : {}),
     ...(updatedAt ? { "dateModified": updatedAt } : {}),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
+interface CollectionItem {
+  name: string;
+  url: string;
+}
+
+interface CollectionPageSchemaProps {
+  name: string;
+  description: string;
+  url: string;
+  locale: string;
+  items: CollectionItem[];
+}
+
+export function CollectionPageSchema({ name, description, url, locale, items }: CollectionPageSchemaProps) {
+  const absoluteUrl = toAbsoluteUrl(url);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": name,
+    "description": description,
+    "url": absoluteUrl,
+    "inLanguage": locale,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": site.siteName,
+      "url": site.siteUrl,
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": items.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.name,
+        "url": toAbsoluteUrl(item.url),
+      })),
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
+interface WebPageSchemaProps {
+  name: string;
+  description: string;
+  url: string;
+  locale: string;
+}
+
+export function WebPageSchema({ name, description, url, locale }: WebPageSchemaProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": name,
+    "description": description,
+    "url": toAbsoluteUrl(url),
+    "inLanguage": locale,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": site.siteName,
+      "url": site.siteUrl,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
+interface SoftwareApplicationSchemaProps {
+  name: string;
+  description: string;
+  url: string;
+  locale: string;
+  featureList?: string[];
+}
+
+export function SoftwareApplicationSchema({
+  name,
+  description,
+  url,
+  locale,
+  featureList = [],
+}: SoftwareApplicationSchemaProps) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": name,
+    "description": description,
+    "url": toAbsoluteUrl(url),
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web",
+    "inLanguage": locale,
+    ...(featureList.length > 0 ? { "featureList": featureList } : {}),
+    "publisher": {
+      "@type": "Organization",
+      "name": site.siteName,
+      "url": site.siteUrl,
+    },
   };
 
   return (

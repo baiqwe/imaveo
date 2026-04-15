@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Clapperboard } from "lucide-react";
+import { WebPageSchema } from "@/components/breadcrumb-schema";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { SeoConversionPanel } from "@/components/seo/seo-conversion-panel";
 import { SeoRichContent } from "@/components/seo/seo-rich-content";
@@ -65,9 +66,73 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
   if (!item) notFound();
 
   const siblingModels = imaveoModels.filter((entry) => entry.category === "video" && entry.slug !== item.slug);
+  const recommendedWorkflowHref = `/${locale}/${item.mode}`;
+  const recommendedWorkflowLabel =
+    item.mode === "image-to-video"
+      ? isZh
+        ? "图生视频"
+        : "Image to Video"
+      : isZh
+        ? "文生视频"
+        : "Text to Video";
+  const defaultAspectRatio = item.generationDefaults?.aspectRatio ?? (item.mode === "image-to-video" ? "9:16" : "16:9");
+  const defaultDuration = item.generationDefaults?.duration ? `${item.generationDefaults.duration}s` : item.mode === "image-to-video" ? "5s" : "8s";
+  const pathRecommendations = [
+    {
+      label: isZh ? "最快起步路径" : "Fastest path",
+      title: isZh ? `先从${recommendedWorkflowLabel}开始` : `Start with ${recommendedWorkflowLabel}`,
+      description: isZh
+        ? `如果你已经决定用 ${item.labels.zh}，先进入对应 workflow，再锁定提示词、比例和时长。`
+        : `If you already chose ${item.labels.en}, enter the matching workflow first and lock the prompt, aspect ratio, and duration.`,
+      href: recommendedWorkflowHref,
+    },
+    {
+      label: isZh ? "真实转化入口" : "Conversion entry",
+      title: isZh ? "直接进入创作中心" : "Move into the Studio",
+      description: isZh
+        ? "在创作中心里切换模型、模式和参数，避免用户在模型页停留过久。"
+        : "Use the Studio to switch models, modes, and parameters without keeping users trapped on a documentation page.",
+      href: buildStudioHref(locale, {
+        mode: item.mode === "image-to-video" ? "image-to-video" : "text-to-video",
+        model: item.slug,
+        source: "video-model-recommendation",
+      }),
+    },
+    {
+      label: isZh ? "比较路径" : "Compare path",
+      title: isZh ? "回到 AI 视频中心横向比较" : "Compare from the AI video hub",
+      description: isZh
+        ? "如果还在 Veo 和 Kling 之间犹豫，回到 hub 页继续做横向比较。"
+        : "If you are still deciding between Veo and Kling, go back to the hub and compare models side by side.",
+      href: `/${locale}/ai-video`,
+    },
+  ];
+  const parameterGuidance = [
+    {
+      label: isZh ? "推荐比例" : "Suggested ratio",
+      value: defaultAspectRatio,
+      description: isZh ? "作为默认起步比例，便于先验证镜头感和主体构图。" : "Use this as the default ratio to validate framing and motion before deeper iteration.",
+    },
+    {
+      label: isZh ? "推荐时长" : "Suggested duration",
+      value: defaultDuration,
+      description: isZh ? "先用较短时长试跑，确认镜头语言后再拉长。" : "Start with a shorter duration, then extend once the camera language feels right.",
+    },
+    {
+      label: isZh ? "最适合的 workflow" : "Best-fit workflow",
+      value: recommendedWorkflowLabel,
+      description: isZh ? "优先沿这个 workflow 进入，减少用户在错误路径里试错。" : "Prefer this workflow so users do not waste time inside the wrong generation path.",
+    },
+  ];
 
   return (
     <section className="py-16 md:py-20">
+      <WebPageSchema
+        name={`${item.labels[localeKey]} | Imaveo`}
+        description={item.descriptions[localeKey]}
+        url={`/${locale}/ai-video/${item.slug}`}
+        locale={locale}
+      />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
           <Breadcrumbs
@@ -139,6 +204,44 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               </Link>
             </div>
           </div>
+
+          <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
+              <div className="section-label">{isZh ? "Recommended Path" : "Recommended Path"}</div>
+              <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
+                {isZh ? `${item.labels.zh} 更适合怎么被使用` : `How ${item.labels.en} should be used inside Imaveo`}
+              </h2>
+              <div className="mt-5 grid gap-4">
+                {pathRecommendations.map((path) => (
+                  <Link
+                    key={path.href + path.title}
+                    href={path.href}
+                    className="rounded-[24px] border border-white/10 bg-black/25 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
+                  >
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-primary">{path.label}</div>
+                    <div className="mt-3 text-xl font-medium text-white">{path.title}</div>
+                    <div className="mt-2 text-sm leading-7 text-zinc-300">{path.description}</div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-7">
+              <div className="section-label">{isZh ? "Parameter Guide" : "Parameter Guide"}</div>
+              <h2 className={`mt-3 text-3xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.04em]"}`}>
+                {isZh ? `${item.labels.zh} 的默认参数建议` : `Suggested starting parameters for ${item.labels.en}`}
+              </h2>
+              <div className="mt-5 space-y-4">
+                {parameterGuidance.map((entry) => (
+                  <div key={entry.label} className="rounded-[24px] border border-white/10 bg-black/25 p-5">
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{entry.label}</div>
+                    <div className="mt-3 text-2xl font-medium text-white">{entry.value}</div>
+                    <div className="mt-2 text-sm leading-7 text-zinc-300">{entry.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <SeoConversionPanel
             eyebrow={isZh ? "Take Action" : "Take Action"}

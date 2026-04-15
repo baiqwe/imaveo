@@ -112,8 +112,8 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
               </p>
               <p>
                 {isZh
-                  ? "生成结果可能以链接或数据形式返回；具体存储策略会根据部署与成本策略调整。"
-                  : "Generated results may be returned as URLs or data; storage strategy may change based on deployment and cost."}
+                  ? "生成结果可能以链接或数据形式返回；具体保存方式会根据产品功能与服务配置调整。"
+                  : "Generated results may be returned as URLs or data; storage behavior may vary based on product features and service configuration."}
               </p>
               <p>
                 {isZh

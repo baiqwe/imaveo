@@ -102,8 +102,8 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "这个页面用于承接文生视频类搜索与转化，并把用户导向最合适的视频模型、定价页和品牌首页。"
-                : "This page captures text-to-video intent and routes users into the right video model pages, pricing, and the brand hub."}
+                ? "输入一句提示词，就可以开始制作短视频。你可以先选择适合的模型，再根据成片频率查看套餐与积分。"
+                : "Start an AI video from a single prompt. Choose a model for the result you want, then review plans and credits when you are ready to create more."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -111,7 +111,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
                 href={`/${locale}/ai-video`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
+                <div className="section-label">{isZh ? "视频中心" : "Video Hub"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "AI 视频中心" : "AI Video Hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "浏览所有视频模型与工作流。" : "Explore all video models and workflows."}
@@ -131,7 +131,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
                 href={`/${locale}`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Brand" : "Brand"}</div>
+                <div className="section-label">{isZh ? "首页" : "Home"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "返回首页中枢" : "Back to the hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "回到品牌首页，继续切换其他工作流。" : "Return to the brand console and switch into other workflows."}
@@ -182,21 +182,21 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
           </section>
 
           <SeoConversionPanel
-            eyebrow={isZh ? "Conversion Entry" : "Conversion Entry"}
-            title={isZh ? "把文生视频需求直接送到视频工作台" : "Route text-to-video demand straight into the video console"}
+            eyebrow={isZh ? "开始生成" : "Start Creating"}
+            title={isZh ? "进入文生视频工作台" : "Open the text-to-video workspace"}
             description={
               isZh
-                ? "文生视频访客通常已经具备明确动作意图。这里不再让他跳来跳去，而是直接把他送到首页视频控制台，再顺着模型卡片去 Veo 或 Kling。"
-                : "Text-to-video visitors usually arrive with a concrete action in mind. Rather than making them browse more layers, send them into the home video console first and then let them choose Veo or Kling from there."
+                ? "如果你已经有画面想法，可以直接进入创作中心，选择 Veo 或 Kling，填写提示词并调整比例、时长和风格。"
+                : "If you already have a scene in mind, open the Studio, choose Veo or Kling, write the prompt, and tune ratio, duration, and style."
             }
             primaryHref={buildStudioHref(locale, { mode: "text-to-video", model: "veo-3", source: "seo-text-to-video" })}
             primaryLabel={isZh ? "立即进入文生视频入口" : "Open text-to-video entry"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "先看价格方案" : "Review pricing first"}
             highlights={[
-              isZh ? "CTA 和页面主题完全一致，减少跳转犹豫" : "The CTA matches the page intent closely, reducing hesitation",
-              isZh ? "继续复用首页已有视频模式切换逻辑" : "Reuses the existing home-page video mode switching logic",
-              isZh ? "保留后续接真实 prompt 表单的升级空间" : "Leaves a clean path for a future real prompt form",
+              isZh ? "适合先用文字描述画面和镜头动作" : "Ideal when you want to describe the shot in words first",
+              isZh ? "支持继续切换视频模型和输出比例" : "Supports model switching and aspect-ratio selection",
+              isZh ? "适合广告短片、社媒视频和概念片段" : "Useful for ad clips, social videos, and concept shots",
             ]}
           />
 
@@ -206,11 +206,11 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
             introTitle={isZh ? "什么是文生视频页面？" : "What is the text-to-video page?"}
             introBody={[
               isZh
-                ? "文生视频页是 Imaveo 的核心 cluster page 之一。它主要承接『text to video』『AI 视频生成器』这类场景词，再把用户分发到最适合的模型页和价格页。"
-                : "The text-to-video page is one of Imaveo's core cluster pages. It captures scenario-driven search intent like 'text to video' or 'AI video generator' and routes users into the best model pages and pricing paths.",
+                ? "文生视频适合从一句创意、脚本或镜头描述开始生成短片。你可以用文字描述人物、场景、镜头运动和氛围，再选择适合的视频模型生成结果。"
+                : "Text-to-video is useful when you want to start from an idea, script, or camera description. Describe the subject, scene, motion, and mood, then choose the video model that fits the output.",
               isZh
-                ? "如果只有一个输入框，这类页面很容易变成薄内容。加入步骤说明、适用场景和 FAQ 后，搜索引擎更容易理解这个页面解决的是哪类需求。"
-                : "If it only contains a prompt box, this kind of page risks becoming thin content. Adding how-to guidance, use cases, and FAQs makes the page much easier for search engines to classify and rank.",
+                ? "它适合做广告短片、产品镜头、社媒开场、故事分镜和概念验证。先把画面说清楚，再通过比例、时长和模型选择控制最终效果。"
+                : "It works well for ad clips, product shots, social openers, storyboards, and concept tests. Start by describing the scene clearly, then control the result with ratio, duration, and model choice.",
             ]}
             stepsTitle={isZh ? "如何在 Imaveo 上完成文生视频" : "How to create text-to-video on Imaveo"}
             steps={[
@@ -218,26 +218,26 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               isZh ? "输入提示词，并逐步确认时长、比例和镜头氛围等关键参数。" : "Enter your prompt, then refine duration, aspect ratio, and overall camera mood.",
               isZh ? "根据生成频率进入价格页，决定使用订阅还是 Credits。" : "Visit pricing and decide whether subscriptions or credits are the better fit for your generation volume.",
             ]}
-            useCasesTitle={isZh ? "哪些搜索意图会进入文生视频页？" : "What search intent does the text-to-video page capture?"}
+            useCasesTitle={isZh ? "文生视频适合哪些创作场景？" : "When should creators use text-to-video?"}
             useCases={[
-              isZh ? "搜索『文生视频』『AI 视频生成』这类泛场景词的用户" : "Users searching broad workflow terms like 'text to video' or 'AI video generator'",
-              isZh ? "想先明确工作流，再决定选哪个模型的创作者" : "Creators who want the workflow first, then the model decision",
-              isZh ? "准备从品牌首页继续深入具体模型页的高意图用户" : "High-intent users moving from the home hub into specific model pages",
+              isZh ? "还没有首帧图片，但已经有镜头想法的创作者" : "Creators who do not have a source image yet but already know the scene",
+              isZh ? "需要快速测试广告脚本、短视频开场或产品镜头的人" : "Teams testing ad scripts, short-video hooks, or product shots",
+              isZh ? "想先用文字试方向，再决定是否继续精修的用户" : "Users who want to test direction with text before refining further",
               isZh ? "需要比较效果、速度和价格的实际生产用户" : "Production-minded users comparing output quality, speed, and price",
             ]}
             faqTitle={isZh ? "文生视频常见问题" : "Text-to-video FAQ"}
             faqs={[
               {
-                question: isZh ? "文生视频页为什么要链接到模型页？" : "Why should the text-to-video page link to model pages?",
+                question: isZh ? "文生视频应该先选模型还是先写提示词？" : "Should I choose a model first or write the prompt first?",
                 answer: isZh
-                  ? "因为场景页负责承接需求词，而模型页负责承接模型词。两者互相链接后，搜索引擎更容易理解站点的主题结构。"
-                  : "Because workflow pages capture scenario intent while model pages capture model intent. Linking them together helps search engines understand the site's topic hierarchy.",
+                  ? "如果你已经知道想要电影感或社媒短片风格，可以先选模型；如果还在探索，先写提示词也可以，再根据结果切换 Veo 或 Kling。"
+                  : "If you already know the target look, pick a model first. If you are exploring, write the prompt first and switch between Veo or Kling after reviewing the result.",
               },
               {
-                question: isZh ? "文生视频页面适合做长文 SEO 吗？" : "Should the text-to-video page include long-form SEO content?",
+                question: isZh ? "什么样的提示词更容易生成稳定视频？" : "What kind of prompt creates more stable videos?",
                 answer: isZh
-                  ? "适合，而且非常有必要。对这类工具页来说，正文内容、FAQ 和内链往往决定了能否稳定收录。"
-                  : "Yes, and it is often necessary. For workflow pages like this, body copy, FAQs, and internal links are what make indexing and ranking stable over time.",
+                  ? "建议写清主体、动作、镜头、环境和风格，例如人物在做什么、镜头如何移动、画面是写实还是电影感。"
+                  : "Describe the subject, action, camera movement, environment, and style. The clearer the scene and motion, the more stable the output tends to be.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}
@@ -245,7 +245,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               {
                 label: isZh ? "AI 视频中心" : "AI Video Hub",
                 href: `/${locale}/ai-video`,
-                description: isZh ? "回到视频类 pillar page。" : "Return to the main AI video pillar page.",
+                description: isZh ? "回到 AI 视频中心继续比较模型。" : "Return to the AI video hub and compare models.",
               },
               {
                 label: isZh ? "价格方案" : "Pricing",

@@ -102,8 +102,8 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
           </section>
 
           <SeoConversionPanel
-            eyebrow={isZh ? "Live Entry" : "Live Entry"}
-            title={isZh ? "从这里进入真实的图片生成入口" : "Jump from SEO traffic into a real image generation entry"}
+            eyebrow={isZh ? "开始生成" : "Start Creating"}
+            title={isZh ? "进入图片生成工作台" : "Open the image generation workspace"}
             description={
               isZh
                 ? "如果你已经知道自己想做封面、海报、广告图或品牌视觉，直接进入创作中心开始生成，再根据结果切换模型。"
@@ -115,7 +115,7 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}
             highlights={[
               isZh ? "一个入口承接不同图片任务，不需要额外跳转" : "One image entry point handles multiple image-generation jobs",
-              isZh ? "适合把模型页、工作流页和创作中心串成一条完整路径" : "Connects model pages, workflow pages, and the Studio into one path",
+              isZh ? "适合制作封面、海报、广告图和品牌视觉" : "Useful for covers, posters, ad visuals, and brand assets",
               isZh ? "先开始生成，再根据结果切换模型更高效" : "Start generating first, then change models based on the result you need",
             ]}
           />
@@ -126,7 +126,7 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             introTitle={isZh ? "什么是 Imaveo 的 AI 图片中心？" : "What is the Imaveo AI image hub?"}
             introBody={[
               isZh
-                ? "AI 图片中心是品牌站中的另一个 pillar。它负责承接大类图片生成需求，再把用户引导到更具体的模型页和工作流页。"
+                ? "AI 图片中心帮助你先了解图片生成模型和常见用途，再进入创作中心制作封面、海报、商品图或品牌视觉。"
                 : "The AI image hub is the place to compare image-generation options before moving into a specific model page or straight into the Studio.",
               isZh
                 ? "对创作者来说，这种中心页能先把场景分清楚，再决定用哪个模型、更适合走文生图还是图生图。"
@@ -138,7 +138,7 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
               isZh ? "再根据结果类型进入对应模型页，或直接打开创作中心开始生成。" : "Then move into the matching model page or go straight to the Studio to start generating.",
               isZh ? "最后根据频率选择订阅或 Credits 包。" : "Choose subscriptions or credits packs based on how often you generate.",
             ]}
-            useCasesTitle={isZh ? "哪些搜索意图适合 AI 图片中心？" : "Which search intents does the AI image hub capture?"}
+            useCasesTitle={isZh ? "AI 图片中心适合哪些创作需求？" : "When should creators use the AI image hub?"}
             useCases={[
               isZh ? "搜索『AI 图片生成器』的泛意图用户" : "Broad users searching for 'AI image generator'",
               isZh ? "搜索 Flux 等模型关键词的用户" : "Users searching for model terms such as Flux",
@@ -148,10 +148,10 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             faqTitle={isZh ? "AI 图片中心常见问题" : "AI image hub FAQ"}
             faqs={[
               {
-                question: isZh ? "为什么图片模型也需要做 pillar page？" : "Why does AI image also need a pillar page?",
+                question: isZh ? "为什么要先看 AI 图片中心？" : "Why start from the AI image hub?",
                 answer: isZh
-                  ? "因为图片模型、风格词和结果词本身会形成一整个搜索簇。Pillar page 的作用就是把这些意图组织起来并持续分发权重。"
-                  : "Because image models, style terms, and outcome-driven keywords form a whole search cluster. A pillar page organizes those intents and distributes authority over time.",
+                  ? "因为图片生成的用途很多，封面、海报、商品图和品牌视觉适合的提示词和比例都不同。先看中心页能更快选对方向。"
+                  : "Because image-generation jobs vary a lot. Covers, posters, product images, and brand visuals need different prompts and ratios, so the hub helps you choose faster.",
               },
               {
                 question: isZh ? "AI 图片中心和创作中心有什么区别？" : "What is the difference between the AI image hub and the Studio?",

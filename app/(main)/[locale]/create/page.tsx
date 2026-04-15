@@ -140,26 +140,26 @@ export default async function CreatePage({ params, searchParams }: CreatePagePro
                 isZh ? "再填写 prompt，并根据当前模式调整比例、质量、时长或数量等参数。" : "Write the prompt, then adjust ratio, quality, duration, or quantity for the current mode.",
                 isZh ? "最后选择最适合的模型，确认参数后开始生成或继续下一步创作。" : "Choose the model that fits the result you want, then start generation or continue into the next creation step.",
               ]}
-              useCasesTitle={isZh ? "创作中心适合承接哪些访问意图？" : "What intent should the Studio capture?"}
+              useCasesTitle={isZh ? "创作中心适合哪些使用场景？" : "When should creators use the Studio?"}
               useCases={[
-                isZh ? "从首页 hero、导航下拉和 CTA 进入的高意图用户" : "High-intent visitors coming from the home hero, navigation, and CTA links",
-                isZh ? "从 hub 页、workflow 页和 model 页完成比较后，准备开始第一次试用的用户" : "Visitors who finished comparing on hub, workflow, and model pages and are ready to try the product",
+                isZh ? "已经准备输入提示词或上传图片，想直接开始生成的用户" : "Users who are ready to enter a prompt or upload an image and start creating",
+                isZh ? "已经比较过模型和工作流，准备开始第一次试用的用户" : "Visitors who have compared models and workflows and are ready to try the product",
                 isZh ? "需要统一切换模型与模式，而不是在多个页面来回跳转的创作者" : "Creators who need one place to switch both models and workflows without bouncing between pages",
                 isZh ? "希望在同一工作台里比较模型与参数的高意图创作者" : "High-intent creators who want to compare models and parameters in one surface",
               ]}
               faqTitle={isZh ? "创作中心常见问题" : "Studio FAQ"}
               faqs={[
                 {
-                  question: isZh ? "为什么创作中心不是纯 SEO 长文页？" : "Why is the Studio not a pure long-form SEO page?",
+                  question: isZh ? "创作中心和 AI 视频 / AI 图片页面有什么区别？" : "How is the Studio different from AI video and AI image pages?",
                   answer: isZh
-                    ? "因为它的核心职责是转化，而不是解释所有搜索词。SEO 解释工作交给 hub、workflow 和 model 页，创作中心负责让用户真正开始操作。"
-                    : "Because its primary job is conversion, not exhaustive explanation for every keyword. Hub, workflow, and model pages handle search intent, while the Studio turns that intent into action.",
+                    ? "AI 视频和 AI 图片页面更适合了解模型和场景，创作中心则是实际操作区：选择模式、填写提示词、上传图片并开始生成。"
+                    : "AI video and AI image pages are better for learning models and use cases. The Studio is the working area where you choose a mode, write prompts, upload images, and generate.",
                 },
                 {
                   question: isZh ? "为什么还要保留 AI 视频中心、AI 图片中心和模型页？" : "Why keep the AI video hub, AI image hub, and model pages if the Studio exists?",
                   answer: isZh
-                    ? "因为这些页面负责承接不同层级的搜索意图，并把权重传回创作中心。没有这些解释型页面，创作中心会更像工具 UI，而不是一个能持续获客的产品站。"
-                    : "Because those pages capture different layers of search intent and funnel authority back into the Studio. Without them, the Studio behaves more like a raw tool UI than a discoverable product site.",
+                    ? "因为很多用户在开始生成前需要先了解模型差异、适用场景和价格。了解清楚后，再进入创作中心会更容易得到稳定结果。"
+                    : "Because many users want to understand model differences, use cases, and pricing before generating. Once that is clear, the Studio is easier to use effectively.",
                 },
               ]}
               relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}

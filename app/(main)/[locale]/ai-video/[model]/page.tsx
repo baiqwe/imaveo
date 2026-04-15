@@ -87,7 +87,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
       href: recommendedWorkflowHref,
     },
     {
-      label: isZh ? "真实转化入口" : "Conversion entry",
+            label: isZh ? "开始生成" : "Start creating",
       title: isZh ? "直接进入创作中心" : "Move into the Studio",
       description: isZh
         ? "在创作中心里切换模型、模式和参数，避免用户在模型页停留过久。"
@@ -167,7 +167,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
                 href={`/${locale}/ai-video`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
+                <div className="section-label">{isZh ? "视频中心" : "Video Hub"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "回到 AI 视频中心" : "Back to AI video hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "查看所有 AI 视频模型和工作流入口。" : "See all AI video models and workflow entry points."}
@@ -248,8 +248,8 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
             title={isZh ? `把 ${item.labels.zh} 的兴趣直接转成一次试用` : `Turn ${item.labels.en} interest into an actual trial`}
             description={
               isZh
-                ? `如果用户已经在看 ${item.labels.zh} 这种模型页，说明他已经进入比较阶段。最有效的动作不是再读一屏内容，而是直接进入视频控制台或对应工作流，继续往生成动作推进。`
-                : `If a visitor is already on a model page like ${item.labels.en}, they are in comparison mode. The most effective next step is not another paragraph, but a direct route into the video console or matching workflow.`
+                ? `如果你已经决定尝试 ${item.labels.zh}，可以直接进入视频工作台，选择文生视频或图生视频，开始测试第一条短片。`
+                : `If you are ready to try ${item.labels.en}, open the video workspace, choose text-to-video or image-to-video, and test the first clip.`
             }
             primaryHref={buildStudioHref(locale, {
               mode: item.mode === "image-to-video" ? "image-to-video" : "text-to-video",
@@ -260,9 +260,9 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
             secondaryHref={`/${locale}/${item.mode}`}
             secondaryLabel={isZh ? "先看对应工作流" : "Open matching workflow"}
             highlights={[
-              isZh ? "让模型词流量直接进入可行动的路径" : "Turns model-keyword traffic into an actionable path",
-              isZh ? "保留继续横向比较 Veo、Kling 等模型的空间" : "Keeps room for lateral comparison across Veo, Kling, and others",
-              isZh ? "不会打断当前页已经建立的 SEO 结构和内链" : "Does not break the SEO structure and internal linking already added to the page",
+              isZh ? "适合先用当前模型测试镜头质量" : "Use this model first to test motion quality",
+              isZh ? "也可以继续比较 Veo、Kling 等视频模型" : "Compare Veo, Kling, and other video models if needed",
+              isZh ? "生成后再根据使用频率选择 Credits 或订阅" : "Choose credits or a subscription after testing output volume",
             ]}
           />
 
@@ -272,11 +272,11 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
             introTitle={isZh ? `${item.labels.zh} 是什么？` : `What is ${item.labels.en}?`}
             introBody={[
               isZh
-                ? `${item.labels.zh} 是 Imaveo AI 视频矩阵中的一条独立模型页。这个页面不只是一个生成入口，更承担模型词搜索流量、产品解释和站内权重分发的作用。`
-                : `${item.labels.en} is a dedicated model page inside the Imaveo AI video cluster. It is not just a generation entry point, but also a place to explain the model and capture model-specific search demand.`,
+                ? `${item.labels.zh} 是 Imaveo 中可用于 AI 视频生成的模型之一，适合从提示词或首帧图片开始制作动态短片。`
+                : `${item.labels.en} is one of the AI video models available in Imaveo, useful for creating clips from prompts or source images.`,
               isZh
-                ? `${item.labels.zh} 当前的优势包括 ${item.strengths.zh.join("、")}。在品牌站策略里，这类页面应该同时链接回 AI 视频中心、对应工作流页面和邻近模型页，形成完整的 hub-and-spoke 结构。`
-                : `${item.labels.en} stands out for ${item.strengths.en.join(", ")}. In a brand-led hub-and-spoke SEO structure, this page should link back to the AI video hub, the relevant workflow page, and nearby model alternatives.`,
+                ? `${item.labels.zh} 的优势包括 ${item.strengths.zh.join("、")}。你可以先用默认参数测试一条短片，再根据画面稳定性、速度和预算决定是否继续放大使用。`
+                : `${item.labels.en} stands out for ${item.strengths.en.join(", ")}. Start with the suggested settings, review motion stability, speed, and cost, then decide whether to scale usage.`,
             ]}
             stepsTitle={isZh ? `如何在 Imaveo 上使用 ${item.labels.zh}` : `How to use ${item.labels.en} on Imaveo`}
             steps={[
@@ -288,22 +288,22 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
             useCases={[
               isZh ? `适合需要 ${item.strengths.zh[0]} 的创作者项目。` : `Best for creator workflows that need ${item.strengths.en[0].toLowerCase()}.`,
               isZh ? `适合把 ${item.labels.zh} 作为主力模型来测试镜头感和成片一致性。` : `Useful when ${item.labels.en} is your primary model for testing motion quality and output consistency.`,
-              isZh ? "适合先做模型页承接搜索，再把用户引导到价格页和工作流页。 " : "Works well as a ranking page that routes users into workflows and pricing once intent is established.",
-              isZh ? "适合品牌站中做模型对比和高意图流量转化。" : "Ideal for model comparison and high-intent conversion inside a branded tool hub.",
+              isZh ? "适合需要先比较模型能力，再决定使用频率的创作者。" : "Useful when creators want to compare model capability before choosing usage volume.",
+              isZh ? "适合已经接近正式生产、需要稳定成片质量的团队。" : "Suitable for teams close to production that need reliable clip quality.",
             ]}
             faqTitle={isZh ? `${item.labels.zh} 常见问题` : `${item.labels.en} FAQ`}
             faqs={[
               {
-                question: isZh ? `${item.labels.zh} 适合直接做 SEO 落地页吗？` : `Is ${item.labels.en} suitable as an SEO landing page?`,
+                question: isZh ? `${item.labels.zh} 适合新手直接使用吗？` : `Is ${item.labels.en} beginner-friendly?`,
                 answer: isZh
-                  ? "适合，但前提是页面不能只有生成器。你需要配上解释性内容、FAQ、工作流说明和站内内链，Google 才更容易理解它的主题价值。"
-                  : "Yes, but only if the page includes more than a generator UI. Explanatory copy, FAQs, workflow guidance, and internal links make it much more understandable to search engines.",
+                  ? "可以。建议先使用默认比例和时长生成第一条短片，再根据结果微调提示词、镜头动作和模型。"
+                  : "Yes. Start with the default ratio and duration, generate one clip, then adjust prompt details, camera motion, and model choice based on the result.",
               },
               {
                 question: isZh ? `${item.labels.zh} 应该怎么和其他模型页互相链接？` : `How should ${item.labels.en} link to other model pages?`,
                 answer: isZh
-                  ? "最佳做法是链接回 AI 视频中心，并横向链接到 1 到 3 个相邻模型页，再补一个对应场景页。这样能形成稳定的权重分发路径。"
-                  : "The best pattern is to link back to the AI video hub, cross-link to one to three neighboring model pages, and include one matching workflow page. That creates a stable internal authority flow.",
+                  ? "如果你还不确定模型选择，可以回到 AI 视频中心横向比较 Veo、Kling 等模型，再进入创作中心开始生成。"
+                  : "If you are unsure which model to use, return to the AI video hub, compare Veo, Kling, and other options, then open the Studio to generate.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}
@@ -311,7 +311,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               {
                 label: isZh ? "AI 视频中心" : "AI Video Hub",
                 href: `/${locale}/ai-video`,
-                description: isZh ? "回到视频类 pillar page。" : "Return to the pillar page for AI video.",
+                description: isZh ? "回到 AI 视频中心继续比较模型。" : "Return to the AI video hub and compare models.",
               },
               {
                 label: isZh ? "查看对应工作流" : "Matching workflow",

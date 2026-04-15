@@ -131,16 +131,16 @@ export default async function BlogArticlePage(props: { params: Promise<{ locale:
 
           <SeoConversionPanel
             eyebrow={isZh ? "Next Step" : "Next Step"}
-            title={isZh ? "把阅读兴趣转成一次真实操作" : "Turn reading intent into a real next action"}
+            title={isZh ? "读完后直接开始创作" : "Start creating after reading"}
             description={article.cta.description[localeKey]}
             primaryHref={buildStudioHrefFromPath(locale, article.cta.href, "blog-cta")}
             primaryLabel={article.cta.label[localeKey]}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "Compare plans and credits"}
             highlights={[
-              isZh ? "先读懂模型和流程，再进入产品路径" : "Move from understanding the workflow into the product path",
-              isZh ? "把内容页和转化页连成连续体验" : "Connects editorial content with conversion pages",
-              isZh ? "让博客成为真正有商业价值的流量入口" : "Turns the blog into a commercially useful acquisition layer",
+              isZh ? "先了解模型和流程，再进入创作中心" : "Understand the workflow, then open the Studio",
+              isZh ? "适合把文章里的提示词直接拿去测试" : "Use prompts from the article directly in the Studio",
+              isZh ? "读完就能继续生成图片或视频" : "Continue into image or video generation after reading",
             ]}
           />
 

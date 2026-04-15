@@ -82,8 +82,8 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
             </h1>
             <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "这个 pillar 页负责承接品牌词下的 AI 视频大类搜索，再把权重分发给 Veo、Kling 以及文生视频、图生视频等 cluster 页面。"
-                : "This pillar page captures broad AI video demand, then distributes authority into Veo, Kling, text-to-video, and image-to-video cluster pages."}
+                ? "在这里查看文生视频、图生视频和主流视频模型，先了解各自适合的场景，再进入创作中心开始生成。"
+                : "Explore text-to-video, image-to-video, and popular video models in one place, then open the Studio when you are ready to generate."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -119,21 +119,21 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
           </section>
 
           <SeoConversionPanel
-            eyebrow={isZh ? "Launch Console" : "Launch Console"}
-            title={isZh ? "把搜索流量直接引到视频工作台" : "Push video-intent visitors directly into the video console"}
+            eyebrow={isZh ? "开始生成" : "Start Creating"}
+            title={isZh ? "进入视频工作台" : "Open the video workspace"}
             description={
               isZh
-                ? "这类访客通常已经知道自己要做视频，不需要再读太多解释。最短路径是直接进入首页的视频控制台，再按 Veo、Kling、文生视频或图生视频继续分流。"
-                : "Visitors landing here usually already know they want to make a video. The shortest path is to enter the home video console first, then branch into Veo, Kling, text-to-video, or image-to-video based on intent."
+                ? "选择文生视频或图生视频，再根据画面目标切换 Veo、Kling 等模型。你可以先生成一条测试片，再决定是否继续放大使用。"
+                : "Choose text-to-video or image-to-video, then switch between Veo, Kling, and other models based on the scene you need. Generate one test clip first, then decide how far to scale."
             }
             primaryHref={buildStudioHref(locale, { mode: "text-to-video", model: "veo-3", source: "seo-ai-video" })}
             primaryLabel={isZh ? "打开视频控制台" : "Open video console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "先看套餐与 Credits" : "Compare plans and credits"}
             highlights={[
-              isZh ? "把高意图用户直接带到品牌首页里的实际控制台" : "Brings high-intent users into the actual console on the brand home page",
-              isZh ? "同时保留模型页和 workflow 页继续承接细分需求" : "Keeps model pages and workflow pages available for deeper segmentation",
-              isZh ? "更适合后续接入真实视频生成表单和参数面板" : "Creates a clean upgrade path for a future real video generation form",
+              isZh ? "适合先测试一条短片再继续迭代" : "Useful for testing one clip before iterating",
+              isZh ? "支持文生视频和图生视频两种起点" : "Supports both text-to-video and image-to-video starts",
+              isZh ? "适合广告短片、社媒视频和产品镜头" : "Works for ad clips, social videos, and product shots",
             ]}
           />
 
@@ -143,11 +143,11 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
             introTitle={isZh ? "什么是 Imaveo 的 AI 视频中心？" : "What is the Imaveo AI video hub?"}
             introBody={[
               isZh
-                ? "Imaveo 的 AI 视频中心是一个典型的 pillar page。它的作用不是只做一个工具入口，而是把 AI 视频这个大类需求拆成模型页、场景页和价格页，形成清晰的权重分发结构。"
-                : "The Imaveo AI video hub is a classic pillar page. Its job is not just to host one tool, but to break AI video demand into model pages, workflow pages, and monetization pages.",
+                ? "Imaveo 的 AI 视频中心帮助你先了解视频生成方式，再选择适合的模型。你可以从文字提示词开始，也可以上传图片作为首帧。"
+                : "The Imaveo AI video hub helps you understand video generation options before choosing a model. Start from a text prompt or upload an image as the first frame.",
               isZh
-                ? "在搜索层面，这种结构比只做单页工具站更容易覆盖广义词和长尾词，因为用户既可能搜模型名，也可能搜场景词。"
-                : "From an SEO perspective, this structure is stronger than a single-page tool because users search both model names and workflow-specific intent.",
+                ? "如果你还不确定该用哪个模型，可以先比较 Veo 和 Kling 的优势，再进入创作中心生成第一条短片。"
+                : "If you are not sure which model to use, compare Veo and Kling first, then open the Studio and generate your first clip.",
             ]}
             stepsTitle={isZh ? "如何使用 Imaveo 选择合适的视频模型" : "How to choose the right video model on Imaveo"}
             steps={[
@@ -165,16 +165,16 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
             faqTitle={isZh ? "AI 视频中心常见问题" : "AI video hub FAQ"}
             faqs={[
               {
-                question: isZh ? "为什么 AI 视频需要单独做一个 pillar page？" : "Why does AI video need a dedicated pillar page?",
+                question: isZh ? "为什么要先看 AI 视频中心？" : "Why start from the AI video hub?",
                 answer: isZh
-                  ? "因为模型词、场景词和品牌词本身就是不同层级的搜索意图。用一个中心页把它们串起来，更容易形成稳定的站内权重传递。"
-                  : "Because model terms, workflow terms, and brand terms represent different search intents. A pillar page connects them into a stronger internal authority system.",
+                  ? "因为不同视频模型适合的场景不同。先看中心页能快速了解文生视频、图生视频、Veo 和 Kling 的区别。"
+                  : "Because different video models fit different jobs. The hub gives you a quick view of text-to-video, image-to-video, Veo, and Kling before you start.",
               },
               {
                 question: isZh ? "Veo 和 Kling 应该放在同一站里吗？" : "Should Veo and Kling live on the same site?",
                 answer: isZh
-                  ? "是的。对于聚合站策略来说，把多个模型放在一个品牌站下，可以更容易积累站点整体权重并共享支付和用户系统。"
-                  : "Yes. In a hub-and-spoke strategy, keeping multiple models under one brand site helps consolidate authority and share the same monetization and user system.",
+                  ? "应该。创作者经常需要根据镜头稳定性、速度和成本切换模型，把它们放在同一个工作台里会更方便。"
+                  : "Yes. Creators often switch models based on stability, speed, and cost, so keeping them in one workspace makes the process easier.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}

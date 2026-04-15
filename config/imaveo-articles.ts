@@ -47,17 +47,17 @@ export const imaveoArticles: ImaveoArticle[] = [
       },
       {
         heading: {
-          en: "How it fits the SEO architecture",
-          zh: "它在 SEO 架构里承担什么角色",
+          en: "How it fits the creation flow",
+          zh: "它在创作流程里承担什么角色",
         },
         paragraphs: {
           en: [
-            "Studio is not meant to replace every SEO landing page. Hub pages, workflow pages, and model pages still exist to capture specific search intents. The Studio is where those intents converge once the visitor is ready to act.",
-            "That distinction matters. Search pages explain and rank, while the Studio converts. When both are forced into one page, the site often becomes worse at both discovery and conversion.",
+            "Studio is not meant to replace every product guide. Video pages, image pages, and model pages still help creators understand what to choose. The Studio is where those choices turn into actual generation.",
+            "That distinction matters. Guide pages help users compare options, while the Studio helps them create. When everything is forced into one page, both learning and creation become harder.",
           ],
           zh: [
-            "Studio 并不是为了取代所有 SEO 落地页。Hub 页、workflow 页和 model 页仍然负责承接不同类型的搜索意图，而 Studio 负责在用户准备行动时成为统一创作入口。",
-            "这个角色分工非常重要。搜索页负责解释和收录，Studio 负责转化。如果把这两种职责强行挤在一个页面里，最后往往既不利于发现，也不利于转化。",
+            "Studio 并不是为了取代所有产品说明页。视频页、图片页和模型页仍然负责帮助创作者理解该选什么，而 Studio 负责把这些选择变成真实生成。",
+            "这个分工很重要。说明页帮助用户比较选项，Studio 帮助用户开始创作。如果所有内容都挤在一个页面里，理解和操作都会变得更困难。",
           ],
         },
       },
@@ -69,11 +69,11 @@ export const imaveoArticles: ImaveoArticle[] = [
         paragraphs: {
           en: [
             "If the goal is exploration, start from a hub or workflow page first. If the goal is action, move into the Studio early. The more specific the idea becomes, the more valuable a unified workspace becomes.",
-            "That is why Imaveo treats the Studio as the conversion core rather than as a stand-alone landing page. It is where the comparison phase ends and the production phase begins.",
+            "That is why Imaveo treats the Studio as the main creation workspace rather than as a stand-alone information page. It is where comparison ends and production begins.",
           ],
           zh: [
             "如果目标是探索，先从 hub 或 workflow 页进入会更合理；如果目标已经是执行，就应该尽早切进 Studio。创意越具体，统一工作台的价值就越明显。",
-            "这也是为什么 Imaveo 把 Studio 视为转化核心，而不是孤立的落地页。它是比较阶段结束、生产阶段开始的地方。",
+            "这也是为什么 Imaveo 把 Studio 视为主要创作工作台，而不是孤立的信息页。它是比较阶段结束、生产阶段开始的地方。",
           ],
         },
       },
@@ -81,12 +81,12 @@ export const imaveoArticles: ImaveoArticle[] = [
     takeaways: {
       en: [
         "Imaveo Studio unifies image, video, and model switching into one production surface.",
-        "SEO pages still matter, but they should funnel into the Studio instead of competing with it.",
+        "Guide pages still matter, but they should help creators move into the Studio when they are ready.",
         "A unified workspace becomes more valuable as creator intent becomes more concrete.",
       ],
       zh: [
         "Imaveo Studio 把图片、视频和模型切换收进一个统一工作面。",
-        "SEO 页面依然重要，但它们应该把流量收口到 Studio，而不是和它互相竞争。",
+        "说明页依然重要，但它们应该帮助创作者在准备好时进入 Studio。",
         "创作者意图越具体，统一工作台的价值就越高。",
       ],
     },
@@ -141,7 +141,7 @@ export const imaveoArticles: ImaveoArticle[] = [
             "For an operator building a repeatable workflow, the question is rarely which model looks best in a launch video. The real question is which model keeps output quality stable enough that a team can produce assets without burning too many credits on retries.",
           ],
           zh: [
-            "Veo 3.1 和 Sora 2 都处在 AI 视频市场里最靠近高意图转化的一层，但两者擅长的方向并不完全一样。Veo 更容易打动看重电影感连贯性和成片质感的用户，Sora 则更适合重视题材跨度和探索空间的团队。",
+            "Veo 3.1 和 Sora 2 都是创作者经常比较的视频模型，但两者擅长的方向并不完全一样。Veo 更容易打动看重电影感连贯性和成片质感的用户，Sora 则更适合重视题材跨度和探索空间的团队。",
             "对要搭建稳定生产流的操作者来说，关键并不是哪一个模型在宣传视频里更惊艳，而是哪一个模型能让输出足够稳定，减少反复重试带来的时间和额度消耗。",
           ],
         },
@@ -170,11 +170,11 @@ export const imaveoArticles: ImaveoArticle[] = [
         paragraphs: {
           en: [
             "Sora is still compelling when the team is in exploration mode and needs to test multiple visual directions quickly. In these moments, flexibility and breadth can matter more than perfect continuity, because the point is to discover the right creative lane before refining.",
-            "That makes Sora useful earlier in a funnel, while Veo often feels stronger once a team has locked the concept and cares more about reliable output quality than open-ended experimentation.",
+            "That makes Sora useful during early exploration, while Veo often feels stronger once a team has locked the concept and cares more about reliable output quality than open-ended experimentation.",
           ],
           zh: [
             "如果团队还处在探索阶段，需要快速试很多视觉方向，Sora 依然很有吸引力。这个时候灵活性和题材覆盖度，往往比镜头一致性更重要，因为目标是先找对创意方向，再做后续打磨。",
-            "所以可以把 Sora 放在漏斗更前段，而 Veo 更适合在方向已经确定后承接正式生产，因为那个阶段更在意的是稳定成片，而不是开放式试验。",
+            "所以 Sora 更适合早期探索，而 Veo 更适合在方向已经确定后承接正式生产，因为那个阶段更在意的是稳定成片，而不是开放式试验。",
           ],
         },
       },

@@ -168,13 +168,13 @@ export default async function HomeStaticContent({ locale }: Props) {
         <div className="container px-4 md:px-6">
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="rounded-[32px] border border-zinc-800 bg-[linear-gradient(180deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02))] p-7">
-              <div className="section-label">Pricing Logic</div>
+              <div className="section-label">{isZh ? "套餐选择" : "Plan Options"}</div>
               <h2 className={`mt-3 text-4xl font-medium text-white ${isZh ? "tracking-normal" : "tracking-[-0.05em]"}`}>
                 {isZh ? "订阅与积分包都清楚可选" : "Subscriptions and credits packs, clearly separated"}
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300">
                 {isZh
-                  ? "按使用频率决定更适合订阅还是按次购买，让团队和个人创作者都能找到合适方案。"
+                  ? "按使用频率决定更适合订阅还是按次购买，让团队和个人创作者都能找到合适套餐。"
                   : "Choose between subscriptions and pay-as-you-go packs based on how often you create and how much flexibility you need."}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">

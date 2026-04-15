@@ -156,7 +156,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
                 href={`/${locale}/ai-image`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
+                <div className="section-label">{isZh ? "图片中心" : "Image Hub"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "回到 AI 图片中心" : "Back to AI image hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "查看所有图片模型和品牌视觉入口。" : "See all image models and brand visual workflows."}
@@ -249,7 +249,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}
             highlights={[
-              isZh ? "把模型页流量直接压进可点击的转化入口" : "Compresses model-page traffic into a clickable conversion path",
+              isZh ? "直接用当前模型开始第一张图" : "Start the first image with the current model",
               isZh ? "直接用当前模型开始生成，减少决策成本" : "Start directly with the current model to reduce decision friction",
               isZh ? "也可以返回图片中心继续比较不同模型" : "You can still return to the image hub and compare alternatives",
             ]}
@@ -261,11 +261,11 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
             introTitle={isZh ? `${item.labels.zh} 是什么？` : `What is ${item.labels.en}?`}
             introBody={[
               isZh
-                ? `${item.labels.zh} 是 Imaveo AI 图片体系中的独立模型页，主要承接模型词搜索、风格词搜索和结果导向型搜索。`
-                : `${item.labels.en} is a dedicated model page inside the Imaveo AI image cluster, designed to capture model-specific, style-specific, and outcome-driven search demand.`,
+                ? `${item.labels.zh} 是 Imaveo 中可用于 AI 图片生成的模型之一，适合制作主视觉、海报、封面和商品图。`
+                : `${item.labels.en} is one of the AI image models available in Imaveo, useful for hero visuals, posters, covers, and product images.`,
               isZh
-                ? `${item.labels.zh} 的优势包括 ${item.strengths.zh.join("、")}。这类页面最适合和 AI 图片中心、定价页以及创作资产页形成互链，既解释模型，也推动转化。`
-                : `${item.labels.en} is strongest at ${item.strengths.en.join(", ")}. Pages like this work best when they interlink with the AI image hub, pricing, and the creations library to balance education and conversion.`,
+                ? `${item.labels.zh} 的优势包括 ${item.strengths.zh.join("、")}。你可以先用默认比例生成一组结果，再根据用途继续调整风格和质量。`
+                : `${item.labels.en} is strongest at ${item.strengths.en.join(", ")}. Start with the default ratio, generate a set of outputs, then tune style and quality for your use case.`,
             ]}
             stepsTitle={isZh ? `如何在 Imaveo 上使用 ${item.labels.zh}` : `How to use ${item.labels.en} on Imaveo`}
             steps={[
@@ -277,22 +277,22 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
             useCases={[
               isZh ? `适合需要 ${item.strengths.zh[0]} 的品牌视觉和营销图需求。` : `Useful for creative work that needs ${item.strengths.en[0].toLowerCase()}.`,
               isZh ? "适合海报、缩略图、头像、品牌 KV 等结果导向页面承接。" : "Good for posters, thumbnails, portraits, and other outcome-specific landing pages.",
-              isZh ? "适合在品牌站内部做模型对比和风格分流。" : "Helpful for model comparison and style segmentation inside a brand-led product site.",
-              isZh ? "适合把流量引导到价格页和创作资产页做后续转化。" : "Strong for routing users into pricing and library pages after initial discovery.",
+              isZh ? "适合需要比较不同图片模型和输出风格的创作者。" : "Helpful when creators need to compare different image models and output styles.",
+              isZh ? "适合高频生成后统一管理创作结果。" : "Useful when you generate frequently and want to manage outputs in one place.",
             ]}
             faqTitle={isZh ? `${item.labels.zh} 常见问题` : `${item.labels.en} FAQ`}
             faqs={[
               {
-                question: isZh ? `${item.labels.zh} 页面为什么不能只放一个输入框？` : `Why should the ${item.labels.en} page include more than an input box?`,
+                question: isZh ? `${item.labels.zh} 适合生成哪些图片？` : `What kind of images is ${item.labels.en} best for?`,
                 answer: isZh
-                  ? "因为搜索引擎需要通过正文、FAQ 和内链理解页面主题。只有工具 UI 很容易被判断为薄内容，导致收录和排名都不稳定。"
-                  : "Because search engines need body copy, FAQs, and internal links to understand the topic. A tool-only page is much more likely to be treated as thin content.",
+                  ? "它适合海报、缩略图、品牌主视觉、商品图和概念视觉。建议先明确用途，再写提示词和选择比例。"
+                  : "It is well suited for posters, thumbnails, brand hero visuals, product images, and concept art. Define the use case first, then write the prompt and choose the ratio.",
               },
               {
                 question: isZh ? `${item.labels.zh} 应该和哪些页面互相链接？` : `Which pages should ${item.labels.en} connect to?`,
                 answer: isZh
-                  ? "至少要链接回 AI 图片中心，并横向连接相关模型页，再补价格页或创作资产页，让用户和搜索引擎都能看到清晰层级。"
-                  : "At minimum it should link back to the AI image hub, connect laterally to related model pages, and include pricing or creations pages so both users and search engines see a clear hierarchy.",
+                  ? "如果你还在比较，可以先回到 AI 图片中心查看模型能力；如果已经准备生成，直接进入创作中心即可。"
+                  : "If you are still comparing, return to the AI image hub to review model capabilities. If you are ready to create, open the Studio directly.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}
@@ -300,7 +300,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
               {
                 label: isZh ? "AI 图片中心" : "AI Image Hub",
                 href: `/${locale}/ai-image`,
-                description: isZh ? "回到图片类 pillar page。" : "Return to the pillar page for AI image.",
+                description: isZh ? "回到 AI 图片中心继续比较模型。" : "Return to the AI image hub and compare models.",
               },
               {
                 label: isZh ? "创作资产库" : "My Creations",

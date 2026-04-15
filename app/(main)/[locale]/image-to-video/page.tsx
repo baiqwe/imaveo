@@ -102,8 +102,8 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "这个页面用于承接图生视频需求，并把用户引导到最适合的模型页、价格页和 AI 视频中心。"
-                : "This page captures image-to-video demand and routes users into the most relevant model pages, pricing, and the broader AI video hub."}
+                ? "上传一张图片，把角色、产品或海报延展成动态镜头。你可以先确认首帧，再选择更适合的模型生成短片。"
+                : "Upload a still image and turn a character, product shot, or poster into a moving clip. Start from the first frame, then choose the model that best fits the motion."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -111,10 +111,10 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
                 href={`/${locale}/ai-video`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Pillar" : "Pillar"}</div>
+                <div className="section-label">{isZh ? "视频中心" : "Video Hub"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "AI 视频中心" : "AI Video Hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
-                  {isZh ? "查看全部视频模型和工作流。" : "Open the full AI video pillar page."}
+                  {isZh ? "查看全部视频模型和工作流。" : "Open the full AI video hub."}
                 </div>
               </Link>
               <Link
@@ -131,7 +131,7 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
                 href={`/${locale}`}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
-                <div className="section-label">{isZh ? "Brand" : "Brand"}</div>
+                <div className="section-label">{isZh ? "首页" : "Home"}</div>
                 <div className="mt-3 text-xl font-medium text-white">{isZh ? "返回首页中枢" : "Back to the hub"}</div>
                 <div className="mt-2 text-sm leading-7 text-zinc-400">
                   {isZh ? "回到品牌首页切换其他工作流和模型。" : "Return to the brand hub to switch between workflows and models."}
@@ -182,21 +182,21 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
           </section>
 
           <SeoConversionPanel
-            eyebrow={isZh ? "Workflow Entry" : "Workflow Entry"}
-            title={isZh ? "从图生视频页直接进入视频控制台" : "Move image-to-video traffic directly into the video console"}
+            eyebrow={isZh ? "开始生成" : "Start Creating"}
+            title={isZh ? "进入图生视频工作台" : "Open the image-to-video workspace"}
             description={
               isZh
-                ? "图生视频用户通常需要先确认模型和路径，再进入真实工作台。这里把入口压缩到最短：先开视频控制台，再根据模型卡片切到最适合的路径。"
-                : "Image-to-video visitors usually need a quick model and workflow decision before they start. This panel shortens the path: open the video console first, then switch to the best-fit model from the model cards."
+                ? "如果你已经有首帧、角色图或商品图，可以直接进入创作中心上传图片，选择 Kling 或其他视频模型开始生成。"
+                : "If you already have a first frame, character image, or product visual, open the Studio, upload the image, and start with Kling or another video model."
             }
             primaryHref={buildStudioHref(locale, { mode: "image-to-video", model: "kling-2-6", source: "seo-image-to-video" })}
             primaryLabel={isZh ? "打开图生视频入口" : "Open image-to-video entry"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "比较 Credits 与订阅" : "Compare credits and subscriptions"}
             highlights={[
-              isZh ? "把 SEO 页面和站内真实工作台连成闭环" : "Creates a closed loop between SEO pages and the real in-site console",
-              isZh ? "适合继续加上传首帧、镜头控制等参数" : "Leaves space for first-frame upload and motion controls later",
-              isZh ? "避免把高意图用户困在纯内容页面里" : "Prevents high-intent users from getting stuck on a copy-only page",
+              isZh ? "适合让产品图、角色图和海报动起来" : "Best for animating product images, character art, and posters",
+              isZh ? "支持围绕首帧继续控制镜头和比例" : "Keeps the first frame while tuning motion and ratio",
+              isZh ? "适合社媒短片、广告素材和概念预览" : "Useful for social clips, ad assets, and concept previews",
             ]}
           />
 
@@ -206,11 +206,11 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
             introTitle={isZh ? "什么是图生视频页面？" : "What is the image-to-video page?"}
             introBody={[
               isZh
-                ? "图生视频页负责承接『image to video』『animate image』这类需求型搜索。相比模型页，它更强调工作流，而不是单一模型名。"
-                : "The image-to-video page is designed to capture workflow intent like 'image to video' and 'animate image'. Compared with a model page, it is more about the workflow than about one specific model name.",
+                ? "图生视频适合从一张确定的视觉图开始生成动态短片。你可以上传产品图、角色设定图、海报或封面图，让画面产生镜头运动。"
+                : "Image-to-video is useful when you already have a clear visual starting point. Upload a product image, character concept, poster, or cover image and turn it into motion.",
               isZh
-                ? "在品牌站结构中，这类页面要承担一个中间层角色：既把用户引向合适模型，也把权重传回 AI 视频中心。"
-                : "Inside a brand-led site architecture, this kind of page acts as a middle layer: it sends users into the right model pages while also feeding authority back into the AI video pillar.",
+                ? "它尤其适合需要保持主体一致性的场景，比如商品展示、角色动态、社媒封面动效和广告开场。"
+                : "It is especially useful when you need to keep the subject consistent, such as product showcases, character motion, animated covers, and ad openers.",
             ]}
             stepsTitle={isZh ? "如何在 Imaveo 上完成图生视频" : "How to create image-to-video on Imaveo"}
             steps={[
@@ -218,26 +218,26 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
               isZh ? "根据目标风格选择更适合的模型页，再进入图生视频工作流。" : "Choose the most relevant model page for the target look, then continue with the image-to-video workflow.",
               isZh ? "生成后检查镜头感和一致性，再决定是否继续购买 Credits 或升级套餐。" : "Review motion quality and consistency, then decide whether to continue with credits or move to a paid plan.",
             ]}
-            useCasesTitle={isZh ? "哪些搜索意图会进入图生视频页？" : "What search intent does the image-to-video page capture?"}
+            useCasesTitle={isZh ? "图生视频适合哪些创作场景？" : "When should creators use image-to-video?"}
             useCases={[
               isZh ? "希望把角色设定图、海报或产品图动画化的用户" : "Users who want to animate character art, posters, or product visuals",
-              isZh ? "先搜工作流词，再挑模型的生产型用户" : "Production users who search the workflow first and choose the model second",
-              isZh ? "从品牌首页进入后，需要快速找到图生视频入口的用户" : "Users coming from the brand home page who need a clear image-to-video path",
-              isZh ? "需要比较模型能力、成本和速度的高意图转化流量" : "High-intent visitors comparing model quality, cost, and speed",
+              isZh ? "已经有首帧素材，想快速测试动态效果的创作者" : "Creators who already have a first frame and want to test motion quickly",
+              isZh ? "需要保持产品、角色或视觉主体一致的团队" : "Teams that need the product, character, or visual subject to stay consistent",
+              isZh ? "正在比较模型效果、速度和成本的实际生产用户" : "Production users comparing model quality, speed, and cost",
             ]}
             faqTitle={isZh ? "图生视频常见问题" : "Image-to-video FAQ"}
             faqs={[
               {
-                question: isZh ? "图生视频页和模型页的区别是什么？" : "What is the difference between the image-to-video page and model pages?",
+                question: isZh ? "图生视频和文生视频应该怎么选？" : "When should I use image-to-video instead of text-to-video?",
                 answer: isZh
-                  ? "图生视频页承接的是工作流需求词，模型页承接的是模型品牌词。两者分层之后，站点更容易覆盖更广的搜索意图。"
-                  : "The image-to-video page captures workflow keywords, while model pages capture model-brand keywords. Keeping both layers separate helps the site cover a wider range of search intent.",
+                  ? "如果你已经有一张想保留主体的图片，用图生视频；如果只有创意或脚本，没有首帧素材，用文生视频更合适。"
+                  : "Use image-to-video when you already have a source image you want to preserve. Use text-to-video when you only have an idea or script.",
               },
               {
-                question: isZh ? "这类页面为什么要有 FAQ 和步骤说明？" : "Why should this page include FAQs and step-by-step guidance?",
+                question: isZh ? "上传什么图片更容易得到稳定视频？" : "What kind of source image works best?",
                 answer: isZh
-                  ? "因为这类内容会让页面更具解释性，降低薄内容风险，同时也能帮助搜索引擎和用户更快理解页面主题。"
-                  : "Because these sections make the page more explanatory, reduce thin-content risk, and help both users and search engines understand the topic faster.",
+                  ? "建议使用主体清晰、光线稳定、遮挡较少的图片。产品图、角色半身图和构图明确的海报通常更容易得到稳定结果。"
+                  : "Use a clear image with stable lighting and minimal occlusion. Product shots, character portraits, and well-composed posters usually produce more stable motion.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}
@@ -245,7 +245,7 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
               {
                 label: isZh ? "AI 视频中心" : "AI Video Hub",
                 href: `/${locale}/ai-video`,
-                description: isZh ? "返回视频类 pillar page。" : "Return to the main AI video pillar page.",
+                description: isZh ? "回到 AI 视频中心继续比较模型。" : "Return to the AI video hub and compare models.",
               },
               {
                 label: isZh ? "价格方案" : "Pricing",

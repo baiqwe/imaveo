@@ -36,7 +36,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
           languages: {
             en: new URL(page ? `/en/${page}` : "/en", site.siteUrl).toString(),
             zh: new URL(page ? `/zh/${page}` : "/zh", site.siteUrl).toString(),
-            "x-default": new URL(page ? `/en/${page}` : "/en", site.siteUrl).toString(),
           },
         },
       } satisfies MetadataRoute.Sitemap[number];
@@ -53,7 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           en: new URL(`/en/${slug}`, site.siteUrl).toString(),
           zh: new URL(`/zh/${slug}`, site.siteUrl).toString(),
-          "x-default": new URL(`/en/${slug}`, site.siteUrl).toString(),
         },
       },
     }))
@@ -69,7 +67,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           en: new URL(`/en${model.href}`, site.siteUrl).toString(),
           zh: new URL(`/zh${model.href}`, site.siteUrl).toString(),
-          "x-default": new URL(`/en${model.href}`, site.siteUrl).toString(),
         },
       },
     }))
@@ -85,7 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           en: new URL(`/en${article.href}`, site.siteUrl).toString(),
           zh: new URL(`/zh${article.href}`, site.siteUrl).toString(),
-          "x-default": new URL(`/en${article.href}`, site.siteUrl).toString(),
         },
       },
     }))

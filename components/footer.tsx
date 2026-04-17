@@ -13,23 +13,22 @@ export function Footer() {
 
   const pathParts = pathname?.split("/") || [];
   const currentLocale = pathParts[1] === "en" || pathParts[1] === "zh" ? pathParts[1] : "en";
-  const localePrefix = `/${currentLocale}`;
   const isZh = currentLocale === "zh";
 
   const toolLinks = imaveoTools.slice(0, 4).map((tool) => ({
     label: tool.labels[currentLocale as "en" | "zh"],
-    href: `${localePrefix}${tool.href}`,
+    href: tool.href,
   }));
 
   const modelLinks = imaveoModels.slice(0, 4).map((model) => ({
     label: model.labels[currentLocale as "en" | "zh"],
-    href: `${localePrefix}${model.href}`,
+    href: model.href,
   }));
 
   const legalLinks = [
-    { label: t("link_privacy"), href: `${localePrefix}/privacy` },
-    { label: t("link_terms"), href: `${localePrefix}/terms` },
-    { label: t("link_blog"), href: `${localePrefix}/blog` },
+    { label: t("link_privacy"), href: "/privacy" },
+    { label: t("link_terms"), href: "/terms" },
+    { label: t("link_blog"), href: "/blog" },
   ];
 
   if (isDashboard) {

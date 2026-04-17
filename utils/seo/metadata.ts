@@ -1,9 +1,22 @@
 import { site } from "@/config/site";
 import { getImaveoModel, getImaveoTool } from "@/config/imaveo";
 
+function normalizeLocalePath(pathname: string) {
+  const withLeadingSlash = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const normalizedLocalePrefix = withLeadingSlash.replace(
+    /^\/(en|zh)\/(?:en|zh)(?=\/|$)/,
+    "/$1"
+  );
+
+  if (/^\/(en|zh)(?=\/|$)/.test(normalizedLocalePrefix)) {
+    return normalizedLocalePrefix;
+  }
+
+  return `/en${normalizedLocalePrefix}`;
+}
+
 export function buildLocaleAlternates(pathname: string) {
-  const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  const normalizedWithLocale = /^\/(en|zh)(?=\/|$)/.test(normalizedPath) ? normalizedPath : `/en${normalizedPath}`;
+  const normalizedWithLocale = normalizeLocalePath(pathname);
   const localizedPath = (locale: "en" | "zh") =>
     normalizedWithLocale.replace(/^\/(en|zh)(?=\/|$)/, `/${locale}`);
 
@@ -12,7 +25,6 @@ export function buildLocaleAlternates(pathname: string) {
     languages: {
       en: buildAbsoluteUrl(localizedPath("en")),
       zh: buildAbsoluteUrl(localizedPath("zh")),
-      "x-default": buildAbsoluteUrl(localizedPath("en")),
     },
   };
 }

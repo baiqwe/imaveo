@@ -70,7 +70,9 @@ function HeroWithUploadSection({
               <Link
                 key={model.slug}
                 href={buildStudioPath({
-                  mode: model.category === 'video' ? (model.mode === 'image-to-video' ? 'image-to-video' : 'text-to-video') : 'text-to-image',
+                  mode: model.category === 'video'
+                    ? (model.mode === 'image-to-video' ? 'image-to-video' : 'text-to-video')
+                    : (model.mode === 'image-to-image' ? 'image-to-image' : 'text-to-image'),
                   model: model.slug,
                   source: 'home-chip',
                 })}
@@ -98,11 +100,11 @@ function HeroWithUploadSection({
                 <div className="mt-4 rounded-[18px] border border-zinc-700/80 bg-black/45 px-4 py-4 text-sm leading-7 text-zinc-300">
                   {activeMode === 'video'
                     ? (isZh
-                      ? '示例：输入一句角色动作提示词，切到 Veo 或 Kling，生成 5-8 秒短片。'
-                      : 'Example: write a motion prompt, switch between Veo and Kling, and generate a 5-8 second clip.')
+                      ? '示例：输入一句角色动作提示词，切到 Veo、Sora 或 HappyHorse，生成 5-8 秒短片。'
+                      : 'Example: write a motion prompt, switch between Veo, Sora, or HappyHorse, and generate a 5-8 second clip.')
                     : (isZh
-                      ? '示例：输入品牌视觉需求，切到 Flux，生成海报、广告图或封面。'
-                      : 'Example: write a branding prompt, switch to Flux, and generate a poster, ad visual, or hero image.')}
+                      ? '示例：输入品牌视觉需求，切到 Nano Banana Pro 或 GPT Image，生成海报、广告图或封面。'
+                      : 'Example: write a branding prompt, switch to Nano Banana Pro or GPT Image, and generate a poster, ad visual, or hero image.')}
                 </div>
               </div>
 
@@ -131,7 +133,7 @@ function HeroWithUploadSection({
                 <Link
                   href={activeMode === 'video'
                     ? buildStudioPath({ mode: 'text-to-video', model: 'veo-3', source: 'home-hero' })
-                    : buildStudioPath({ mode: 'text-to-image', model: 'flux-pro', source: 'home-hero' })}
+                    : buildStudioPath({ mode: 'text-to-image', model: 'nano-banana-pro', source: 'home-hero' })}
                   className="inline-flex items-center justify-center gap-2 rounded-[18px] bg-primary px-5 py-4 text-sm font-medium text-black transition-transform hover:translate-y-[-1px]"
                 >
                   {activeMode === 'video'

@@ -29,7 +29,7 @@ export function Logo() {
             Beta
           </span>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.28em] text-zinc-400">Image + Veo</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-zinc-400">Image + Video</span>
       </div>
     </Link>
   );

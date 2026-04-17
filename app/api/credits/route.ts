@@ -2,11 +2,29 @@
 import { createClient } from "@/utils/supabase/server";
 import { getProjectId } from "@/utils/supabase/project";
 import { NextResponse } from "next/server";
+import { checkRateLimit, getRateLimitKey } from "@/utils/server-rate-limit";
 
-export const runtime = 'edge';
+export const runtime = "nodejs";
+
+const PRIVATE_CACHE_HEADERS = {
+    "Cache-Control": "private, max-age=15, stale-while-revalidate=60",
+};
 
 export async function GET(request: Request) {
     try {
+        const rateLimit = checkRateLimit({
+            key: getRateLimitKey(request.headers.get("x-forwarded-for"), "credits-read"),
+            limit: 30,
+            windowMs: 60_000,
+        });
+
+        if (!rateLimit.ok) {
+            return NextResponse.json(
+                { error: "Too many credit requests" },
+                { status: 429, headers: { "Retry-After": String(rateLimit.retryAfter) } }
+            );
+        }
+
         const supabase = await createClient();
         const projectId = await getProjectId(supabase);
         const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -17,7 +35,7 @@ export async function GET(request: Request) {
 
         const { data: customer, error: fetchError } = await supabase
             .from("customers")
-            .select("*")
+            .select("id, user_id, credits, created_at, updated_at")
             .eq("project_id", projectId)
             .eq("user_id", user.id)
             .single();
@@ -37,7 +55,7 @@ export async function GET(request: Request) {
             updated_at: customer.updated_at
         };
 
-        return NextResponse.json({ credits: creditsData });
+        return NextResponse.json({ credits: creditsData }, { headers: PRIVATE_CACHE_HEADERS });
 
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
@@ -46,6 +64,19 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     try {
+        const rateLimit = checkRateLimit({
+            key: getRateLimitKey(request.headers.get("x-forwarded-for"), "credits-write"),
+            limit: 20,
+            windowMs: 60_000,
+        });
+
+        if (!rateLimit.ok) {
+            return NextResponse.json(
+                { error: "Too many credit requests" },
+                { status: 429, headers: { "Retry-After": String(rateLimit.retryAfter) } }
+            );
+        }
+
         const supabase = await createClient();
         const projectId = await getProjectId(supabase);
         const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -80,10 +111,14 @@ export async function POST(request: Request) {
         // Fetch updated balance to return
         const { data: customer } = await supabase
             .from("customers")
-            .select("*")
+            .select("id, user_id, credits, created_at, updated_at")
             .eq("project_id", projectId)
             .eq("user_id", user.id)
             .single();
+
+        if (!customer) {
+            return NextResponse.json({ error: "Failed to fetch credits" }, { status: 500 });
+        }
 
         const creditsData = {
             id: customer.id,
@@ -94,7 +129,7 @@ export async function POST(request: Request) {
             updated_at: customer.updated_at
         };
 
-        return NextResponse.json({ credits: creditsData });
+        return NextResponse.json({ credits: creditsData }, { headers: PRIVATE_CACHE_HEADERS });
 
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

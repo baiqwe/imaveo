@@ -50,12 +50,12 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
       label: isZh ? "适合谁" : "Best for",
       title: isZh ? "先有想法，再找最合适模型的人" : "Creators who know the idea first and choose the model second",
       description: isZh
-        ? "如果你已经知道要生成什么场景，但还没决定 Veo 还是 Kling，文生视频页就是最好的中间层。"
-        : "If you already know the scene you want but have not committed to Veo or Kling yet, this page works as the best middle layer.",
+        ? "如果你已经知道要生成什么场景，但还没决定用 Veo、Sora 还是 HappyHorse，文生视频页就是最好的中间层。"
+        : "If you already know the scene you want but have not committed to Veo, Sora, or HappyHorse yet, this page works as the best middle layer.",
     },
     {
       label: isZh ? "默认起手参数" : "Starter setup",
-      title: isZh ? "16:9 + 8 秒 + Veo 3.1" : "16:9 + 8s + Veo 3.1",
+      title: isZh ? "16:9 + 8 秒 + Veo" : "16:9 + 8s + Veo",
       description: isZh
         ? "先用横屏和较短时长验证镜头感，确认方向后再扩展到其他比例和模型。"
         : "Use a horizontal ratio and a shorter duration first to validate motion quality, then expand into other ratios and models.",
@@ -102,8 +102,8 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "输入一句提示词，就可以开始制作短视频。你可以先选择适合的模型，再根据成片频率查看套餐与积分。"
-                : "Start an AI video from a single prompt. Choose a model for the result you want, then review plans and credits when you are ready to create more."}
+                ? "输入一句提示词，就可以开始制作短视频。你可以在 Veo、Sora 和 HappyHorse 之间切换，根据电影感、叙事范围和短视频节奏选择更合适的文生视频模型。"
+                : "Start an AI video from a single prompt. Switch between Veo, Sora, and HappyHorse based on cinematic quality, narrative range, or short-form pacing."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -186,8 +186,8 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
             title={isZh ? "进入文生视频工作台" : "Open the text-to-video workspace"}
             description={
               isZh
-                ? "如果你已经有画面想法，可以直接进入创作中心，选择 Veo 或 Kling，填写提示词并调整比例、时长和风格。"
-                : "If you already have a scene in mind, open the Studio, choose Veo or Kling, write the prompt, and tune ratio, duration, and style."
+                ? "如果你已经有画面想法，可以直接进入创作中心，选择 Veo、Sora 或 HappyHorse，填写提示词并调整比例、时长和风格。"
+                : "If you already have a scene in mind, open the Studio, choose Veo, Sora, or HappyHorse, write the prompt, and tune ratio, duration, and style."
             }
             primaryHref={buildStudioHref(locale, { mode: "text-to-video", model: "veo-3", source: "seo-text-to-video" })}
             primaryLabel={isZh ? "立即进入文生视频入口" : "Open text-to-video entry"}
@@ -214,7 +214,7 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
             ]}
             stepsTitle={isZh ? "如何在 Imaveo 上完成文生视频" : "How to create text-to-video on Imaveo"}
             steps={[
-              isZh ? "先选择 Veo 或 Kling 等最适合当前项目的视频模型。" : "Choose the video model that best matches your project, such as Veo or Kling.",
+              isZh ? "先选择 Veo、Sora、HappyHorse 等最适合当前项目的视频模型。" : "Choose the video model that best matches your project, such as Veo, Sora, or HappyHorse.",
               isZh ? "输入提示词，并逐步确认时长、比例和镜头氛围等关键参数。" : "Enter your prompt, then refine duration, aspect ratio, and overall camera mood.",
               isZh ? "根据生成频率进入价格页，决定使用订阅还是 Credits。" : "Visit pricing and decide whether subscriptions or credits are the better fit for your generation volume.",
             ]}
@@ -230,8 +230,8 @@ export default async function TextToVideoPage(props: { params: Promise<{ locale:
               {
                 question: isZh ? "文生视频应该先选模型还是先写提示词？" : "Should I choose a model first or write the prompt first?",
                 answer: isZh
-                  ? "如果你已经知道想要电影感或社媒短片风格，可以先选模型；如果还在探索，先写提示词也可以，再根据结果切换 Veo 或 Kling。"
-                  : "If you already know the target look, pick a model first. If you are exploring, write the prompt first and switch between Veo or Kling after reviewing the result.",
+                  ? "如果你已经知道想要电影感、叙事片段或社媒短片风格，可以先选模型；如果还在探索，先写提示词也可以，再根据结果切换 Veo、Sora 或 HappyHorse。"
+                  : "If you already know the target look, pick a model first. If you are exploring, write the prompt first and switch between Veo, Sora, or HappyHorse after reviewing the result.",
               },
               {
                 question: isZh ? "什么样的提示词更容易生成稳定视频？" : "What kind of prompt creates more stable videos?",

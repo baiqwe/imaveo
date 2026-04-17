@@ -5,6 +5,7 @@ import { getProjectId } from "@/utils/supabase/project";
 import { CREDITS_PER_GENERATION } from "@/config/credit-packs";
 import type { AnimeStyleId } from "@/config/landing-pages";
 import { modelConfig } from "@/config/imaveo";
+import { checkRateLimit, getRateLimitKey } from "@/utils/server-rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60; // 1 minute timeout
@@ -178,10 +179,20 @@ function resolveGenerationConfig(modelId?: string) {
 }
 
 export async function POST(request: NextRequest) {
-    const supabase = await createClient();
-    const projectId = await getProjectId(supabase);
-
     try {
+        const rateLimit = checkRateLimit({
+            key: getRateLimitKey(request.headers.get("x-forwarded-for"), "ai-generate"),
+            limit: 12,
+            windowMs: 60_000,
+        });
+
+        if (!rateLimit.ok) {
+            return NextResponse.json(
+                { error: "Too many generate requests. Please wait a moment.", code: "RATE_LIMITED" },
+                { status: 429, headers: { "Retry-After": String(rateLimit.retryAfter) } }
+            );
+        }
+
         const body = await request.json();
         const image: string | undefined = body?.image;
         const modelId: string | undefined = body?.model;
@@ -192,17 +203,6 @@ export async function POST(request: NextRequest) {
         const prompt: string | undefined = body?.prompt;
         const generationConfig = resolveGenerationConfig(modelId);
         const stylePreset = STYLE_PRESETS[style] ?? STYLE_PRESETS.standard;
-
-        // 1. Authentication
-        const { data: { user }, error: authError } = await supabase.auth.getUser();
-        if (authError || !user) {
-            return NextResponse.json({ error: "Please sign in to generate.", code: "UNAUTHORIZED" }, { status: 401 });
-        }
-
-        // 2. Input Validation
-        if (!image) {
-            return NextResponse.json({ error: "Missing image", code: "MISSING_IMAGE" }, { status: 400 });
-        }
 
         if (!generationConfig) {
             return NextResponse.json({ error: "Unsupported model", code: "UNSUPPORTED_MODEL" }, { status: 400 });
@@ -215,12 +215,32 @@ export async function POST(request: NextRequest) {
             }, { status: 501 });
         }
 
+        if (modelId && modelId !== "nano-banana-pro") {
+            return NextResponse.json({
+                error: "This image model is not wired to the generation API yet.",
+                code: "MODEL_NOT_READY",
+            }, { status: 501 });
+        }
+
+        if (!image) {
+            return NextResponse.json({ error: "Missing image", code: "MISSING_IMAGE" }, { status: 400 });
+        }
+
         if (!process.env.REPLICATE_API_TOKEN) {
             console.error("REPLICATE_API_TOKEN is not set");
             return NextResponse.json({ error: "Service configuration error", code: "CONFIG_ERROR" }, { status: 500 });
         }
 
-        // 3. Deduct Credits
+        const supabase = await createClient();
+        const projectId = await getProjectId(supabase);
+
+        // 1. Authentication
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        if (authError || !user) {
+            return NextResponse.json({ error: "Please sign in to generate.", code: "UNAUTHORIZED" }, { status: 401 });
+        }
+
+        // 2. Deduct Credits
         const { data: deductSuccess, error: rpcError } = await supabase.rpc('decrease_credits', {
             p_user_id: user.id,
             p_amount: CREDITS_PER_GENERATION,
@@ -240,7 +260,7 @@ export async function POST(request: NextRequest) {
             }, { status: 402 });
         }
 
-        // 4. Call Replicate img2img API
+        // 3. Call Replicate img2img API
         try {
             const { positive, negative, promptStrength } = buildPromptParts({
                     style,
@@ -249,11 +269,6 @@ export async function POST(request: NextRequest) {
                     keepHairColor,
                     userPrompt: prompt,
             });
-
-            console.log("=== Calling Replicate Nano Banana Pro ===");
-            console.log("Model:", REPLICATE_MODEL);
-            console.log("Style:", style);
-            console.log("Prompt:", positive);
 
             const replicate = new Replicate({
                 auth: process.env.REPLICATE_API_TOKEN,
@@ -269,8 +284,6 @@ export async function POST(request: NextRequest) {
                             new Blob([normalizedImage.buffer], { type: normalizedImage.mimeType })
                         )
                     ).urls.get;
-            console.log("Replicate uploaded image:", replicateImage);
-
             const predictionResponse = await fetch("https://api.replicate.com/v1/predictions", {
                 method: "POST",
                 headers: {
@@ -309,9 +322,7 @@ export async function POST(request: NextRequest) {
                 throw new Error("Replicate returned no image");
             }
 
-            console.log("Generated image URL/data length:", resultImageUrl.substring(0, 100) + "...");
-
-            // 5. Log Generation
+            // 4. Log Generation
             await supabase.from("generations").insert({
                 project_id: projectId,
                 user_id: user.id,

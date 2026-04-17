@@ -67,6 +67,13 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
 
   const siblingModels = imaveoModels.filter((entry) => entry.category === "video" && entry.slug !== item.slug);
   const recommendedWorkflowHref = `/${locale}/${item.mode}`;
+  const recommendedStudioMode = item.mode === "image-to-video" ? "image-to-video" : "text-to-video";
+  const primaryCtaHref = buildStudioHref(locale, {
+    mode: recommendedStudioMode,
+    model: item.slug,
+    source: "seo-video-model",
+  });
+  const primaryCtaLabel = isZh ? `用 ${item.labels.zh} 开始生成` : `Create with ${item.labels.en}`;
   const recommendedWorkflowLabel =
     item.mode === "image-to-video"
       ? isZh
@@ -87,23 +94,19 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
       href: recommendedWorkflowHref,
     },
     {
-            label: isZh ? "开始生成" : "Start creating",
+      label: isZh ? "开始生成" : "Start creating",
       title: isZh ? "直接进入创作中心" : "Move into the Studio",
       description: isZh
         ? "在创作中心里切换模型、模式和参数，避免用户在模型页停留过久。"
         : "Use the Studio to switch models, modes, and parameters without keeping users trapped on a documentation page.",
-      href: buildStudioHref(locale, {
-        mode: item.mode === "image-to-video" ? "image-to-video" : "text-to-video",
-        model: item.slug,
-        source: "video-model-recommendation",
-      }),
+      href: primaryCtaHref,
     },
     {
       label: isZh ? "比较路径" : "Compare path",
       title: isZh ? "回到 AI 视频中心横向比较" : "Compare from the AI video hub",
       description: isZh
-        ? "如果还在 Veo 和 Kling 之间犹豫，回到 hub 页继续做横向比较。"
-        : "If you are still deciding between Veo and Kling, go back to the hub and compare models side by side.",
+        ? "如果还在 Veo、Sora、Seedance 和 HappyHorse 之间犹豫，回到 hub 页继续做横向比较。"
+        : "If you are still deciding between Veo, Sora, Seedance, and HappyHorse, go back to the hub and compare models side by side.",
       href: `/${locale}/ai-video`,
     },
   ];
@@ -174,7 +177,7 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
                 </div>
               </Link>
               <Link
-                href={`/${locale}/${item.mode}`}
+                href={recommendedWorkflowHref}
                 className="rounded-[24px] border border-white/10 bg-black/30 p-5 transition-colors hover:border-primary/35 hover:bg-white/[0.04]"
               >
                 <div className="section-label">{isZh ? "Workflow" : "Workflow"}</div>
@@ -251,17 +254,13 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
                 ? `如果你已经决定尝试 ${item.labels.zh}，可以直接进入视频工作台，选择文生视频或图生视频，开始测试第一条短片。`
                 : `If you are ready to try ${item.labels.en}, open the video workspace, choose text-to-video or image-to-video, and test the first clip.`
             }
-            primaryHref={buildStudioHref(locale, {
-              mode: item.mode === "image-to-video" ? "image-to-video" : "text-to-video",
-              model: item.slug,
-              source: "seo-video-model",
-            })}
-            primaryLabel={isZh ? `试用 ${item.labels.zh} 路径` : `Launch ${item.labels.en} flow`}
+            primaryHref={primaryCtaHref}
+            primaryLabel={primaryCtaLabel}
             secondaryHref={`/${locale}/${item.mode}`}
             secondaryLabel={isZh ? "先看对应工作流" : "Open matching workflow"}
             highlights={[
               isZh ? "适合先用当前模型测试镜头质量" : "Use this model first to test motion quality",
-              isZh ? "也可以继续比较 Veo、Kling 等视频模型" : "Compare Veo, Kling, and other video models if needed",
+              isZh ? "也可以继续比较 Veo、Sora、Seedance 和 HappyHorse 等视频模型" : "Compare Veo, Sora, Seedance, and HappyHorse if needed",
               isZh ? "生成后再根据使用频率选择 Credits 或订阅" : "Choose credits or a subscription after testing output volume",
             ]}
           />
@@ -302,8 +301,8 @@ export default async function VideoModelPage(props: { params: Promise<{ locale: 
               {
                 question: isZh ? `${item.labels.zh} 应该怎么和其他模型页互相链接？` : `How should ${item.labels.en} link to other model pages?`,
                 answer: isZh
-                  ? "如果你还不确定模型选择，可以回到 AI 视频中心横向比较 Veo、Kling 等模型，再进入创作中心开始生成。"
-                  : "If you are unsure which model to use, return to the AI video hub, compare Veo, Kling, and other options, then open the Studio to generate.",
+                  ? "如果你还不确定模型选择，可以回到 AI 视频中心横向比较 Veo、Sora、Seedance 和 HappyHorse，再进入创作中心开始生成。"
+                  : "If you are unsure which model to use, return to the AI video hub, compare Veo, Sora, Seedance, and HappyHorse, then open the Studio to generate.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}

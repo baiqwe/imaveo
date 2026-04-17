@@ -155,7 +155,7 @@ export default function Header() {
               { label: t("home"), href: "/" },
               { label: t("create"), href: buildStudioPath({ source: "mobile-nav" }) },
               { label: t("ai_video"), href: buildStudioPath({ mode: "text-to-video", model: "veo-3", source: "mobile-nav" }) },
-              { label: t("ai_image"), href: buildStudioPath({ mode: "text-to-image", model: "flux-pro", source: "mobile-nav" }) },
+              { label: t("ai_image"), href: buildStudioPath({ mode: "text-to-image", model: "nano-banana-pro", source: "mobile-nav" }) },
               { label: t("pricing"), href: "/pricing" },
               { label: t("blog"), href: "/blog" },
               { label: t("creations"), href: "/my-creations" },

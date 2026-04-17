@@ -56,10 +56,14 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
         description={isZh ? "浏览 Imaveo 上的 AI 图片模型、工作流和相关入口。" : "Explore AI image models, workflows, and related entry points on Imaveo."}
         url={`/${locale}/ai-image`}
         locale={locale}
-        items={models.map((model) => ({
-          name: model.labels[localeKey],
-          url: `/${locale}${model.href}`,
-        }))}
+        items={[
+          { name: isZh ? "文生图" : "Text to Image", url: `/${locale}/text-to-image` },
+          { name: isZh ? "图生图" : "Image to Image", url: `/${locale}/image-to-image` },
+          ...models.map((model) => ({
+            name: model.labels[localeKey],
+            url: `/${locale}${model.href}`,
+          })),
+        ]}
       />
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl space-y-10">
@@ -78,11 +82,25 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             </h1>
             <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "在这里比较主流图片模型，快速判断哪一种更适合海报、缩略图、商品图或品牌主视觉。"
-                : "Compare leading image models here and decide which one best fits posters, thumbnails, product shots, or branded visuals."}
+                ? "在这里比较 Nano Banana Pro、Wan、GPT Image、Flux Klein、Z Image 和 Qwen Image，快速判断哪一种更适合海报、缩略图、商品图或品牌主视觉。"
+                : "Compare Nano Banana Pro, Wan, GPT Image, Flux Klein, Z Image, and Qwen Image here, then decide which one best fits posters, thumbnails, product shots, or branded visuals."}
             </p>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <Link href={`/${locale}/text-to-image`} className="rounded-[28px] border border-white/10 bg-black/25 p-6 transition-colors hover:border-primary/35 hover:bg-white/[0.04]">
+                <div className="section-label">{isZh ? "文生图" : "Text to Image"}</div>
+                <div className="mt-4 text-2xl font-medium text-white">{isZh ? "从 prompt 直接起图" : "Start from prompt"}</div>
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
+                  {isZh ? "适合海报、广告图、封面和品牌主视觉。" : "Best for posters, ads, covers, and branded hero visuals."}
+                </div>
+              </Link>
+              <Link href={`/${locale}/image-to-image`} className="rounded-[28px] border border-white/10 bg-black/25 p-6 transition-colors hover:border-primary/35 hover:bg-white/[0.04]">
+                <div className="section-label">{isZh ? "图生图" : "Image to Image"}</div>
+                <div className="mt-4 text-2xl font-medium text-white">{isZh ? "从原图继续精修" : "Refine an existing image"}</div>
+                <div className="mt-2 text-sm leading-7 text-zinc-400">
+                  {isZh ? "适合优化商品图、海报初稿和已有品牌视觉。" : "Best for polishing product shots, poster drafts, and existing brand visuals."}
+                </div>
+              </Link>
               {models.map((model) => (
                 <Link key={model.slug} href={`/${locale}${model.href}`} className="rounded-[28px] border border-white/10 bg-black/25 p-6 transition-colors hover:border-primary/35 hover:bg-white/[0.04]">
                   <div className="flex items-start justify-between gap-3">
@@ -109,7 +127,7 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
                 ? "如果你已经知道自己想做封面、海报、广告图或品牌视觉，直接进入创作中心开始生成，再根据结果切换模型。"
                 : "If you already know you need covers, posters, ad visuals, or brand assets, open the Studio and start generating right away, then switch models as needed."
             }
-            primaryHref={buildStudioHref(locale, { mode: "text-to-image", model: "flux-pro", source: "seo-ai-image" })}
+            primaryHref={buildStudioHref(locale, { mode: "text-to-image", model: "nano-banana-pro", source: "seo-ai-image" })}
             primaryLabel={isZh ? "打开图片控制台" : "Open image console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}
@@ -135,13 +153,13 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
             stepsTitle={isZh ? "如何使用 Imaveo 选择图片模型" : "How to choose the right image model on Imaveo"}
             steps={[
               isZh ? "先判断你要生成的是品牌视觉、海报还是人物头像。" : "Decide whether you need brand visuals, posters, or portraits.",
-              isZh ? "再根据结果类型进入对应模型页，或直接打开创作中心开始生成。" : "Then move into the matching model page or go straight to the Studio to start generating.",
+              isZh ? "再判断你更适合走文生图还是图生图，并进入对应工作流。" : "Then decide whether text-to-image or image-to-image is the better workflow for the job.",
               isZh ? "最后根据频率选择订阅或 Credits 包。" : "Choose subscriptions or credits packs based on how often you generate.",
             ]}
             useCasesTitle={isZh ? "AI 图片中心适合哪些创作需求？" : "When should creators use the AI image hub?"}
             useCases={[
               isZh ? "搜索『AI 图片生成器』的泛意图用户" : "Broad users searching for 'AI image generator'",
-              isZh ? "搜索 Flux 等模型关键词的用户" : "Users searching for model terms such as Flux",
+              isZh ? "搜索 Nano Banana Pro、GPT Image、Flux Klein、Wan、Qwen Image 等模型关键词的用户" : "Users searching for model terms such as Nano Banana Pro, GPT Image, Flux Klein, Wan, and Qwen Image",
               isZh ? "搜索海报、封面、品牌图等结果导向词的用户" : "Users searching outcome-driven terms like posters, hero art, and brand visuals",
               isZh ? "需要统一比较模型、价格和工作流的创作者" : "Creators who want to compare models, pricing, and workflows in one place",
             ]}
@@ -161,11 +179,23 @@ export default async function AiImageHubPage(props: { params: Promise<{ locale: 
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}
-            relatedLinks={models.map((model) => ({
-              label: model.labels[localeKey],
-              href: `/${locale}${model.href}`,
-              description: model.descriptions[localeKey],
-            }))}
+            relatedLinks={[
+              {
+                label: isZh ? "文生图" : "Text to Image",
+                href: `/${locale}/text-to-image`,
+                description: isZh ? "从 prompt 直接生成海报、广告图和封面视觉。" : "Generate posters, ad visuals, and covers directly from prompts.",
+              },
+              {
+                label: isZh ? "图生图" : "Image to Image",
+                href: `/${locale}/image-to-image`,
+                description: isZh ? "如果已有原图，继续做精修、变体和视觉升级。" : "Refine, restyle, and expand existing images when you already have a base visual.",
+              },
+              ...models.map((model) => ({
+                label: model.labels[localeKey],
+                href: `/${locale}${model.href}`,
+                description: model.descriptions[localeKey],
+              })),
+            ]}
           />
         </div>
       </div>

@@ -55,7 +55,7 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
     },
     {
       label: isZh ? "默认起手参数" : "Starter setup",
-      title: isZh ? "9:16 + 5 秒 + Kling 2.6" : "9:16 + 5s + Kling 2.6",
+      title: isZh ? "9:16 + 6 秒 + Seedance" : "9:16 + 6s + Seedance",
       description: isZh
         ? "先用较短时长和竖屏比例验证运动方向，再根据结果决定是否切到更高质量模型。"
         : "Begin with a shorter duration and a vertical ratio to validate motion direction before moving into a heavier model.",
@@ -102,8 +102,8 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "上传一张图片，把角色、产品或海报延展成动态镜头。你可以先确认首帧，再选择更适合的模型生成短片。"
-                : "Upload a still image and turn a character, product shot, or poster into a moving clip. Start from the first frame, then choose the model that best fits the motion."}
+                ? "上传一张图片，把角色、产品或海报延展成动态镜头。你可以在 Seedance 和 HappyHorse 之间切换，根据主体稳定性、运动方式和社媒节奏选择更适合的图生视频模型。"
+                : "Upload a still image and turn a character, product shot, or poster into a moving clip. Switch between Seedance and HappyHorse based on subject stability, motion style, and social pacing."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -186,10 +186,10 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
             title={isZh ? "进入图生视频工作台" : "Open the image-to-video workspace"}
             description={
               isZh
-                ? "如果你已经有首帧、角色图或商品图，可以直接进入创作中心上传图片，选择 Kling 或其他视频模型开始生成。"
-                : "If you already have a first frame, character image, or product visual, open the Studio, upload the image, and start with Kling or another video model."
+                ? "如果你已经有首帧、角色图或商品图，可以直接进入创作中心上传图片，选择 Seedance、HappyHorse 或其他视频模型开始生成。"
+                : "If you already have a first frame, character image, or product visual, open the Studio, upload the image, and start with Seedance or another video model."
             }
-            primaryHref={buildStudioHref(locale, { mode: "image-to-video", model: "kling-2-6", source: "seo-image-to-video" })}
+            primaryHref={buildStudioHref(locale, { mode: "image-to-video", model: "seedance", source: "seo-image-to-video" })}
             primaryLabel={isZh ? "打开图生视频入口" : "Open image-to-video entry"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "比较 Credits 与订阅" : "Compare credits and subscriptions"}
@@ -215,7 +215,7 @@ export default async function ImageToVideoPage(props: { params: Promise<{ locale
             stepsTitle={isZh ? "如何在 Imaveo 上完成图生视频" : "How to create image-to-video on Imaveo"}
             steps={[
               isZh ? "先准备一张静态图，并判断你需要更稳定的动画还是更快的迭代。" : "Start with a still image and decide whether you prioritize stable motion or rapid iteration.",
-              isZh ? "根据目标风格选择更适合的模型页，再进入图生视频工作流。" : "Choose the most relevant model page for the target look, then continue with the image-to-video workflow.",
+              isZh ? "根据目标风格选择更适合的模型页，再进入图生视频工作流，例如 Seedance 或 HappyHorse。" : "Choose the most relevant model page for the target look, then continue with the image-to-video workflow, such as Seedance or HappyHorse.",
               isZh ? "生成后检查镜头感和一致性，再决定是否继续购买 Credits 或升级套餐。" : "Review motion quality and consistency, then decide whether to continue with credits or move to a paid plan.",
             ]}
             useCasesTitle={isZh ? "图生视频适合哪些创作场景？" : "When should creators use image-to-video?"}

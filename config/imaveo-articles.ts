@@ -110,8 +110,8 @@ export const imaveoArticles: ImaveoArticle[] = [
     publishedAt: "2026-04-09",
     updatedAt: "2026-04-09",
     title: {
-      en: "Veo 3.1 vs Sora 2: which model should creators pick in 2026?",
-      zh: "Veo 3.1 vs Sora 2：2026 年创作者该选谁？",
+      en: "Veo vs Sora: which model should creators pick in 2026?",
+      zh: "Veo vs Sora：2026 年创作者该选谁？",
     },
     excerpt: {
       en: "Compare motion realism, prompt adherence, and cost curves before you buy credits.",
@@ -119,14 +119,14 @@ export const imaveoArticles: ImaveoArticle[] = [
     },
     seo: {
       en: {
-        title: "Veo 3.1 vs Sora 2 for creators | Imaveo Blog",
-        description: "Compare Veo 3.1 and Sora 2 across motion realism, prompting behavior, and production economics before you scale a video workflow.",
-        keywords: ["veo vs sora", "veo 3.1 review", "sora 2 comparison", "ai video model comparison"],
+        title: "Veo vs Sora for creators | Imaveo Blog",
+        description: "Compare Veo and Sora across motion realism, prompting behavior, and production economics before you scale a video workflow.",
+        keywords: ["veo vs sora", "veo review", "sora comparison", "ai video model comparison"],
       },
       zh: {
-        title: "Veo 3.1 vs Sora 2 对比 | Imaveo 博客",
-        description: "从运动表现、提示词理解与成本结构对比 Veo 3.1 和 Sora 2，帮助创作者选择更合适的视频主力模型。",
-        keywords: ["Veo 对比 Sora", "Veo 3.1 评测", "Sora 2 对比", "AI 视频模型对比"],
+        title: "Veo vs Sora 对比 | Imaveo 博客",
+        description: "从运动表现、提示词理解与成本结构对比 Veo 和 Sora，帮助创作者选择更合适的视频主力模型。",
+        keywords: ["Veo 对比 Sora", "Veo 评测", "Sora 对比", "AI 视频模型对比"],
       },
     },
     sections: [
@@ -137,19 +137,19 @@ export const imaveoArticles: ImaveoArticle[] = [
         },
         paragraphs: {
           en: [
-            "Veo 3.1 and Sora 2 both sit in the high-intent part of the AI video market, but they tend to win on different criteria. Veo usually appeals to creators who care about cinematic continuity and premium scene quality, while Sora attracts teams who value experimentation breadth and narrative range.",
+            "Veo and Sora both sit in the high-intent part of the AI video market, but they tend to win on different criteria. Veo usually appeals to creators who care about cinematic continuity and premium scene quality, while Sora attracts teams who value experimentation breadth and narrative range.",
             "For an operator building a repeatable workflow, the question is rarely which model looks best in a launch video. The real question is which model keeps output quality stable enough that a team can produce assets without burning too many credits on retries.",
           ],
           zh: [
-            "Veo 3.1 和 Sora 2 都是创作者经常比较的视频模型，但两者擅长的方向并不完全一样。Veo 更容易打动看重电影感连贯性和成片质感的用户，Sora 则更适合重视题材跨度和探索空间的团队。",
+            "Veo 和 Sora 都是创作者经常比较的视频模型，但两者擅长的方向并不完全一样。Veo 更容易打动看重电影感连贯性和成片质感的用户，Sora 则更适合重视题材跨度和探索空间的团队。",
             "对要搭建稳定生产流的操作者来说，关键并不是哪一个模型在宣传视频里更惊艳，而是哪一个模型能让输出足够稳定，减少反复重试带来的时间和额度消耗。",
           ],
         },
       },
       {
         heading: {
-          en: "Where Veo 3.1 tends to win",
-          zh: "Veo 3.1 更容易赢的地方",
+          en: "Where Veo tends to win",
+          zh: "Veo 更容易赢的地方",
         },
         paragraphs: {
           en: [
@@ -164,8 +164,8 @@ export const imaveoArticles: ImaveoArticle[] = [
       },
       {
         heading: {
-          en: "Where Sora 2 can still be the better fit",
-          zh: "Sora 2 依然可能更适合的场景",
+          en: "Where Sora can still be the better fit",
+          zh: "Sora 依然可能更适合的场景",
         },
         paragraphs: {
           en: [
@@ -181,21 +181,21 @@ export const imaveoArticles: ImaveoArticle[] = [
     ],
     takeaways: {
       en: [
-        "Choose Veo 3.1 when first-pass publishability matters more than experimentation breadth.",
-        "Choose Sora 2 when the team is still searching for a creative direction and wants broader exploration.",
+        "Choose Veo when first-pass publishability matters more than experimentation breadth.",
+        "Choose Sora when the team is still searching for a creative direction and wants broader exploration.",
         "Judge models by operational cost per usable clip, not only by cost per generation.",
       ],
       zh: [
-        "如果你更在意首稿可发布性而不是探索空间，优先选 Veo 3.1。",
-        "如果团队还在寻找创意方向、需要更广泛试验，Sora 2 仍然更合适。",
+        "如果你更在意首稿可发布性而不是探索空间，优先选 Veo。",
+        "如果团队还在寻找创意方向、需要更广泛试验，Sora 仍然更合适。",
         "评估模型时要看每条可用视频的运营成本，而不只是单次生成价格。",
       ],
     },
     cta: {
       href: "/ai-video/veo-3",
       label: {
-        en: "Try Veo 3.1 on Imaveo",
-        zh: "在 Imaveo 试用 Veo 3.1",
+        en: "Try Veo on Imaveo",
+        zh: "在 Imaveo 试用 Veo",
       },
       description: {
         en: "Move from comparison into a real Veo workflow.",

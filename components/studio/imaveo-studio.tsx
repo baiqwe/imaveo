@@ -68,8 +68,8 @@ const studioModes: StudioModeDefinition[] = [
     icon: <Wand2 className="h-4 w-4" />,
     title: { en: "Image to Image", zh: "图生图" },
     description: {
-      en: "Upload a source image and refine it into anime or polished art directions.",
-      zh: "上传原图，再把它推进到动漫风或更精致的视觉改造。",
+      en: "Upload a source image and refine it into polished campaign visuals, covers, product shots, or new art directions.",
+      zh: "上传原图，再把它推进成更完整的海报、封面、商品图或新的视觉方向。",
     },
     promptPlaceholder: {
       en: "Add optional notes about pose, expression, lighting, or finishing details...",
@@ -133,21 +133,21 @@ const quantityMap: Record<StudioMode, string[]> = {
 };
 
 const recentSeeds = [
-  { id: "A1", status: "Live", color: "from-[#f5c518]/30", kind: "Flux Pro" },
-  { id: "B4", status: "Queued", color: "from-cyan-400/20", kind: "Veo 3.1" },
-  { id: "C7", status: "Draft", color: "from-pink-400/20", kind: "Flux Pro" },
-  { id: "D2", status: "Live", color: "from-emerald-400/20", kind: "Kling 2.6" },
+  { id: "A1", status: "Live", color: "from-[#f5c518]/30", kind: "Nano Banana Pro" },
+  { id: "B4", status: "Queued", color: "from-cyan-400/20", kind: "Veo" },
+  { id: "C7", status: "Draft", color: "from-pink-400/20", kind: "GPT Image" },
+  { id: "D2", status: "Live", color: "from-emerald-400/20", kind: "Seedance" },
 ];
 
 const studioSignals = {
   en: [
     { label: "Unified", value: "4 modes" },
-    { label: "Models", value: "Veo / Kling / Flux" },
+    { label: "Models", value: "Veo / Sora / Seedance / GPT Image" },
     { label: "Surface", value: "One prompt + one control plane" },
   ],
   zh: [
     { label: "统一入口", value: "4 种模式" },
-    { label: "模型矩阵", value: "Veo / Kling / Flux" },
+    { label: "模型矩阵", value: "Veo / Sora / Seedance / GPT Image" },
     { label: "工作面", value: "一个 Prompt + 一套控制平面" },
   ],
 };
@@ -175,21 +175,54 @@ function getModeConfig(mode: StudioMode) {
   return studioModes.find((item) => item.id === mode) ?? studioModes[0];
 }
 
+function getWorkflowHeading(mode: StudioMode, isZh: boolean) {
+  switch (mode) {
+    case "text-to-video":
+      return isZh ? "AI 文生视频生成器" : "AI Text to Video Generator";
+    case "image-to-video":
+      return isZh ? "AI 图生视频生成器" : "AI Image to Video Generator";
+    case "image-to-image":
+      return isZh ? "AI 图生图生成器" : "AI Image to Image Generator";
+    case "text-to-image":
+    default:
+      return isZh ? "AI 文生图生成器" : "AI Text to Image Generator";
+  }
+}
+
+function getWorkflowLabel(mode: StudioMode, isZh: boolean) {
+  switch (mode) {
+    case "text-to-video":
+      return isZh ? "文生视频" : "text-to-video";
+    case "image-to-video":
+      return isZh ? "图生视频" : "image-to-video";
+    case "image-to-image":
+      return isZh ? "图生图" : "image-to-image";
+    case "text-to-image":
+    default:
+      return isZh ? "文生图" : "text-to-image";
+  }
+}
+
 function modeNeedsSourceImage(mode: StudioMode) {
   return mode === "image-to-image" || mode === "image-to-video";
 }
 
 function getModelsForMode(mode: StudioMode) {
+  const availableImageModels = imaveoModels.filter((model) => model.category === "image");
+  const availableVideoModels = imaveoModels.filter((model) => model.category === "video");
+  const supportsMode = (model: ImaveoModel, targetMode: StudioMode) =>
+    model.supportedModes?.includes(targetMode) ?? model.mode === targetMode;
+
   switch (mode) {
     case "text-to-video":
-      return imaveoModels.filter((model) => model.category === "video" && model.mode === "text-to-video");
+      return availableVideoModels.filter((model) => supportsMode(model, "text-to-video"));
     case "image-to-video":
-      return imaveoModels.filter((model) => model.category === "video");
+      return availableVideoModels.filter((model) => supportsMode(model, "image-to-video"));
     case "image-to-image":
-      return imaveoModels.filter((model) => model.category === "image");
+      return availableImageModels.filter((model) => supportsMode(model, "image-to-image"));
     case "text-to-image":
     default:
-      return imaveoModels.filter((model) => model.category === "image");
+      return availableImageModels.filter((model) => supportsMode(model, "text-to-image"));
   }
 }
 
@@ -613,6 +646,7 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [mode, setMode] = useState<StudioMode>(normalizeStudioMode(initialMode));
   const [selectedModelId, setSelectedModelId] = useState(initialModel ?? "");
+  const [hasExplicitModel, setHasExplicitModel] = useState(Boolean(initialModel));
   const [selectedStyle, setSelectedStyle] = useState(initialStyle ?? "");
   const [prompt, setPrompt] = useState("");
   const [sourcePreview, setSourcePreview] = useState("");
@@ -621,6 +655,19 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   const [selectedQuality, setSelectedQuality] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState("");
   const availableModels = useMemo(() => getModelsForMode(mode), [mode]);
+
+  useEffect(() => {
+    setMode(normalizeStudioMode(initialMode));
+  }, [initialMode]);
+
+  useEffect(() => {
+    setSelectedModelId(initialModel ?? "");
+    setHasExplicitModel(Boolean(initialModel));
+  }, [initialModel]);
+
+  useEffect(() => {
+    setSelectedStyle(initialStyle ?? "");
+  }, [initialStyle]);
 
   useEffect(() => {
     const currentModelIsValid = availableModels.some((model) => model.slug === selectedModelId);
@@ -644,13 +691,36 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   useEffect(() => {
     const params = new URLSearchParams();
     params.set("mode", mode);
-    if (selectedModelId) params.set("model", selectedModelId);
+    if (hasExplicitModel && selectedModelId) params.set("model", selectedModelId);
     if (selectedStyle) params.set("style", selectedStyle);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [mode, pathname, router, selectedModelId, selectedStyle]);
+  }, [hasExplicitModel, mode, pathname, router, selectedModelId, selectedStyle]);
 
   const selectedModel = availableModels.find((model) => model.slug === selectedModelId) ?? availableModels[0];
+  const keywordModel = hasExplicitModel ? selectedModel : undefined;
   const liveGeneration = false;
+  const pageHeading = keywordModel
+    ? `${keywordModel.labels[isZh ? "zh" : "en"]} ${getWorkflowHeading(mode, isZh)}`
+    : getWorkflowHeading(mode, isZh);
+  const pageDescription = keywordModel
+    ? isZh
+      ? `当前已锁定 ${keywordModel.labels.zh}，你可以在这个 ${getWorkflowLabel(mode, true)} 工作流里继续写 prompt、调整参数并直接开始生成。`
+      : `${keywordModel.labels.en} is currently selected, so you can continue inside this ${getWorkflowLabel(mode, false)} workflow and refine prompts and settings before generating.`
+    : isZh
+      ? "先确定当前工作流，再根据结果继续切换模型和参数。"
+      : "Start with the workflow first, then switch models and settings based on the result you want.";
+  const docsHref = `/${locale}/${keywordModel?.category === "video" || mode.includes("video") ? "ai-video" : "ai-image"}`;
+
+  useEffect(() => {
+    const title = keywordModel
+      ? isZh
+        ? `${keywordModel.labels.zh} ${getWorkflowHeading(mode, true)} | Imaveo 创作中心`
+        : `${keywordModel.labels.en} ${getWorkflowHeading(mode, false)} | Imaveo Studio`
+      : isZh
+        ? `${getWorkflowHeading(mode, true)} | Imaveo 创作中心`
+        : `${getWorkflowHeading(mode, false)} | Imaveo Studio`;
+    document.title = title;
+  }, [isZh, keywordModel, mode]);
 
   const handlePickSource = () => {
     fileInputRef.current?.click();
@@ -688,18 +758,16 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
             <div>
               <div className="section-label">Imaveo Studio</div>
               <h1 className={`display-serif mt-3 text-4xl font-medium text-white md:text-5xl ${isZh ? "tracking-normal" : ""}`}>
-                {isZh ? "在一个工作台里完成四种创作模式" : "Create across four modes in one Studio"}
+                {pageHeading}
               </h1>
               <p className="mt-4 max-w-4xl text-base leading-8 text-zinc-300">
-                {isZh
-                  ? "先切换创作模式，再输入 prompt，然后调整参数与模型，让图片和视频工作流都更清晰。"
-                  : "Switch the creation mode first, then write the prompt and adjust parameters and models so both image and video workflows stay clear."}
+                {pageDescription}
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <Button asChild variant="outline" className="hidden rounded-full border-zinc-700 bg-transparent text-zinc-200 hover:bg-white/[0.04] md:inline-flex">
-                <Link href={`/${locale}/ai-video`}>{isZh ? "返回模型文档" : "Back to docs"}</Link>
+                <Link href={docsHref}>{isZh ? "返回模型文档" : "Back to docs"}</Link>
               </Button>
               <Sheet>
                 <SheetTrigger asChild>
@@ -732,7 +800,10 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
                 selectedModel={selectedModel}
                 selectedModelId={selectedModelId}
                 availableModels={availableModels}
-                onModelChange={setSelectedModelId}
+                onModelChange={(value) => {
+                  setSelectedModelId(value);
+                  setHasExplicitModel(true);
+                }}
                 prompt={prompt}
                 setPrompt={setPrompt}
                 selectedAspectRatio={selectedAspectRatio}

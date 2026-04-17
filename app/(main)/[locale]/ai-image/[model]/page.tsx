@@ -66,8 +66,9 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
   if (!item) notFound();
 
   const siblingModels = imaveoModels.filter((entry) => entry.category === "image" && entry.slug !== item.slug);
-  const recommendedWorkflowHref = `/${locale}/create?mode=text-to-image&model=${item.slug}`;
-  const recommendedWorkflowLabel = isZh ? "文生图 / Studio" : "Text to Image / Studio";
+  const recommendedStudioMode = item.mode === "image-to-image" ? "image-to-image" : "text-to-image";
+  const recommendedWorkflowHref = buildStudioHref(locale, { mode: recommendedStudioMode, model: item.slug, source: "seo-image-model" });
+  const recommendedWorkflowLabel = isZh ? (recommendedStudioMode === "image-to-image" ? "图生图 / Studio" : "文生图 / Studio") : recommendedStudioMode === "image-to-image" ? "Image to Image / Studio" : "Text to Image / Studio";
   const defaultAspectRatio = item.generationDefaults?.aspectRatio ?? "1:1";
   const defaultStyle = item.generationDefaults?.style ?? (isZh ? "营销视觉" : "Marketing visual");
   const pathRecommendations = [
@@ -75,8 +76,8 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
       label: isZh ? "最快起步路径" : "Fastest path",
       title: isZh ? `先进入 ${recommendedWorkflowLabel}` : `Start with ${recommendedWorkflowLabel}`,
       description: isZh
-        ? `如果你要用 ${item.labels.zh} 做品牌视觉，先在 Studio 里用文生图模式起一个稳定版本。`
-        : `If you are using ${item.labels.en} for branded visuals, begin with text-to-image in the Studio and create a stable first version.`,
+        ? `如果你要用 ${item.labels.zh} 做品牌视觉、商品图或封面，先在 Studio 里起一个稳定版本。`
+        : `If you are using ${item.labels.en} for branded visuals, product images, or covers, begin in the Studio and create a stable first version.`,
       href: recommendedWorkflowHref,
     },
     {
@@ -240,11 +241,7 @@ export default async function ImageModelPage(props: { params: Promise<{ locale: 
                 ? `如果你正在查看 ${item.labels.zh}，通常已经知道自己想要的结果方向。直接进入创作中心，写下提示词并从这个模型开始生成即可。`
                 : `If you are exploring ${item.labels.en}, you likely already know the kind of result you want. Open the Studio, write your prompt, and start with this model directly.`
             }
-            primaryHref={buildStudioHref(locale, {
-              mode: "text-to-image",
-              model: item.slug,
-              source: "seo-image-model",
-            })}
+            primaryHref={recommendedWorkflowHref}
             primaryLabel={isZh ? "打开图片控制台" : "Open image console"}
             secondaryHref={`/${locale}/pricing`}
             secondaryLabel={isZh ? "查看套餐与 Credits" : "View plans and credits"}

@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Imaveo - AI 视频与 AI 图片创作平台",
     "description": "Imaveo 是面向创作者的 AI 视觉创作平台，整合文生图、图生图、文生视频、图生视频和热门模型。",
-    "keywords": "imaveo, ai视频生成, ai图片生成, 文生视频, 图生视频, 文生图, 图生图, veo 3, kling 2.6, flux pro"
+    "keywords": "imaveo, ai视频生成, ai图片生成, 文生视频, 图生视频, 文生图, 图生图, veo, sora, seedance, happyhorse, nano banana pro, gpt image, flux klein"
   },
   "nav": {
     "home": "首页",
@@ -23,7 +23,7 @@
     "badge": "AI 视频 • AI 图片 • 创作中心",
     "title": "一个暗色极简的",
     "title_highlight": "AI 视觉创作中枢",
-    "subtitle": "把 Veo、Kling、Flux 等热门模型放进同一个工作台，在一个地方完成文生图、图生图、文生视频和图生视频。",
+    "subtitle": "把 Veo、Sora、Seedance、HappyHorse、Nano Banana Pro、GPT Image、Flux Klein、Wan、Z Image 和 Qwen Image 放进同一个工作台，在一个地方完成文生图、图生图、文生视频和图生视频。",
     "feature_1": "按场景组织工作流",
     "feature_2": "热门模型即时切换",
     "feature_3": "统一资产底座",

@@ -16,8 +16,8 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const pathname = `/${locale}/ai-video`;
   const title = isZh ? "AI 视频模型中心 | Imaveo" : "AI Video Models Hub | Imaveo";
   const description = isZh
-    ? "浏览 Imaveo 上的 AI 视频模型，包括 Veo、Kling 等主流模型，并按场景选择最合适的视频工作流。"
-    : "Explore AI video models on Imaveo including Veo and Kling, and choose the right workflow for each production need.";
+    ? "浏览 Imaveo 上的 AI 视频模型，包括 Veo、Sora、Seedance 和 HappyHorse，并按场景选择最合适的视频工作流。"
+    : "Explore AI video models on Imaveo including Veo, Sora, Seedance, and HappyHorse, then choose the right workflow for each production need.";
   const ogDescription = isZh ? "一个承接 AI 视频模型搜索和场景需求的中心页。" : "A central page that captures AI video model intent and workflow demand.";
   const ogImage = new URL(site.ogImagePath, site.siteUrl).toString();
 
@@ -82,8 +82,8 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
             </h1>
             <p className="mt-4 max-w-4xl text-base leading-7 text-zinc-300">
               {isZh
-                ? "在这里查看文生视频、图生视频和主流视频模型，先了解各自适合的场景，再进入创作中心开始生成。"
-                : "Explore text-to-video, image-to-video, and popular video models in one place, then open the Studio when you are ready to generate."}
+                ? "在这里查看文生视频、图生视频，以及 Veo、Sora、Seedance 和 HappyHorse 这些主流视频模型，先了解各自适合的场景，再进入创作中心开始生成。"
+                : "Explore text-to-video, image-to-video, and leading video models like Veo, Sora, Seedance, and HappyHorse in one place, then open the Studio when you are ready to generate."}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -123,8 +123,8 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
             title={isZh ? "进入视频工作台" : "Open the video workspace"}
             description={
               isZh
-                ? "选择文生视频或图生视频，再根据画面目标切换 Veo、Kling 等模型。你可以先生成一条测试片，再决定是否继续放大使用。"
-                : "Choose text-to-video or image-to-video, then switch between Veo, Kling, and other models based on the scene you need. Generate one test clip first, then decide how far to scale."
+                ? "选择文生视频或图生视频，再根据画面目标切换 Veo、Sora、Seedance 和 HappyHorse。你可以先生成一条测试片，再决定是否继续放大使用。"
+                : "Choose text-to-video or image-to-video, then switch between Veo, Sora, Seedance, and HappyHorse based on the scene you need. Generate one test clip first, then decide how far to scale."
             }
             primaryHref={buildStudioHref(locale, { mode: "text-to-video", model: "veo-3", source: "seo-ai-video" })}
             primaryLabel={isZh ? "打开视频控制台" : "Open video console"}
@@ -146,19 +146,19 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
                 ? "Imaveo 的 AI 视频中心帮助你先了解视频生成方式，再选择适合的模型。你可以从文字提示词开始，也可以上传图片作为首帧。"
                 : "The Imaveo AI video hub helps you understand video generation options before choosing a model. Start from a text prompt or upload an image as the first frame.",
               isZh
-                ? "如果你还不确定该用哪个模型，可以先比较 Veo 和 Kling 的优势，再进入创作中心生成第一条短片。"
-                : "If you are not sure which model to use, compare Veo and Kling first, then open the Studio and generate your first clip.",
+                ? "如果你还不确定该用哪个模型，可以先比较 Veo、Sora、Seedance 和 HappyHorse 的优势，再进入创作中心生成第一条短片。"
+                : "If you are not sure which model to use, compare Veo, Sora, Seedance, and HappyHorse first, then open the Studio and generate your first clip.",
             ]}
             stepsTitle={isZh ? "如何使用 Imaveo 选择合适的视频模型" : "How to choose the right video model on Imaveo"}
             steps={[
               isZh ? "先判断你的需求属于文生视频还是图生视频。" : "Decide whether your need is text-to-video or image-to-video.",
-              isZh ? "再进入具体模型页，对比 Veo、Kling 等模型的优势。" : "Visit model pages to compare Veo, Kling, and other options.",
+              isZh ? "再进入具体模型页，对比 Veo、Sora、Seedance 和 HappyHorse 的优势。" : "Visit model pages to compare Veo, Sora, Seedance, and HappyHorse.",
               isZh ? "最后根据预算和频率，决定使用订阅还是 Credits 包。" : "Choose between subscriptions and credits packs based on usage frequency.",
             ]}
             useCasesTitle={isZh ? "哪些场景适合这个中心页承接？" : "What use cases does this hub capture?"}
             useCases={[
               isZh ? "搜索『AI 视频生成器』的泛意图用户" : "Broad users searching for 'AI video generator'",
-              isZh ? "搜索 Veo、Kling 等模型关键词的高意图用户" : "High-intent users searching Veo, Kling, and model-specific terms",
+              isZh ? "搜索 Veo、Sora、Seedance、HappyHorse 等模型关键词的高意图用户" : "High-intent users searching Veo, Sora, Seedance, HappyHorse, and model-specific terms",
               isZh ? "搜索文生视频、图生视频等工作流词的需求型用户" : "Workflow-intent users searching text-to-video or image-to-video",
               isZh ? "需要价格、模型和工作流一起比较的创作者" : "Creators who want to compare pricing, models, and workflows together",
             ]}
@@ -167,14 +167,14 @@ export default async function AiVideoHubPage(props: { params: Promise<{ locale: 
               {
                 question: isZh ? "为什么要先看 AI 视频中心？" : "Why start from the AI video hub?",
                 answer: isZh
-                  ? "因为不同视频模型适合的场景不同。先看中心页能快速了解文生视频、图生视频、Veo 和 Kling 的区别。"
-                  : "Because different video models fit different jobs. The hub gives you a quick view of text-to-video, image-to-video, Veo, and Kling before you start.",
+                  ? "因为不同视频模型适合的场景不同。先看中心页能快速了解文生视频、图生视频，以及 Veo、Sora、Seedance 和 HappyHorse 的差异。"
+                  : "Because different video models fit different jobs. The hub gives you a quick view of text-to-video, image-to-video, and the differences between Veo, Sora, Seedance, and HappyHorse before you start.",
               },
               {
-                question: isZh ? "Veo 和 Kling 应该放在同一站里吗？" : "Should Veo and Kling live on the same site?",
+                question: isZh ? "为什么 Veo、Sora、Seedance 和 HappyHorse 适合放在同一站里？" : "Why should Veo, Sora, Seedance, and HappyHorse live on the same site?",
                 answer: isZh
-                  ? "应该。创作者经常需要根据镜头稳定性、速度和成本切换模型，把它们放在同一个工作台里会更方便。"
-                  : "Yes. Creators often switch models based on stability, speed, and cost, so keeping them in one workspace makes the process easier.",
+                  ? "因为创作者会根据镜头一致性、叙事能力、图生视频稳定性和社媒节奏在不同模型间切换，把它们放进同一个工作台会更高效。"
+                  : "Because creators switch models based on cinematic quality, narrative range, image-to-video stability, and social pacing. Keeping them in one workspace makes that process much easier.",
               },
             ]}
             relatedTitle={isZh ? "继续浏览相关页面" : "Continue with related pages"}

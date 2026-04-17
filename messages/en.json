@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Imaveo - AI Video and AI Image Creation Platform",
     "description": "Imaveo is an AI visual creation platform that combines text-to-image, image-to-image, text-to-video, image-to-video, and leading models in one workspace.",
-    "keywords": "imaveo, ai video generator, ai image generator, text to video, image to video, text to image, image to image, veo 3, kling 2.6, flux pro"
+    "keywords": "imaveo, ai video generator, ai image generator, text to video, image to video, text to image, image to image, veo, sora, seedance, happyhorse, nano banana pro, gpt image, flux klein"
   },
   "nav": {
     "home": "Home",
@@ -23,7 +23,7 @@
     "badge": "AI Video • AI Image • Studio",
     "title": "One dark hub for",
     "title_highlight": "visual AI creation",
-    "subtitle": "Use Veo, Kling, Flux, and other leading models from one workspace built for text-to-image, image-to-image, text-to-video, and image-to-video.",
+    "subtitle": "Use Veo, Sora, Seedance, HappyHorse, Nano Banana Pro, GPT Image, Flux Klein, Wan, Z Image, and Qwen Image from one workspace built for text-to-image, image-to-image, text-to-video, and image-to-video.",
     "feature_1": "Scenario-first workflows",
     "feature_2": "Hot model switching",
     "feature_3": "Unified asset foundation",

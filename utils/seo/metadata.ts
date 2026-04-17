@@ -24,16 +24,16 @@ export function buildAbsoluteUrl(pathname: string) {
 export function getHubMetadata(locale: "en" | "zh") {
   if (locale === "zh") {
     return {
-      title: "Imaveo - AI 视频与 AI 图片创作平台",
-      description: "Imaveo 提供文生图、图生图、文生视频、图生视频和模型切换能力，帮助创作者更快从想法走到成片。",
-      keywords: ["Imaveo", "AI创作平台", "AI视频生成", "AI图片生成", "文生视频", "图生视频", "文生图", "图生图"],
+      title: "AI 视频与图片生成聚合平台 | Imaveo Studio",
+      description: "Imaveo 聚合 Veo、Sora、Seedance、HappyHorse、Nano Banana Pro、GPT Image、Flux Klein、Wan、Z Image 和 Qwen Image，支持文生视频、图生视频、文生图与图生图。",
+      keywords: ["Imaveo", "AI视频生成器", "AI图片生成器", "AI创作平台", "文生视频", "图生视频", "文生图", "图生图", "Veo", "Sora", "Seedance", "HappyHorse", "Nano Banana Pro", "GPT Image", "Flux Klein"],
     };
   }
 
   return {
-    title: "Imaveo - AI video and image creation platform",
-    description: "Imaveo helps creators generate images and videos with text-to-image, image-to-image, text-to-video, image-to-video, and flexible model switching.",
-    keywords: ["Imaveo", "AI creation platform", "AI video generator", "AI image generator", "text to video", "image to video", "text to image", "image to image"],
+    title: "AI Video & Image Generator Hub | Imaveo Studio",
+    description: "Imaveo is an all-in-one AI visual studio for text-to-video, image-to-video, text-to-image, and image-to-image workflows with models like Veo, Sora, Seedance, HappyHorse, Nano Banana Pro, GPT Image, Flux Klein, Wan, Z Image, and Qwen Image.",
+    keywords: ["Imaveo", "AI video generator", "AI image generator", "AI studio", "text to video", "image to video", "text to image", "image to image", "Veo", "Sora", "Seedance", "HappyHorse", "Nano Banana Pro", "GPT Image", "Flux Klein"],
   };
 }
 

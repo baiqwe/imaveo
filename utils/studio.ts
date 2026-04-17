@@ -72,12 +72,12 @@ export function buildStudioPathFromPath(href?: string, source?: string) {
     return buildStudioPath({
       mode: toStudioMode(model?.mode),
       model: model?.slug ?? segments[1],
-      style: model?.slug === "animeify" ? "anime" : model?.generationDefaults?.style,
+      style: model?.generationDefaults?.style,
       source,
     });
   }
 
-  if (segments[0] === "text-to-video" || segments[0] === "image-to-video") {
+  if (segments[0] === "text-to-video" || segments[0] === "image-to-video" || segments[0] === "text-to-image" || segments[0] === "image-to-image") {
     const tool = getImaveoTool(segments[0]);
     return buildStudioPath({
       mode: toStudioMode(tool?.mode ?? segments[0]),

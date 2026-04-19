@@ -12,7 +12,7 @@ const PRIVATE_CACHE_HEADERS = {
 
 export async function GET(request: Request) {
     try {
-        const rateLimit = checkRateLimit({
+        const rateLimit = await checkRateLimit({
             key: getRateLimitKey(request.headers.get("x-forwarded-for"), "credits-read"),
             limit: 30,
             windowMs: 60_000,
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     try {
-        const rateLimit = checkRateLimit({
+        const rateLimit = await checkRateLimit({
             key: getRateLimitKey(request.headers.get("x-forwarded-for"), "credits-write"),
             limit: 20,
             windowMs: 60_000,

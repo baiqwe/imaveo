@@ -180,7 +180,7 @@ function resolveGenerationConfig(modelId?: string) {
 
 export async function POST(request: NextRequest) {
     try {
-        const rateLimit = checkRateLimit({
+        const rateLimit = await checkRateLimit({
             key: getRateLimitKey(request.headers.get("x-forwarded-for"), "ai-generate"),
             limit: 12,
             windowMs: 60_000,

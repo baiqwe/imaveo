@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   ArrowRight,
   CheckCircle2,
@@ -643,6 +643,7 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   const isZh = locale === "zh";
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [mode, setMode] = useState<StudioMode>(normalizeStudioMode(initialMode));
   const [selectedModelId, setSelectedModelId] = useState(initialModel ?? "");
@@ -655,19 +656,23 @@ export function ImaveoStudio({ locale, initialMode, initialModel, initialStyle }
   const [selectedQuality, setSelectedQuality] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState("");
   const availableModels = useMemo(() => getModelsForMode(mode), [mode]);
+  const queryMode = searchParams.get("mode");
+  const queryModel = searchParams.get("model");
+  const queryStyle = searchParams.get("style");
 
   useEffect(() => {
-    setMode(normalizeStudioMode(initialMode));
-  }, [initialMode]);
+    setMode(normalizeStudioMode(queryMode ?? initialMode));
+  }, [initialMode, queryMode]);
 
   useEffect(() => {
-    setSelectedModelId(initialModel ?? "");
-    setHasExplicitModel(Boolean(initialModel));
-  }, [initialModel]);
+    const nextModel = queryModel ?? initialModel ?? "";
+    setSelectedModelId(nextModel);
+    setHasExplicitModel(Boolean(queryModel ?? initialModel));
+  }, [initialModel, queryModel]);
 
   useEffect(() => {
-    setSelectedStyle(initialStyle ?? "");
-  }, [initialStyle]);
+    setSelectedStyle(queryStyle ?? initialStyle ?? "");
+  }, [initialStyle, queryStyle]);
 
   useEffect(() => {
     const currentModelIsValid = availableModels.some((model) => model.slug === selectedModelId);

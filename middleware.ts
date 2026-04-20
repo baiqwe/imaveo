@@ -12,9 +12,11 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const localeMatch = pathname.match(/^\/(en|zh)(?=\/|$)/)
   const currentLocale = localeMatch?.[1] ?? routing.defaultLocale
+  const existingLocale = request.cookies.get("NEXT_LOCALE")?.value
 
-  request.cookies.set("NEXT_LOCALE", currentLocale)
-  response.cookies.set("NEXT_LOCALE", currentLocale)
+  if (existingLocale !== currentLocale) {
+    response.cookies.set("NEXT_LOCALE", currentLocale)
+  }
 
   // Preview mode: allow local UI review without Supabase env configured.
   if (!hasSupabaseEnv()) {

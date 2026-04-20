@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ArrowRight, Clapperboard, ImageIcon, Sparkles } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
@@ -14,6 +15,7 @@ import { buildAbsoluteUrl, buildLocaleAlternates } from "@/utils/seo/metadata";
 import { buildStudioHref } from "@/utils/studio";
 
 export const dynamicParams = false;
+export const dynamic = "force-static";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -57,6 +59,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 
 export default async function LandingPage(props: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await props.params;
+  setRequestLocale(locale);
   const isZh = locale === "zh";
   const localeKey = locale as "en" | "zh";
   const page = getLocalizedLandingPage(slug, locale);

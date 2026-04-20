@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Header from "@/components/header";
@@ -10,6 +10,7 @@ import { SoftwareApplicationSchema } from "@/components/json-ld-schema";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { ClarityAnalytics } from "@/components/clarity-analytics";
 import { site } from "@/config/site";
+import { LocaleDocumentSync } from "@/components/locale-document-sync";
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -112,10 +113,12 @@ export default async function LocaleLayout(props: {
         notFound();
     }
 
+    setRequestLocale(locale);
     const messages = await getMessages({ locale });
 
     return (
         <>
+            <LocaleDocumentSync locale={locale} />
             <GoogleAnalytics />
             <ClarityAnalytics />
             <SoftwareApplicationSchema locale={locale} />

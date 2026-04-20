@@ -1,18 +1,13 @@
-import { cookies } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
-  const htmlLang = localeCookie === "zh" ? "zh" : "en";
-
   return (
-    <html lang={htmlLang} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`

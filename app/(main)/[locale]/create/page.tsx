@@ -1,58 +1,23 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { SoftwareApplicationSchema, WebPageSchema } from "@/components/breadcrumb-schema";
 import { ImaveoStudio } from "@/components/studio/imaveo-studio";
 import { StudioBreadcrumbTrail, StudioContextContent } from "@/components/studio/studio-context-content";
-import { getImaveoModel } from "@/config/imaveo";
 import { site } from "@/config/site";
 import { buildAbsoluteUrl, buildLocaleAlternates } from "@/utils/seo/metadata";
-import { normalizeStudioMode } from "@/utils/studio";
 
-type CreatePageProps = {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{ mode?: string; model?: string; style?: string }>;
-};
-
-function getWorkflowLabel(mode: ReturnType<typeof normalizeStudioMode>, isZh: boolean) {
-  switch (mode) {
-    case "text-to-video":
-      return isZh ? "文生视频" : "Text to Video";
-    case "image-to-video":
-      return isZh ? "图生视频" : "Image to Video";
-    case "image-to-image":
-      return isZh ? "图生图" : "Image to Image";
-    case "text-to-image":
-    default:
-      return isZh ? "文生图" : "Text to Image";
-  }
-}
+export const dynamic = "force-static";
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ mode?: string; model?: string }>;
 }): Promise<Metadata> {
   const { locale } = await props.params;
-  const query = await props.searchParams;
   const isZh = locale === "zh";
-  const mode = normalizeStudioMode(query.mode);
-  const model = query.model ? getImaveoModel(query.model, "video") ?? getImaveoModel(query.model, "image") : undefined;
   const pathname = `/${locale}/create`;
-  const workflowLabel = getWorkflowLabel(mode, isZh);
-
-  const title = model
-    ? isZh
-      ? `${model.labels.zh} ${workflowLabel} | Imaveo 创作中心`
-      : `${model.labels.en} ${workflowLabel} | Imaveo Studio`
-    : isZh
-      ? `${workflowLabel} | Imaveo 创作中心`
-      : `${workflowLabel} | Imaveo Studio`;
-
-  const description = model
-    ? isZh
-      ? `进入 Imaveo 创作中心，直接使用 ${model.labels.zh} 完成 ${workflowLabel}，并围绕该模型的核心关键词继续调 prompt 和参数。`
-      : `Open Imaveo Studio and use ${model.labels.en} for ${workflowLabel}, then refine prompts and settings around that model's strengths.`
-    : isZh
-      ? `进入 Imaveo 创作中心，直接开始 ${workflowLabel}，再根据结果决定是否切换模型。`
-      : `Open Imaveo Studio and start ${workflowLabel}, then decide whether you need to switch models after the first result.`;
+  const title = isZh ? "Imaveo 创作中心 | AI 视频与图片工作台" : "Imaveo Studio | AI video and image workspace";
+  const description = isZh
+    ? "在 Imaveo 创作中心完成文生图、图生图、文生视频和图生视频，并在同一工作台内切换模型与参数。"
+    : "Use Imaveo Studio for text-to-image, image-to-image, text-to-video, and image-to-video workflows with model and parameter switching in one workspace.";
 
   const ogImage = new URL(site.ogImagePath, site.siteUrl).toString();
 
@@ -78,25 +43,14 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function CreatePage({ params, searchParams }: CreatePageProps) {
-  const { locale } = await params;
-  const query = await searchParams;
+export default async function CreatePage(props: { params: Promise<{ locale: string }> }) {
+  const { locale } = await props.params;
   const isZh = locale === "zh";
-  const mode = normalizeStudioMode(query.mode);
-  const model = query.model ? getImaveoModel(query.model, "video") ?? getImaveoModel(query.model, "image") : undefined;
-  const workflowLabel = getWorkflowLabel(mode, isZh);
-  const title = model
-    ? isZh
-      ? `${model.labels.zh} ${workflowLabel}`
-      : `${model.labels.en} ${workflowLabel}`
-    : workflowLabel;
-  const description = model
-    ? isZh
-      ? `在创作中心中直接使用 ${model.labels.zh} 完成 ${workflowLabel}，并围绕该模型能力继续调 prompt 与参数。`
-      : `Use ${model.labels.en} inside the Studio for ${workflowLabel}, then refine prompts and parameters around that model's strengths.`
-    : isZh
-      ? `在创作中心中直接开始 ${workflowLabel}，并根据第一版结果继续切换模型和参数。`
-      : `Start ${workflowLabel} inside the Studio, then continue adjusting models and parameters from the first result.`;
+  setRequestLocale(locale);
+  const title = isZh ? "Imaveo 创作中心" : "Imaveo Studio";
+  const description = isZh
+    ? "在一个工作台里完成文生图、图生图、文生视频和图生视频，并切换模型与参数。"
+    : "Use one workspace for text-to-image, image-to-image, text-to-video, and image-to-video generation.";
 
   return (
     <>
@@ -121,7 +75,7 @@ export default async function CreatePage({ params, searchParams }: CreatePagePro
         </div>
       </section>
 
-      <ImaveoStudio locale={locale} initialMode={query.mode} initialModel={query.model} initialStyle={query.style} />
+      <ImaveoStudio locale={locale} />
 
       <section className="aurora-stage pb-16 md:pb-20">
         <div className="container px-4 md:px-6">

@@ -1,11 +1,13 @@
 import HomeClientWrapper from '@/components/home/HomeClientWrapper';
 import HomeStaticContent from '@/components/home/HomeStaticContent';
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { site } from "@/config/site";
 import { buildLocaleAlternates, getHubMetadata } from "@/utils/seo/metadata";
 
 // ✅ This is now a Server Component (no 'use client')
 // Hero/Interactive content is client-side, static content is server-rendered for SEO
+export const dynamic = "force-static";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const params = await props.params;
@@ -38,6 +40,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
     const params = await props.params;
     const { locale } = params;
+    setRequestLocale(locale);
 
     // Server-rendered static content for better LCP and SEO
     const staticContent = await HomeStaticContent({ locale });
